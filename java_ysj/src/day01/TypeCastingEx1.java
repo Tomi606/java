@@ -1,5 +1,5 @@
 package day01;
-//자동 자료형 변환 예제 : 작은 자료형 값을 -> 큰 자료형으로 변환, 정수 -> 실수로 변환, 데이터 손실 X
+//자동 자료 형 변환 예제 : 작은 자료형 값을 -> 큰 자료형으로 변환, 정수 -> 실수로 변환, 데이터 손실 X
 public class TypeCastingEx1 {
 
 	public static void main(String []args) {
