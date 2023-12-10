@@ -19,8 +19,8 @@ public class VariableNamingEx1 {
 		//int void;
 		
 		//3. 숫자로 시작 불가능
+		//int 1num;		
 		  int num1;
-		//int 1num;
 		  int nu1m;
 		  
 		//4. 특수문자는 _ 와 $만 가능
