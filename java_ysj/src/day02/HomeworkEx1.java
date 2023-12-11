@@ -15,7 +15,7 @@ public class HomeworkEx1 {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("학생의 성적은 몇점 입니까? ");
+		System.out.print("학생의 성적은 몇점 입니까? ");
 		int score = sc.nextInt();
 		
 		if(score<0 || score>100) {
