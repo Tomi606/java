@@ -33,8 +33,8 @@ public class ScannerEx1 {
 		
 		//문자를 입력받는 예제
 		System.out.print("문자를 입력하세요 : ");
-		//"문자열".charAt(번지) : 번지번째에 있는 문자를 가져옴, 문장의 앞 단어만 가져옴
-		char ch = sc.next().charAt(0);
+		//"문자열".charAt(인덱스) : 인덱스 번째에 있는 문자를 가져옴, 문장의 앞 단어만 가져옴
+		char ch = sc.next().charAt(1);
 		System.out.println("입력받은 문자 : " + ch);
 		
 		sc.close();
