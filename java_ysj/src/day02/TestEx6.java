@@ -16,7 +16,8 @@ public class TestEx6 {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("두 정수와 연산자 입력 (예 : 1 + 2) : ");
+		System.out.println("두 정수와 연산자를 입력하시오. (예 : 1 + 2) ");
+		
 		int num1 = sc.nextInt();
 		char oper = sc.next().charAt(0);
 		int num2 = sc.nextInt();
