@@ -27,7 +27,7 @@ public class LogicalOperatorEx1 {
 		 * T => F
 		 */
 		
-		int score = 99;
+		int score = 80;
 		//성적이 올바른지 확인하는 작업, 올바른 성적은 0~100(범위를 넘어가면 잘못된 성적)
 		//성적이 0이상이고, 100이하이다.
 		//성적이 0보다 (크거나 같)(고), 성적이 100보다 (작거나 같다).
@@ -42,6 +42,8 @@ public class LogicalOperatorEx1 {
 		//성적이 0보다 (작)(거나), 성적이 100보다 (크다)
 		//성적 < 0 || 성적 > 100
 		System.out.println(score + "점은 올바른 성적이 아닌가? " + (score < 0 && score > 100));
+		
+		System.out.println(score + "점은 올바른 성적인가? " + (score>= 0 && score<=100? "올바른 성적입니다." : "올바르지 않은 성적입니다."));
 
 	}
 
