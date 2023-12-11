@@ -29,7 +29,7 @@ public class TestEx5 {
 			System.out.println("잘못된 월 입니다.");
 		}
 		
-		if(month < 1 || month > 12) {
+		if(month <= 0 || month > 12) {
 			System.out.println("잘못된 월 입니다.");
 		}else if(month <= 2 || month == 12) {
 			System.out.println("겨울 입니다.");
