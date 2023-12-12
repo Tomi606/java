@@ -19,6 +19,13 @@ public class WhileTestEx2 {
 		while(i>0) {
 			System.out.println(i--);
 		}
+		
+		System.out.println("=====================");
+		int num = 5;
+		int j = 1;
+		while(num>=j) {
+			System.out.println(num--);
+		}
 	}
 
 }
