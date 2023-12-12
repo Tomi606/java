@@ -27,7 +27,7 @@ public class ForPrimeNumberEx1 {
 		
 		for(i=1, count=0; i<=num; i++) {
 			
-			if(num%2==0) {
+			if(num%i==0) {
 				count++;
 			}
 		}
