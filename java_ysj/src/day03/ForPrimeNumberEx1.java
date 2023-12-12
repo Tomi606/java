@@ -32,6 +32,8 @@ public class ForPrimeNumberEx1 {
 			}
 		}
 		
+		//for 문을 나와서 if 문을 사용
+		
 		if(count==2) {
 			System.out.println(num + "은 소수 입니다.");
 		} else {
