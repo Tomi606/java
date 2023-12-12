@@ -9,11 +9,11 @@ public class WhileSumEx1 {
 		 * 규칙성 : sum = sum + i
 		 * 반복문 종료 후 : sum을 출력*/
 		
-		int i = 1;
 		int sum = 0;
-		int num = 6;
+		int i = 1;
+		int num = 5;
 		
-		while(i<num) {
+		while(i<=num) {
 			sum += i;
 			i++;
 		}
