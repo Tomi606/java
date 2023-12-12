@@ -17,7 +17,7 @@ public class AlphabetEx1 {
 		System.out.println("=============");
 		for(char ch = 'a'; ch<'z'; ch++) {
 			
-			System.out.println(ch);
+			System.out.print(ch + (ch == 'y'? "\n" : ", "));
 		}
 	}
 
