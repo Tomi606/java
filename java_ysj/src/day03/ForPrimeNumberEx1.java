@@ -21,24 +21,22 @@ public class ForPrimeNumberEx1 {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("숫자를 입력하세요 : ");
+		System.out.print("정수를 입력하시오 : ");
 		int num = sc.nextInt();
+		int i, count;
 		
-		int i;
-		int count = 0;
+		for(i=1, count=0; i<=num; i++) {
 			
-	 	for(i=1;i<=num;i++) {
-		
-		if(num%i==0) {
-			count++;
+			if(num%2==0) {
+				count++;
+			}
 		}
-	}
+		
 		if(count==2) {
 			System.out.println(num + "은 소수 입니다.");
-		}else {
+		} else {
 			System.out.println(num + "은 소수가 아닙니다.");
 		}
-	 	
 	}
 }
 		
