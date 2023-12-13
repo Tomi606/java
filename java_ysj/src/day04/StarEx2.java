@@ -22,6 +22,14 @@ public class StarEx2 {
 			}
 			System.out.println();
 		}
+		
+		//i, j를 0이라고 할 경우(*이 하나씩 없이나옴)
+		for(int i=0;i<5;i++) {
+			for(int j=0;j<i;j++) {
+			System.out.print("*");
+			}
+			System.out.println();
+			}
 	}
 
 	
