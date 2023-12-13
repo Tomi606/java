@@ -1,5 +1,5 @@
-package day04;
 
+package day04;
 public class LcmEx1 {
 
 	public static void main(String[] args) {
@@ -28,8 +28,7 @@ public class LcmEx1 {
 		//i가 num1부터 num1씩 증가 => i를 num1의 배수들로만 계산(계산횟수가 줄어듦)
 		for(i=num1;i<=num1*num2;i++) {
 			if(i%num1==0 && i%num2==0) {	//최대 공약수와 반대로
-				System.out.println(num1 + "과 " + num2 + "의 최소 공배수 : " + i
-						);
+				System.out.println(num1 + "과 " + num2 + "의 최소 공배수 : " + i);
 				break;
 			}
 	}
