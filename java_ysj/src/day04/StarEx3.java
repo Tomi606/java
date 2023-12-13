@@ -9,7 +9,7 @@ public class StarEx3 {
 		 *   *** i=3  " "=2  *=3
 		 *  **** i=4  " "=1  *=4
 		 * ***** i=5  " "=0  *=5
-		 *            " "=5-i개  *=i개
+		 *             5-i개  =i개
 		 * 반복횟수 : 
 		 * 규칙성 : 
 		 * */
@@ -26,5 +26,17 @@ public class StarEx3 {
 			}
 			System.out.println();
 		}
+		System.out.println();
+
+		for(int i=1;i<=5;i++) {
+			for(int j=1;j<=5-i;j++) {
+			System.out.print(" ");
+			}
+			for(int k=1;k<=i;k++) {
+			System.out.print("*");
+			}
+			System.out.println();
+			}
+
 		}
 	}
