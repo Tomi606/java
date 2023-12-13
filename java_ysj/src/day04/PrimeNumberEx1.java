@@ -21,7 +21,6 @@ public class PrimeNumberEx1 {
 			System.out.print(num + " ");
 		}
 	}
-		
-		
+
 	}
 }
