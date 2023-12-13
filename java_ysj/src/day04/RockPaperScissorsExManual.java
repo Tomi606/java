@@ -32,7 +32,7 @@ public class RockPaperScissorsExManual {
 			System.out.println("2. 기록 확인");
 			System.out.println("3. 프로그램 종료");
 			System.out.println("---------------");
-			System.out.println("메뉴 선택 : ");
+			System.out.print("메뉴 선택 : ");
 			//메뉴 선택
 			menu = sc.nextInt();
 			//선택한 메뉴에 맞는 기능 실행
