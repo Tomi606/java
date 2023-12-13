@@ -29,4 +29,5 @@ public class GcdEx3_1 {
 		System.out.println(num1 + "과 " + num2 + "의 최대 공약수 : " + gcd);
 	}
 
+	
 }
