@@ -21,6 +21,14 @@ public class StarEx1 {
 			}
 			System.out.println();
 		}
+		System.out.println();
+
+		for(int i=1;i<=3;i++) {	//3줄
+			for(int j=1;j<=5;j++) {	//5칸
+				System.out.print("*");				
+			}
+			System.out.println();
+		}
 	}
 
 	
