@@ -19,3 +19,13 @@ public class DoWhileEx1 {
 	}
 
 }
+
+//왜 무한루프?
+/*
+Scanner sc = new Scanner(System.in);
+char ch = sc.next().charAt(0);;
+do {
+	System.out.print("입력 : ");
+	System.out.println(ch);
+	System.out.println("출력 : " + ch);
+}while(ch != 'q');*/
