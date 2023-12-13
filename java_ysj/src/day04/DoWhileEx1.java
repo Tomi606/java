@@ -23,9 +23,9 @@ public class DoWhileEx1 {
 //왜 무한루프?
 /*
 Scanner sc = new Scanner(System.in);
-char ch = sc.next().charAt(0);;
+char ch = sc.next().charAt(0);	//처음입력받고, 이 값으로 계속 확인해서 무한루프
 do {
 	System.out.print("입력 : ");
-	System.out.println(ch);
+	System.out.println(ch);	//여기서 계속 확인
 	System.out.println("출력 : " + ch);
 }while(ch != 'q');*/
