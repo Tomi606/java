@@ -25,5 +25,3 @@ public class PrimeNumberEx1 {
 		
 	}
 }
-
-
