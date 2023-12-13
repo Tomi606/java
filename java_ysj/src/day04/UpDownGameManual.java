@@ -21,16 +21,18 @@ public class UpDownGameManual {
 		int menu; //메뉴 
 		int count, bestCount = -1;	//여기서 count를 초기화하면 누적이됨. 게임 플레이 횟수, 최고기록
 		//-1을 하는 이유? -1일경우 게임이력이 없습니다 라고 출력(플레이했을때 나올수 없는 수)
-		int r = 0;	//랜덤 수
-		int num = 0;	//입력한 정수
+		int r;	//랜덤 수
+		int num;	//입력한 정수
 		int min = 1, max = 100;	//랜덤 수 범위
 		//1. 반복문
 		do {
 			//메뉴출력
+			System.out.println("================");
 			System.out.println("[Up Down Game]");
 			System.out.println("1. 새게임");
 			System.out.println("2. 최고기록 확인");
 			System.out.println("3. 프로그램 종료");
+			System.out.println("================");
 			System.out.print("메뉴 선택 : ");
 			//메뉴선택
 			menu = sc.nextInt();
@@ -46,9 +48,9 @@ public class UpDownGameManual {
 				count = 0;	//초기화
 				do {
 					//정수 입력
+					System.out.println("입력 : ");
 					num = sc.nextInt();	
 					//입력횟수를 1증가
-					count++;
 					//입력한 정수와 랜덤한 수 비교후 Up/Down/정답 출력
 					if(num<r) {
 						System.out.println("Up!");
@@ -58,12 +60,13 @@ public class UpDownGameManual {
 						count++;
 					}else {
 						System.out.println("정답!");
+						count++;
 					}
 				}while(num != r);
 				//현재기록 출력
 				System.out.println("기록 : " + count);
 				//게임이 끝났으면 현재 횟수가 최고기록 횟수보다 좋으면
-				if(bestCount == -1 || count<bestCount) {
+				if(bestCount == -1 || count < bestCount) {
 					//최고 기록횟수를 현재횟수로 수정
 					bestCount = count;
 				}
