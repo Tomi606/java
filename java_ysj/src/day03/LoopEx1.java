@@ -10,7 +10,7 @@ public class LoopEx1 {
 		//->증감식 쓸필요 X, 제약없음
 		
 		Scanner sc = new Scanner(System.in);
-		char ch = 'a';
+		char ch = 'a';	//초기화해줘야 사용가능
 		
 		//식을 생략하면 무한 루프
 		for( ;ch!='q'; ) {
