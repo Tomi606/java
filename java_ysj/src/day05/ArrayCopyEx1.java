@@ -5,9 +5,10 @@ public class ArrayCopyEx1 {
 	public static void main(String[] args) {
 
 		//배열 복사 예제
-		//1. arr1과 arr2의 복사
+		
+		//1. arr1과 arr2의 "공유"
 		int[] arr1 = new int[] {1,2,3,4,5};
-		int[] arr2 = arr1;	//arr2는 복사가 아닌 "공유"복사가 된게 아님, "주소"를 공유!
+		int[] arr2 = arr1;	//arr2는 복사가 아닌 "공유"가 된 것. 복사가 된게 아님, "주소"를 공유!
 		
 		//arr1의 내용이 바뀌면 arr2도 같이 바뀜
 		arr1[0] = 9;	//arr2도 같이 수정({1,2,3,4,5}가 복사된게 아님)
