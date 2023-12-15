@@ -10,7 +10,7 @@ public class LottoEx1 {
 		 * 단, 정렬이 되도록 (Arrays.sort) */
 		
 		int min=1, max=45;
-		int lotto[] = new int[6];
+		int lotto[] = new int[6];	//6개 출력
 		int count = 0;	//저장된 갯수만큼
 		
 		//랜덤으로 중복되지 않는 6개의 수 생성
