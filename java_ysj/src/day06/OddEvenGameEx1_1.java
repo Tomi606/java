@@ -20,17 +20,17 @@ public class OddEvenGameEx1_1 {
 			System.out.print("배팅금액(1~"+totalMoney+") : ");
 			int money = sc.nextInt();
 			
-			//7. 입력받은 money가 totalMoney보다 크면 totalMoney로 수정
+			//7. 입력받은 money 가 totalMoney보다 크면 totalMoney로 수정
 			//money = money > totalMoney ? totalMoney : money;
 			if(money > totalMoney) {
-				totalMoney = money;	//money = totalMoney;?
+				totalMoney = money;	//money 를 totalMoney로 넣어줌
 			}
 			
 			//3. 사용자가 0 또는 1을 입력받는 코드 작성 0:짝수, 1:홀수
 			System.out.print("0(짝수) 또는 1(홀수)을 입력하세요 : ");
 			int user = sc.nextInt();
 			
-			//1. 정수 num가 주어졌을때 홀수인지 짝수인지 판별하는 예제
+			//1. 정수 num 가 주어졌을때 홀수인지 짝수인지 판별하는 예제
 			if(num%2==0) {
 				System.out.println(num+"은 짝수");
 			}else {
