@@ -36,6 +36,7 @@ public class ThirtyOneEx1_1 {
 		/*if(end>=31) {
 			end = 31;
 		}*/	
+		
 		//아니면 현재 숫자부터 랜덤으로 생성된 숫자 갯수만큼 출력
 		System.out.print("com : ");
 		for(int i=count+1;i<=end;i++) {
@@ -50,7 +51,7 @@ public class ThirtyOneEx1_1 {
 		}
 		
 		
-			//user가 1~3사이의 숫자를 입력
+		//user가 1~3사이의 숫자를 입력
 		System.out.print("정수 : ");
 		user = sc.nextInt();
 			//현재 숫자부터 랜덤으로 생성된 숫자를 합했을 때 31 이상이 되면 31까지 출력하고, user 가 졌다고 출력 후 반복문 종료
@@ -66,8 +67,8 @@ public class ThirtyOneEx1_1 {
 		count=end;
 		if(count==31) {
 			System.out.println("컴퓨터 승!");
+			break;
 		}
-		break;
 		}
 	}
 
