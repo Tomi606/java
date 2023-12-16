@@ -23,16 +23,15 @@ public class ReverseNumberEx1 {
 		 * 1 % 10 => 1
 		 * 1 / 10 => 0
 		 * */
+
 		int i;
 		Scanner sc = new Scanner(System.in);
-		System.out.print("정수 4자리를 입력 : ");
+		System.out.print("정수 입력 : ");
 		String num = sc.nextLine();
 		
 		for(i=num.length()-1;i>=0;i--) {
-			System.out.print(num.charAt(i) + " ");
+			System.out.print(num.charAt(i) + " ");	//문자열로 받아서 문자로 출력
 		}
-		
-		
 	}
 
 }
