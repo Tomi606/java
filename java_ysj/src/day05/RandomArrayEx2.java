@@ -10,13 +10,13 @@ public class RandomArrayEx2 {
 		int arr[] = new int[3];
 		int count = 0;	//배열에 저장된 중복되지 않은 수의 개수
 		
-		//(배열에 중복되지 않은 수가 3보다 작으면 반복)
-		while(count<3) {
+		//(배열에 중복되지 않은 수가 arr길이 보다 작으면 반복)
+		while(count<arr.length) {
 			//랜덤수 생성
 			int r = (int)(Math.random()*(max-min+1)+min);
 			
 			//중복 확인(0부터 시작)
-			boolean duplicated = false;	//중복이면 거짓
+			boolean duplicated = false;	//중복이 아니다 라고 false 로 저장
 			//duplicated(중복)에 false저장, 중복 여부를 알려주는 변수로 true이면 중복, false이면 중복아님.
 			for(int i=0;i<count;i++) {
 				if(arr[i]==r) {
