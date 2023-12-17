@@ -61,7 +61,6 @@ public class OddEvenGameEx1_1 {
 			if(totalMoney == 0) {
 				System.out.println("G A M E  O V E R");
 				System.out.println("================");
-				System.out.println("배팅금액을 넣어주세요");
 			}
 			
 		}while(totalMoney!=0);
