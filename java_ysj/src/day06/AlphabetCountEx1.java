@@ -15,19 +15,46 @@ public class AlphabetCountEx1 {
 		 * p : 2 */
 		
 		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("영어 단어 입력 : ");
-		String word = sc.next();	//next ->문자, nextLine -> 문자열
-		
-		//각 알파벳을 받을 배열과 알파벳 개수를 셀 count 배열
 		int alphabet[] = new int[26];
-		int count[] = new int[50];
+		int i;
 		
-		//알파벳을 받은 배열 출력
-		for(int i=0;i<alphabet.length;i++) {
-			
+		//1.
+		//단어 입력 받기(문자-charAt)
+		System.out.print("단어 입력 : ");
+		String word = sc.next();
+		
+		//입력받은 단어 세기
+		for(i=0;i<word.length();i++) {
+			char ch = word.charAt(i);
+			alphabet[ch-'a']++;
 		}
 		
+		for(i=0;i<alphabet.length;i++) {
+			if(alphabet[i] != 0) {
+				char ch = (char)('a'+i);
+				System.out.println(ch+ " : " +alphabet[i]);
+			}
+		}
+		
+		//2. 향상된 for 문 사용
+		//문자받기
+		System.out.print("문자 입력 : ");
+		word = sc.next();
+				
+		//문자의 알파벳 세기
+		for(i=0;i<word.length();i++) {
+			 char ch = word.charAt(i);	//각 알파벳
+			 alphabet[ch - 'a']++;		//각 인덱스에 1증가
+		}
+		
+		//갯수가 0을 제외한 나머지 수 출력
+		char ch = 'a';
+		for(int count : alphabet) {
+			if(count != 0) {
+				System.out.println(ch+ " : " +count);
+			}
+			ch++;
+		}
 	}
 
 }
