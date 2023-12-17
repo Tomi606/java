@@ -19,7 +19,7 @@ public class ArithmeticEx1_2 {
 		//정수2를 랜덤으로 생성 1~99
 		int num2 = (int)(Math.random()*(99-1+1)+1);
 		//정수3(연산자)를 랜덤으로 생성 1~3
-		int oprNum = (int)(Math.random()*3);
+		int oprNum = (int)(Math.random()*3);	//str의 length에 넘어가기 때문에 +1은 안붙인다
 		
 		Scanner sc = new Scanner(System.in);
 		int user, answer = 0;
