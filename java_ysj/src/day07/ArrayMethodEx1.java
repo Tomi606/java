@@ -96,7 +96,7 @@ public class ArrayMethodEx1 {
 			return false;
 		}
 	/*1.
-	 *  min ~ max 사이의 랜덤한 수를 생성해서 알려주는 메소드
+	 * 기능 : min ~ max 사이의 랜덤한 수를 생성해서 알려주는 메소드
 	 * 매개변수 : 최소값과 최댓값 -? int min, int max
 	 * 리턴타입 : 생성된 랜덤한 수 -> 정수 -> int
 	 * 메소드명 : random */
