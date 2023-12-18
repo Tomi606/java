@@ -30,7 +30,7 @@ public class LottoEx1 {
 			
 			//중복되지 않으면 저장 후 count++
 			if(i==count) {
-				lotto[count++] = r;
+				lotto[count++] = r;	//Q. lotto[i] = r; count++;도 되나? 
 			}
 			/* 
 			 * if(!duplicated) {	//!duplicated = 중복이 아니면 = true
