@@ -9,10 +9,13 @@ public class ArrayMethodEx2 {
 		printArray(arr1);
 		System.out.println();
 		
+		int arr2[] = new int[5];
 		initArray2(arr1);
 		printArray(arr1);
 		System.out.println();
 		
+		int [] arr3 = initArray3(5);
+		printArray(arr1);		
 	}
 	public static void printArray(int arr[]) {
 		for(int tmp : arr) {
@@ -50,5 +53,11 @@ public class ArrayMethodEx2 {
 	 * 리턴타입 : 생성된 배열 -> int [];
 	 * 메소드명 : initArray3
 	 * */
-	
+	public static int [] initArray3(int length) {
+		int arr[] = new int[length];
+		for(int i=0;i<length;i++) {
+			arr[i] = i + 1;
+		}
+		return arr;
+	}
 }
