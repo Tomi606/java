@@ -26,7 +26,7 @@ public class PrimeNumberMethodEx1 {
 	 * 메소드명 : isPrimeNumber
 	 * */
 	public static boolean isPrimeNumber(int num) {
-		//약수의 개수가 2개면 소수 아니면 소수가 아님
+		//약수의 개수가 2개면 소수, 아니면 소수가 아님
 		int count = 0; //약수의 개수
 		for(int i=1;i<=num;i++) {
 			if(isDivisor(num, i)) {	//약수이면
@@ -34,20 +34,19 @@ public class PrimeNumberMethodEx1 {
 			}
 		}
 		if(count ==2) {
-			return true;
+			return true;	//count가 2이면 참
 		}
-		return false;
+		return false;	//else : 아니면 거짓
 	}
 	
 	//2.
-	//1과 자기자신을 제외한 약수가 존재하면 소수가 아니고 존재하지 않으면 소수
+	//1과 자기자신을 제외한 약수가 존재하면 소수가 아니고, 존재하지 않으면 소수
 	/* 기능 : 주어진 정수가 소수이면 소수라고 알려주고 아니면 아니라고 알려주는 메소드
 	 * 매개변수 : 정수 -> int num
 	 * 리턴타입 : 소수인지 아닌지 -> boolean
 	 * 메소드명 : isPrimeNumber2
 	 * */
 	public static boolean isPrimeNumber2(int num) {
-		
 		for(int i=2;i<num;i++) {
 			if(isDivisor(num, i)) {
 				return false;
