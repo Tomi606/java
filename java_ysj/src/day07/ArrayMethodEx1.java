@@ -22,11 +22,10 @@ public class ArrayMethodEx1 {
 		int user[] = new int[6];
 		int count = 0;
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.print("중복되지 않은 수 6자리 입력(1~45) : ");
 		while(count < user.length) {
 			int num = sc.nextInt();
-			if(contains(user, count, num) && (num >= min && num <= max)) {
+			if(!contains(user, count, num) && (num >= min && num <= max)) {
 				user[count++] = num;
 			}	
 		}
@@ -72,7 +71,7 @@ public class ArrayMethodEx1 {
 	}
 	
 	//2. [1, 2, 0, 0, 0] -> 배열에서 0번지부터 2개 중에서 0과 일치하는 값이 있나? false
-	/* 기능 : 배열이 주어지고 배열의 0번지부터 n개 중에서 num와 같은 값이 있는지 없는지를 알려주는 메소드
+	/* 기능 : 배열이 주어지고 배열의 0번지부터 n개 중에서 num와 같은 값이 있는지 없는지를 알려주는 메소드(중복 유무 메소드)
 	 * 매개변수 : 주어진 배열, 검사할 배열의 개수, 비교할 정수 ->int []arr, int n, int num
 	 * 리턴타입 : 같은 값이 있는지 없는지 -> boolean
 	 * 메소드명 : contains(포함하다)
@@ -90,12 +89,13 @@ public class ArrayMethodEx1 {
 				//배열에 num와 같은 값이 있으면
 				if(arr[i] == num) {
 					return true;
+					//Q.arr[i] == num true 로 끝나서 값을 출력안하고, !=이면 통과되서 false로 가서 출력?
 				}
 			}
-			//반복문이 끝날때까지 같은게 없으면 
+			//반복문이 끝날때까지 같은 값이 없으면 
 			return false;
 		}
-	/*1.
+	/*1. 
 	 * 기능 : min ~ max 사이의 랜덤한 수를 생성해서 알려주는 메소드
 	 * 매개변수 : 최소값과 최댓값 -? int min, int max
 	 * 리턴타입 : 생성된 랜덤한 수 -> 정수 -> int
