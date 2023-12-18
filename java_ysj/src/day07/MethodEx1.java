@@ -19,8 +19,8 @@ public class MethodEx1 {
  * 매개변수 : 두 정수 -> int num1, int num2
  * 리턴타입 : 정수의 합 -> 정수 -> int
  * 메소드명 : sum
- * 리턴타입 메소드명(매개변수들) {
+ * public static 리턴타입 메소드명(매개변수들) {
 	구현;
-	return 값;
+	return 값; -> 리턴타입으로 감
 }
  */
