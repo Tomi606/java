@@ -81,12 +81,14 @@ public class ArrayMethodEx1 {
 			if(arr == null || arr.length == 0) {	
 				return false;
 			}
+			
 			//배열의 크기보다 비교할 개수가 많으면
 			if(arr.length < n) {	
 				n = arr.length;		//비교할 개수를 배열 개수로 수정
 			}
+			
+			//배열에 num와 같은 값이 있으면
 			for(int i=0;i<n;i++) {
-				//배열에 num와 같은 값이 있으면
 				if(arr[i] == num) {
 					return true;
 					//Q.arr[i] == num true 로 끝나서 값을 출력안하고, !=이면 통과되서 false로 가서 출력?
