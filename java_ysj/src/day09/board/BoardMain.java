@@ -118,7 +118,7 @@ public class BoardMain {
 	private static void runMenu(int menu) {
 
 		switch(menu) {
-		
+			//게시글 목록 조회
 		case 1 : 
 			//runBoard();
 			//게시글 목록 출력(번호가 높은 순으로)
@@ -133,6 +133,7 @@ public class BoardMain {
 			runSubmenu(submenu);
 			break;
 			
+			//게시글 등록
 		case 2 : 
 			//게시글 등록 기능을 구현
 			insertBoard();
@@ -150,18 +151,104 @@ public class BoardMain {
 		switch(submenu) {
 		case 1 :
 			//게시글 상세 조회
-			System.out.print("조회할 게시글 번호 : ");
-			int num = sc.nextInt();
+			printBoardDetail();
+			break;
+			
+			//게시글 수정
+		case 2 :
+			updateBoard();
+			break;
+			
+			//게시글 삭제
+		case 3 :
+			deleteBoard();
 			
 			break;
-		case 2 :
-			break;
-		case 3 :
-			break;
+			
+			//뒤로가기
 		case 4 :
 			break;
 		default : System.out.println("잘못된 메뉴입니다.");	break;	
 		}
+	}
+	private static void deleteBoard() {
+		//삭제할 게시글 번호를 입력
+		System.out.print("삭제할 게시글 번호 : ");
+		int num = sc.nextInt();
+		//반복문 : 게시글 목록 전체
+		int index = -1;//일치하는 게시글이 있는 번지(몇번지에 있는지 찾기용)
+		for(int i=0;i<count;i++) {
+			//입력한 번호와 일치하는 게시글을 찾아 번지를 저장
+			if(num == boardList[i].getNum()) {
+				index = i;
+				break;
+			}
+		}
+		if(index == -1) {	//초기값, 일치하는게 X
+			System.out.println("일치하는 게시글이 없습니다.");
+			return;
+		}
+		count--;
+		//가장 최근에 등록된 게시글을 삭제했다면
+		//==배열에서 가장 마지막에 있는 게시글을 삭제했다면
+		if(index == count) {
+			return;
+		}
+		
+		//찾은 번지 다음부터 한칸씩 당겨옴
+		//기본 배열과 크기가 같은 새 배열을 생성
+		Board []tmpList = new Board[boardList.length];
+		//새 배열에 기존 배열을 복사
+		System.arraycopy(boardList, 0, tmpList, 0, boardList.length);
+		//기존 배열에서 찾은 번지 다음부터 나머지 개수를 복사해서
+		//새 배열에 찾은 번지부터 덮어씀
+		System.arraycopy(tmpList, index+1, boardList, index, count-index);	//count-- 위에 해줌
+		
+	}
+
+	/**
+	 * 수정할 게시글 번호와 제목, 내용을 입력받아 게시글을 수정하는 메서드
+	 */
+	private static void updateBoard() {
+		//수정할 게시글 번호와 제목, 내용을 입력
+		System.out.print("수정할 게시글 번호 : ");
+		int num = sc.nextInt();
+		
+		//반복문 : 게시글 목록 전체
+		for(int i=0;i<count;i++) {
+			//입력한 게시글 번호와 일치하는 게시글이 있으면
+		if(num == boardList[i].getNum()) {
+			sc.nextLine();	//엔터처리
+			System.out.print("수정할 게시글 제목 : ");
+			String title = sc.nextLine();
+			System.out.print("수정할 게시글 내용 : ");
+			String contents = sc.nextLine();
+			
+			//해당 게시글의 제목과 내용을 수정하고 메서드 종료
+			boardList[i].update(title, contents);				
+			System.out.println("수정이 완료됐습니다.");
+			return;
+			}
+		//일치하는 게시글이 없습니다. 라고 출력
+		System.out.println("일치하는 게시글이 없습니다.");
+		}		
+	}
+
+	private static void printBoardDetail() {
+		//조회할 게시글 번호 입력
+		System.out.print("조회할 게시글 번호 : ");
+		int num = sc.nextInt();
+		//반복문 : 등록된 게시글 천제(배열 전체X)
+		for(int i=0;i<count;i++) {
+			//입력한 번호와 같은 번호를 가진 게시글 찾고
+			if(num == boardList[i].getNum()) {	//num은 private이라서
+				//해당 게시글의 printInfoDetail을 호출
+				boardList[i].printInfoDetail();
+				return;
+			}
+		}
+		//리턴을 통해 빠져나가지 못했다는 걸 말하기 위해 return 사용
+		System.out.println("일치하는 게시글이 없습니다.");
 	}
 
 	/** 게시글 목록 조회 시 나타나는 서브메뉴를 출력하는 메서드
@@ -182,13 +269,13 @@ public class BoardMain {
 	private static void insertBoard() {
 		sc.nextLine();	//입력 버퍼에 남아있는 엔터 처리
 		//제목, 내용, 일자, 아이디 순으로 입력받음
-		System.out.println("제목 : ");
+		System.out.print("제목 : ");
 		String title = sc.nextLine();
-		System.out.println("내용 : ");
+		System.out.print("내용 : ");
 		String contents = sc.nextLine();
-		System.out.println("일자 : ");
+		System.out.print("일자 : ");
 		String date = sc.next();
-		System.out.println("작성자 : ");
+		System.out.print("작성자 : ");
 		String writer = sc.next();
 		//입력받은 정보들을 이용하여 게시글 인스턴스를 생성
 		Board board = new Board(boardNum++, title, contents, writer, date);	//추가될 게시글 번호 1증가
