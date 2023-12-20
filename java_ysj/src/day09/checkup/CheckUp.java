@@ -1,4 +1,4 @@
-package day09.board;
+package day09.checkup;
 
 public class CheckUp {
 
