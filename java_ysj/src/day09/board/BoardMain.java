@@ -281,6 +281,7 @@ public class BoardMain {
 		Board board = new Board(boardNum++, title, contents, writer, date);	//추가될 게시글 번호 1증가
 		//생성된 인스턴스를 배열에 저장(몇번지에 저장?)
 		boardList[count++] = board;	//저장된 개수를 1증가
+		
 		//배열 크기를 안늘려도 되면 종료
 		if(count < boardList.length) {
 			return;
