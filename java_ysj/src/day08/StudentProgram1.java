@@ -45,7 +45,7 @@ public class StudentProgram1 {
 			//3. 프로그램 종료
 			case 3 : System.out.println("프로그램을 종료합니다.");	break;
 				
-			default : System.out.println("잘못된 메뉴입니다.");		break;
+			default : System.out.println("잘못된 메뉴입니다.");	break;
 			}
 			
 		}while(menu != 3);
