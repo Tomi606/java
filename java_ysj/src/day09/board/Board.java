@@ -48,7 +48,7 @@ public class Board {
 	 * 번호. 제목 작성일 작성자 조회수 순으로 출력
 	 */
 	public void printInfo() {
-		System.out.print(num + ".");
+		System.out.print(num + ". ");
 		System.out.print(title + " ");
 		System.out.print(date + " ");
 		System.out.print(writer + " ");
