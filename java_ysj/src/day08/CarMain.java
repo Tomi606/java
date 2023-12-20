@@ -26,11 +26,20 @@ public class CarMain {
 		car.print();
 		car.turnLight(0);	//깜박이 끄기
 		car.print();
-		for(int i=0;i<10;i++) {	//속력 10ㅈ
+		for(int i=0;i<10;i++) {	//속력 10
 			car.speedUp();
 		}
 		car.print();
 		
+		System.out.println("===zip===");
+		Car zip = new Car();
+		zip.turn();
+		zip.turn();
+		for(int i=0;i<100;i++) {			
+			zip.speedUp();
+		}
+		zip.turnLight(1);
+		zip.print();
 	}
 
 }
