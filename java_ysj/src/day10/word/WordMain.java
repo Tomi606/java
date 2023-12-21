@@ -148,7 +148,7 @@ public class WordMain {
 			//기능 실행
 			runMenu(menu);
 			
-		}while(menu != 5);
+		}while(menu != 4);
 		
 	}
 
@@ -176,19 +176,22 @@ public class WordMain {
 	}
 
 	private static void printAlphabet(int alphabet) {
-		
 		switch(alphabet) {
 		
 		case 1 : 
 			for(int i=0;i<a.length;i++) {
-				a[i].printWord(null, null);
+				String[] Word = {"attack","advance","arm","age","art"};
+				String[] Mean = {"폭행, 공격","전진, 발전","팔","나이,연령","미술,예술"};
+				a[i].printWord(Word[i], Mean[i]);
 			}
 			break;
 		
 		case 2 : 
+			
 			break;
 			
 		case 3 : 
+			
 			break;
 			
 		default : System.out.println("없는 알파벳 입니다.");
