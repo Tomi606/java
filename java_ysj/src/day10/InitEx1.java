@@ -23,6 +23,7 @@ public class InitEx1 {
 
 }
 
+//클래스 B
 class B {
 	int num1;
 	int num3 = 1;
