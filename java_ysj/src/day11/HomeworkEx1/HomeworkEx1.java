@@ -67,12 +67,15 @@ public class HomeworkEx1 {
 	private static void runManageScore(int score) {
 		switch(score) {
 		case 1 : 
+			storeSubject();
 			break;
 			
 		case 2 : 
+			 updateSubject();
 			break;
 			
 		case 3 : 
+			deleteSubject();
 			break;
 			
 		default : System.out.println("없는 메뉴입니다.");
@@ -80,10 +83,80 @@ public class HomeworkEx1 {
 	}
 
 	
+	//3. 성적 삭제(과목삭제)
+	private static void deleteSubject() {
+		System.out.print("삭제할 과목 : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		
+		int index = -1;
+		for(int i=0;i<countSubject;i++) {
+			if(subject[i].equals(name)) {
+				index = i;
+				break;
+			}
+		}
+		
+		//일치 안할때
+		if(index == -1) {
+			System.out.println("일치하는 과목이 없습니다.");
+		}
+		
+		countSubject--;
+		
+		//일치할때
+		if(index == countSubject) {
+			return;
+		}
+		
+		Subject[] tmplist = new Subject[subject.length];
+		System.arraycopy(subject, 0, tmplist, 0, subject.length);
+		System.arraycopy(tmplist, index+1, subject, index, countSubject-index);
+	}
+
+	//2. 성적 수정
+	private static void updateSubject() {
+		System.out.print("수정할 과목 : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		System.out.print("점수 : ");
+		int score = sc.nextInt();
+		
+		for(int i=0;i<countSubject;i++) {
+			if(subject[i].equals(name)) {
+				subject[i].updateScore(score);
+				subject[i].showSubjectInfo();
+			}
+		}
+	}
+
+	//1. 성적 추가
+	private static void storeSubject() {
+		System.out.print("추가할 과목 : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		System.out.print("점수 : ");
+		int score = sc.nextInt();
+		
+		subject[countSubject++] = new Subject(name, score);
+		for(int i=0;i<countSubject;i++) {
+			subject[i].showSubjectInfo();
+		}
+		
+		if(countSubject == subject.length) {
+			subject = expandList2(subject);
+		}
+	}
+	//과목 배열 확장
+	private static Subject[] expandList2(Subject[] subject) {
+		Subject[] tmplist = new Subject[subject.length + 5];
+		System.arraycopy(subject, 0, tmplist, 0, subject.length);
+		return tmplist;
+	}
+
 	
 	
-	
-	//학생 관리
+	//////학생 관리//////
 	private static void runManageStudent(int student) {
 		switch(student) {
 		case 1 : 
@@ -135,7 +208,6 @@ public class HomeworkEx1 {
 		Student[] tmplist = new Student[student.length];
 		System.arraycopy(student, 0, tmplist, 0, student.length);
 		System.arraycopy(tmplist, index+1, student, index, countStudent-index);
-		
 	}
 
 
@@ -148,6 +220,7 @@ public class HomeworkEx1 {
 		System.out.println("수정한 이름 : ");
 		String updateName = sc.nextLine();
 		
+		//***왜 수정이 안되나?
 		for(int i=0;i<countStudent;i++) {
 			if(student[i].equals(name)) {
 				student[i].updateName(updateName);
@@ -172,8 +245,13 @@ public class HomeworkEx1 {
 		sc.nextLine();
 		String name = sc.nextLine();
 		
-		//동일인 있을때 배열에 안넣음
-		
+		//***동일인 있을때 배열에 안넣음
+		for(int i=0;i<countStudent;i++) {
+			if(student[i].grade == grade && student[i].classNum == classNum &&
+					student[i].num == num && student[i].name == name) {
+				System.out.println("중복입니다.");				
+			}
+		}
 		
 		//없을시 배열에 넣음 + 학생 출력
 		student[countStudent++] = new Student(grade, classNum, num, name);
@@ -183,12 +261,12 @@ public class HomeworkEx1 {
 		
 		//배열 확장
 		if(countStudent == student.length) {
-			student = expandList(student);
+			student = expandList1(student);
 		}
 	}
 
 	//배열 확장 코드
-	private static Student[] expandList(Student[] student) {
+	private static Student[] expandList1(Student[] student) {
 		Student[] tmplist = new Student[student.length + 10];
 		System.arraycopy(student, 0, tmplist, 0, student.length);
 		return tmplist;
