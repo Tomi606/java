@@ -20,7 +20,7 @@ public class HomeworkEx3 {
 		//회원 가입
 		String name;
 		int birth;	//6자리
-		char sex;
+		char sex;	//m, f
 		
 		//로그인
 		String id, password;
@@ -29,7 +29,6 @@ public class HomeworkEx3 {
 		
 		
 		//메서드
-		
 		public Member(int birth, String name, char sex) {
 			this.birth = birth;
 			this.name = name;
