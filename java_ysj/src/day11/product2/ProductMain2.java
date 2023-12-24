@@ -19,10 +19,10 @@ public class ProductMain2 {
 	
 	private static Scanner sc = new Scanner(System.in);
 	private static Product[] list = new Product[10];
-	private static Product[] saleList = new Product[10];
+	private static Product[] saleList = new Product[10];	//판매한 제품 리스트
 	
 	private static int count = 0;	//배열에 담긴(저장된) 제품 개수
-	private static int saleCount = 0;
+	private static int saleCount = 0;	//판매된 제품 개수
 	
 	
 	public static void main(String[] args) {
@@ -110,7 +110,7 @@ public class ProductMain2 {
 		String name = sc.nextLine();
 		
 		//판매 개수를 입력
-		System.out.print("수량 : ");
+		System.out.print("수량  : ");
 		int amount = sc.nextInt();
 		
 		//기존 제품의 수량을 변경
@@ -152,7 +152,6 @@ public class ProductMain2 {
 		System.out.println("판매가 등록되었습니다.");
 	}
 	
-	//1. 제품 입고
 	//1. 제품 입고
 	private static void storeProduct() {
 		//제품 정보를 입력
