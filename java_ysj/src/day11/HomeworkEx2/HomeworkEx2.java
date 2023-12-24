@@ -23,7 +23,7 @@ public class HomeworkEx2 {
 		switch(ch) {
 		case '+' : opr.plus(num1, ch, num2);	break;
 			
-		case '-' : opr.subtract(num1, ch, num2);	break;
+		case '-' : opr.subtract(num1, ch, num2);break;
 			
 		case '*' : opr.times(num1, ch, num2);	break;
 			
