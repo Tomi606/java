@@ -6,8 +6,6 @@ public class Operator {
 	private int num2;
 	private char ch;
 	
-	
-	
 	public int getNum1() {
 		return num1;
 	}
