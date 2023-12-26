@@ -8,12 +8,12 @@ public class HomeworkEx3 {
 
 	public static void main(String[] args) {
 
-		Member m[] = new Member[10];
+		Member1 m[] = new Member1[10];
 		
 	}
 
 	//필요한 멤버변수 및 메서드를 정리하고 구현하세요.(Car)
-	class Member {
+	class Member1 {
 		
 		//멤버변수
 		
@@ -29,7 +29,7 @@ public class HomeworkEx3 {
 		
 		
 		//메서드
-		public Member(int birth, String name, char sex) {
+		public Member1(int birth, String name, char sex) {
 			this.birth = birth;
 			this.name = name;
 			this.sex = sex;
