@@ -17,7 +17,7 @@ public class ListEx3_1 {
 			str = sc.nextLine();
 			//종료하기 위해 -1을 입력했으면 반복문 종료
 			if(str.equals("-1")) {
-				continue;
+				break;
 			}
 			list.add(str);
 		}
