@@ -3,7 +3,7 @@ package day14.work;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class IteratorEx1 {
+public class ListIteratorEx1 {
 
 	public static void main(String[] args) {
 		//업캐스팅
