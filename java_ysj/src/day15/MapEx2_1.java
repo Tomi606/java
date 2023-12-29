@@ -95,8 +95,6 @@ public class MapEx2_1 {
 		System.out.println("아이디 : " + id + ", 비번 : " + pw);
 	}
 
-
-
 	//메뉴
 	private static void printMenu() {
 		System.out.println("1. 회원가입");
