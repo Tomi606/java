@@ -83,12 +83,12 @@ public class StudentProgram implements Program {
 		switch(case1) {
 		//추가
 		case 1 : 
-			System.out.print("학년 반 번호 입력 : ");
-			
+			insertStudent();
 			break;
 			
 		//수정
 		case 2 : 
+			//updateStudent();
 			break;
 			
 		//삭제
@@ -99,7 +99,11 @@ public class StudentProgram implements Program {
 		}
 	}
 	
-	
+	//학생 추가
+	private void insertStudent() {
+		System.out.println();
+	}
+
 	//2. 성적 관리
 	private void printManageScore() {
 		System.out.println("-성적 관리-");
