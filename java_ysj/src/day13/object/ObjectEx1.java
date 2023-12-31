@@ -24,10 +24,12 @@ public class ObjectEx1 {
 		a1.num1 = 20;
 		//a1 출력
 		System.out.println(a1);
+		
 		A a2 = a1;
 		a2.num1 = 30;
 		//a2의 num1을 수정한 후 a1을 출력 : 공유하기 때문에 바뀜
 		System.out.println(a1);
+		
 		A a3 = a1.clone();
 		a3.num2 = 40;
 		//a3의 num2를 수정한 후 a1을 출력 : 복제했기 때문에 바뀌지 않음
@@ -39,6 +41,8 @@ public class ObjectEx1 {
 class Student {
 	int grade, classNum, num;
 	String name;
+	
+	//source -> hashCode and equals를 사용해서 선택한 매개변수가 같으면 같다고 나옴
 	@Override
 	public int hashCode() {
 		return Objects.hash(classNum, grade, num);	//학년 반 번호가 같으면 같은거라고 출력
@@ -63,6 +67,7 @@ class Student {
 	
 }
 @EqualsAndHashCode
+//clone()을 쓰기 위해서는 Cloneable 인터페이스를 구현해야 한다.
 class A implements Cloneable {
 	int num1 = 10;
 	int num2 = 3;
