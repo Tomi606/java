@@ -3,27 +3,29 @@ package day13;
 import java.util.Scanner;
 
 public class StringEx2_1 {
-
+	
+	/* 문장들을 입력받아 배열에 저장하고, 특정 단어가 들어가 있는 문장들을
+			 * 출력하는  프로그램을 작성하세요.
+			 * 메뉴
+			 * 1. 문장 추가
+			 * 2. 검색
+			 * 3. 종료 
+			 * 
+			 * 안녕하세요.
+			 * 테스트
+			 * 만나서 반갑습니다.
+			 * 나는 홍길동입니다.
+			 * 
+			 * 나로 검색
+			 * 만나서 반갑습니다.
+			 * 나는 홍길동입니다. 가 출력 */
+	
 	private static Scanner sc = new Scanner(System.in);
 	private static String [] list = new String[30];
 	private static int count = 0;	//문장 몇개 저장했는지
 	
 	public static void main(String[] args) {
-		/* 문장들을 입력받아 배열에 저장하고, 특정 단어가 들어가 있는 문장들을
-		 * 출력하는  프로그램을 작성하세요.
-		 * 메뉴
-		 * 1. 문장 추가
-		 * 2. 검색
-		 * 3. 종료 */
 		
-		/* 안녕하세요.
-		 * 테스트
-		 * 만나서 반갑습니다.
-		 * 나는 홍길동입니다.
-		 * 
-		 * 나로 검색
-		 * 만나서 반갑습니다.
-		 * 나는 홍길동입니다. 가 출력 */
 		int menu;
 		
 		do {
