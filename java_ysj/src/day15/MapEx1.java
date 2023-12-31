@@ -17,6 +17,8 @@ public class MapEx1 {
 		map.put("def", "def");
 		System.out.println(map.remove("abc123"));	//key값이 abc123인 것 삭제 + value값 리턴
 		System.out.println(map);	//key=value 형태로 출력
+		//remove 전 : {def456=abc123!, def=def, abc123=qwer123!, admin=admin}
+		//remove 후 : qwer123! {def456=abc123!, def=def, admin=admin}
 		
 		//keySet을 이용한 반복문 예제
 		Set<String> keySet = map.keySet();
