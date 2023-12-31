@@ -10,7 +10,7 @@ public class ExceptionEx3 {
 			System.out.println(e.getMessage());
 		}
 		
-		printDiv1(1, 0);
+		//printDiv1(1, 0);
 		try {
 			printDiv2(1, 0);
 		} catch (Exception e) {
