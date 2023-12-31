@@ -15,6 +15,9 @@ public class CalendarEx1 {
 		
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		System.out.println(day);
+		
+		int date = cal.get(Calendar.DAY_OF_WEEK);
+		System.out.println(date);
 	}
 
 }
