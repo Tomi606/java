@@ -21,8 +21,10 @@ public class SetEx1 {
 		System.out.println(set);
 		
 		Iterator<Integer> it = set.iterator();
-		int tmp = it.next();
-		System.out.print(tmp + " ");
+		while(it.hasNext()) {			
+			int tmp = it.next();
+			System.out.print(tmp + " ");
+		}
 	}
 
 }
