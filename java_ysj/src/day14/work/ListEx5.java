@@ -13,8 +13,9 @@ public class ListEx5 {
 		List<A> list = new ArrayList<A>();
 		list.add(new A(1));
 		list.add(new A(10));
+		list.add(new A(12));
 		
-		System.out.println(list.indexOf(new A(1)));	//없다고 나옴(-1)
+		System.out.println(list.indexOf(new A(12)));	//없다고 나옴(-1)
 	}
 
 }
