@@ -31,7 +31,7 @@ public class StudentMain {
 
 	public static void main(String[] args) {
 		
-		Program p = new StudentProgram2();
+		Program p = new StudentProgram();
 		p.run();
 		
 	}
