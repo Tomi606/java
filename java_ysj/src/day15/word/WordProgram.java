@@ -63,6 +63,11 @@ public class WordProgram implements Program {
 		String mean = sc.nextLine();
 		
 		Word tmp = new Word(word, mean);
+		int index = list.indexOf(tmp);
+		if(index == -1) {
+			System.out.println("");
+		}
+		
 		if(list.remove(tmp)) {
 			System.out.println("단어가 삭제되었습니다.");
 		} else {
@@ -70,6 +75,7 @@ public class WordProgram implements Program {
 		}
 	}
 
+	//단어랑 뜻이 수정이 안됨
 	//2. 단어 수정
 	private void updateWord() {
 		//기존 단어, 뜻 입력
@@ -94,6 +100,12 @@ public class WordProgram implements Program {
 		mean = sc.nextLine();
 		
 		Word newWord = new Word(word, mean);
+		
+		//수정할 단어 정보가 등록됬는지 확인해서 있으면 알림 후 종료
+		if(list.contains(newWord)) {
+			System.out.println("이미 등록된 단어라서 수정할 수 없습니다.");
+			return;
+		}
 		
 		//수정할 단어 인스턴스에 기존 단어를 업데이트하고 + 삭제 후 저장
 		newWord.setWord(tmp.getWord());
