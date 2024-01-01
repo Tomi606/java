@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
+
+import day15.student.Student;
 
 public class WordProgram implements Program {
 
@@ -50,11 +53,22 @@ public class WordProgram implements Program {
 	//4. 단어 조회
 	//**단어가 등록되지 않을 시 "등록된 단어가 없습니다." 라는 메세지 출력
 	private void searchWord() {
-		if(list == null) {
-			System.out.println("등록된 단어가 없습니다.");
-		}
+		//단어 리스트 조회
 		for(Word tmp : list) {
 			tmp.print();
+		}
+		//단어 입력
+		System.out.print("검색할 단어 입력 : ");
+		sc.nextLine();
+		String word = sc.nextLine();
+		Word tmp = new Word(word, "");
+		//같은 단어가 없으면 등록된 단어가 없다는 메세지 출력 후 종료(return)
+		if(!list.contains(tmp)) {
+			System.out.println("등록된 단어가 없습니다.");
+		}
+		//같은 단어가 있으면 출력 후 종료 -> **안되는 이유?
+		if(list.contains(tmp)) {
+			//list.print();
 		}
 	}
 
