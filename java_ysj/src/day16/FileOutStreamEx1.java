@@ -7,7 +7,7 @@ import java.io.IOException;
 public class FileOutStreamEx1 {
 
 	public static void main(String[] args) {
-		/* FileOutputStream은 파일이 없으면 생성한 후 출력해 줌
+		/* FileOutputStream은 파일이 없으면 생성한 후 출력해 줌(새로고침)
 		 * FileIntputStream은 파일이 없으면 예외가 발생 */
 		FileOutputStream fos = null;
 		String fileName = "src/day16/fileEx2.txt";
