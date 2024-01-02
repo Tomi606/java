@@ -16,7 +16,7 @@ public class FileStreamEx2 {
 		try(FileInputStream fis1 = new FileInputStream(fileName);
 			FileOutputStream fos1 = new FileOutputStream(fileName))
 		{
-			String str = "Hello";
+			String str = "안녕하세요";
 			for(int i=0;i<str.length();i++) {
 				fos1.write(str.charAt(i));
 			}
