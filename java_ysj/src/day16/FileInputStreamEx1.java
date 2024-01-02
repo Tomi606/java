@@ -10,8 +10,9 @@ public class FileInputStreamEx1 {
 		try {
 			FileInputStream fis = new FileInputStream("src/day16/fileEx1.txt");
 			for(int i=0;i<3;i++) {
-				int num = fis.read();	//read가 byte 단위로 하나씩 읽어옴. int(정수)로 읽어 오기 때문
-				System.out.print((char)num);	//char로 형변환을 해줘야 함
+				int num = fis.read();	
+				//read가 fileEx1의 텍스트를 byte 단위로 하나씩 읽어옴.//int(정수)로 읽어 오기 때문에
+				System.out.print((char)num);				//char로 형변환을 해줘야 함
 			}
 			fis.close();
 		}
