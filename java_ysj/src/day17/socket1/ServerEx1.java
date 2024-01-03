@@ -33,6 +33,11 @@ public class ServerEx1 {
 			
 			//5. 작업
 			System.out.println("서버 연결 성공");
+			//읽어온 채팅 내역을 클라이언트로 전송
+			ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+			oos.writeObject(list);
+			oos.flush();
+			
 			InputStream is = socket.getInputStream();
 			ObjectInputStream ois = new ObjectInputStream(is);
 				while(true) {
