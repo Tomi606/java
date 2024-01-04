@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentProgram implements Program {
@@ -55,13 +55,13 @@ public class StudentProgram implements Program {
 	private void load() {
 		if(socket == null) {
 			System.out.println("서버에 연결되지 않아 불러올 수 없습니다.");
+			return;
 		}
 		try {
 			oos.writeUTF("LOAD");
 			oos.flush();
-			
 			//읽어옴
-			ArrayList<Student> list = (ArrayList<Student>)ois.readObject();
+			List<Student> list = (List<Student>)ois.readObject();
 			sm = new StudentManager(list);
 			System.out.println("불러오기 성공");
 		} catch (IOException | ClassNotFoundException e) {
@@ -123,6 +123,9 @@ public class StudentProgram implements Program {
 	}
 
 	private void sendUpdateStudent(Student std) {
+		if(socket == null) {
+			return;
+		}
 		try {
 			oos.writeUTF("UPDATE");
 			oos.flush();
@@ -134,6 +137,9 @@ public class StudentProgram implements Program {
 	}
 
 	private void exit() {
+		if(socket == null) {
+			return;
+		}
 		try {
 			oos.writeUTF("SAVE");
 			oos.flush();
@@ -160,6 +166,7 @@ public class StudentProgram implements Program {
 		if(sm.insertStudent(std)) {
 			System.out.println("학생을 추가했습니다.");
 			sendStudent(std);
+			return;
 		}
 		System.out.println("이미 등록되있습니다.");
 	}
