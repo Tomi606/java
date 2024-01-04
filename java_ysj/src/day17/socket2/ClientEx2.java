@@ -36,7 +36,7 @@ public class ClientEx2 {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				System.out.println("서버 : 받는 기능 종료");
+				System.out.println("클라이언트 : 받는 기능 종료");
 
 			});
 			receiveThread.start();
@@ -55,7 +55,7 @@ public class ClientEx2 {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				System.out.println("서버 : 보내는 기능 종료");
+				System.out.println("클라이언트 : 보내는 기능 종료");
 			});
 			sendThread.start();
 
