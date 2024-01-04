@@ -6,7 +6,7 @@ import lombok.Data;
 public class SynchronizedEx1 {
 
 	public static void main(String[] args) {
-		//하나의 통장을 2명이 사용, 1명은 atm, 1명은 폰뱅ㅋ이
+		//하나의 통장을 2명이 사용, 1명은 atm, 1명은 폰뱅크
 		BankBook bb = new BankBook(0, null);
 		Customer c1 = new Customer(bb, "홍길동");
 		Customer c2 = new Customer(bb, "고길동");
