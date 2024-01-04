@@ -15,17 +15,16 @@ import lombok.RequiredArgsConstructor;
 
 public class ServerMain {
 
-	private static List<Student> list;
+	private static StudentManager sm = new StudentManager();
 	private static String fileName = "src/day18/student/list.txt";
 	
 	public static void main(String[] args) {
 		int port = 5001;
 		load();
-		System.out.println(list);
 		try {
 			ServerSocket serverSocket = new ServerSocket(port);
 			while(true) {
-				Thread t = new ServerThread(serverSocket.accept(), list);
+				Thread t = new ServerThread(serverSocket.accept(), sm);
 				t.start();
 				//save();
 			}
@@ -38,7 +37,7 @@ public class ServerMain {
 		try {
 			ObjectOutputStream foos = 
 					new ObjectOutputStream(new FileOutputStream(fileName));
-			foos.writeObject(list);
+			foos.writeObject(sm.getList());
 			foos.flush();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -50,9 +49,10 @@ public class ServerMain {
 		try {
 			ObjectInputStream fois = 
 					new ObjectInputStream(new FileInputStream(fileName));
-			list = (List<Student>)fois.readObject();
+			List<Student>list = (List<Student>)fois.readObject();
+			sm = new StudentManager(list);
 		} catch (IOException | ClassNotFoundException e) {
-			list = new ArrayList<Student>();	//빈배열
+			sm = new StudentManager();//빈배열
 			e.printStackTrace();	//서버에서 파일이 없어서 안보내고 있을때 계속 기다리기때문에 null이라도 보냄(?)
 		}
 	}
@@ -64,7 +64,7 @@ class ServerThread extends Thread {
 	@NonNull
 	private Socket socket;
 	@NonNull
-	List<Student> list;	//서버에서 공유하는 학생 리스트
+	private StudentManager sm;	//서버에서 공유하는 학생 리스트
 	
 	private ObjectInputStream ois;	//클라이언트에서 읽어올때 사용
 	private ObjectOutputStream oos;	//클라이언트에 보낼때 사용
@@ -81,17 +81,14 @@ class ServerThread extends Thread {
 				switch(menu) {
 				case "LOAD" :
 					load();
-					System.out.println(list);
 					break;
 					
 				case "INSERT" :
 					insert();
-					System.out.println(list);
 					break;
 					
 				case "UPDATE" : 
 					update();
-					System.out.println(list);
 					break;
 					
 				case "SAVE" :
@@ -108,11 +105,7 @@ class ServerThread extends Thread {
 	private void update() {
 		try {
 			Student std = (Student)ois.readObject();
-			int index = list.indexOf(std);
-			if(index < 0) {
-				return;
-			}
-			list.get(index).setName(getName());
+			sm.updateStudent(std);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,7 +114,7 @@ class ServerThread extends Thread {
 	private void insert() {
 		try {
 			Student std = (Student)ois.readObject();
-			list.add(std);
+			sm.insertStudent(std);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -129,7 +122,7 @@ class ServerThread extends Thread {
 
 	private void load() {
 		try {
-			oos.writeObject(list);
+			oos.writeObject(sm.getList());
 			oos.flush();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -141,7 +134,7 @@ class ServerThread extends Thread {
 		try {
 			ObjectOutputStream foos = 
 					new ObjectOutputStream(new FileOutputStream(fileName));
-			foos.writeObject(list);
+			foos.writeObject(sm.getList());
 			foos.flush();
 		} catch(Exception e) {
 			e.printStackTrace();
