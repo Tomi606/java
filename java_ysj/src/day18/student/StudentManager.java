@@ -1,6 +1,7 @@
 package day18.student;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentManager {
 
-	private ArrayList<Student> list = new ArrayList<Student>();
+	private List<Student> list = new ArrayList<Student>();
 
 	public boolean insertStudent(Student std) {
 		if(list.contains(std)) {
@@ -43,7 +44,7 @@ public class StudentManager {
 	}
 	
 	//null처리를 위해 StudentManager 메서드 다시 생성
-	public StudentManager(ArrayList<Student> list) {
+	public StudentManager(List<Student> list) {
 		if(list == null) {
 			return;	//list가 비워있으면 return해서 종료
 		}
