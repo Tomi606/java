@@ -11,16 +11,16 @@ public class SynchronizedEx1 {
 		Customer c1 = new Customer(bb, "홍길동");
 		Customer c2 = new Customer(bb, "고길동");
 		
-		Thread t1 = new Thread(()->{
+		/*Thread t1 = new Thread(()->{
 			c1.run();
 		});
 				
 		Thread t2 = new Thread(()->{
 			c2.run();
-		});
+		});*/
 				
-		t1.start();
-		t2.start();
+		c1.start();
+		c2.start();
 	}
 
 }
