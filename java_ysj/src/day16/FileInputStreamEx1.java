@@ -7,8 +7,9 @@ import java.io.IOException;
 public class FileInputStreamEx1 {
 
 	public static void main(String[] args) {
+		String fileName = "src/day16/fileEx1.txt";
 		try {
-			FileInputStream fis = new FileInputStream("src/day16/fileEx1.txt");
+			FileInputStream fis = new FileInputStream(fileName);
 			for(int i=0;i<3;i++) {
 				int num = fis.read();	
 				//read가 fileEx1의 텍스트를 byte 단위로 하나씩 읽어옴.//int(정수)로 읽어 오기 때문에
