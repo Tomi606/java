@@ -1,6 +1,8 @@
 package word;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,10 +12,11 @@ import lombok.Data;
 //영어 단어의 "단어"를 의미하는 클래스로, 단어를 멤버로 가짐
 @Data
 @AllArgsConstructor
-public class Word {
+public class Word implements Serializable{
 
+	private static final long serialVersionUID = -2971303189877919418L;
 	private String word;	//단어
-	private List<Mean> meanList;	//품사와 뜻 리스트(뜻은 여러개라서)
+	private List<Mean> meanList;//품사와 뜻 리스트(뜻은 여러개라서)
 	private int views;	//조회수
 	
 	//단어만 똑같으면 같은 단어로 판별하기 위해 재정의, 단어 추가 수정할 때 편함
@@ -107,6 +110,35 @@ public class Word {
 		this.word = word;
 		meanList = new ArrayList<Mean>();
 		meanList.add(new Mean(partOfSpeech, mean));
+	}
+	
+	//게임 - 단어의 뜻 중에서 랜덤으로 하나 선택
+	public String getRandomMean() {
+		List<Mean> tmp = new ArrayList<Mean>(meanList);
+		Collections.shuffle(tmp);
+		//뜻이 없거나 비어있으면
+		if(tmp == null || tmp.size() == 0) {
+			return null;
+		}
+		return tmp.get(0).getMean();
+	}
+	
+	//해당 조회수 증가
+	public void views() {
+		views++;
+	}
+	
+	public Word(String word, List<Mean> newMeanList) {
+		this.word = word;		//뉴민리스트가 눌이 아니면 뉴민리스트 : 눌이면 뜻 배열에 추가
+		this.meanList = newMeanList != null ? newMeanList : new ArrayList<Mean>();
+	}
+	
+	public void addMean(List<Mean> newMeanList) {
+		if(meanList == null) {
+			meanList = newMeanList;
+			return;
+		}
+		meanList.addAll(newMeanList);	//전부 다 가져와서 추가
 	}
 	
 	
