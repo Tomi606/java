@@ -79,7 +79,7 @@ public class ServerEx1 {
 		ArrayList<String> list = new ArrayList<String>();
 		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
 			while(true) {
-				list.add(ois.readUTF());				
+				list.add(ois.readUTF());
 			}
 		} catch (IOException e) {
 			return list;
