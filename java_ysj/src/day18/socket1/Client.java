@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 //클라이언트 클래스는 소켓을 가짐, 오브젝트 인,아웃풋 스트림을 사용하려면 "소켓.겟 인아웃풋 스트림"을 사용해서
 public class Client {
 	private Socket socket;
-
 	/*
 		Thread t1 = new Thread(new Runnable() {
 			
