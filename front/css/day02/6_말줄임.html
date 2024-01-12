@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>말줄임(쇼핑몰, 뉴스 등)</title>
+    <style>
+        [class^=box]{width: 300px;}
+        /* 뒤에 ... 처리 */
+        .box1{overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+        .box2{
+            /* -webkit-line-clamp: 2 -> 두 줄 부터 말줄임 적용 */
+            overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2;
+            display: -webkit-box; -webkit-box-orient: vertical;}
+    </style>
+</head>
+<body>
+    <div class="box1">한줄 예제입니다.한줄 예제입니다.한줄 예제입니다.한줄 예제입니다.한줄 예제입니다.한줄 예제입니다.한줄 예제입니다.한줄 예제입니다.한줄 예제입니다.</div>
+    <hr>
+    <div class="box2">두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.두줄 예제입니다.</div>
+</body>
+</html>
