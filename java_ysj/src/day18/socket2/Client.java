@@ -13,25 +13,15 @@ import lombok.AllArgsConstructor;
 public class Client {
 	private Socket socket;
 
-	/*
-		Thread t1 = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				
-			}
-		}); */
-	
-	//람다식 이용(이용안하면 Runnable 생성해서 오버라이드로 run 메서드 생성해야 함.(위))
-	public void receive() {	//받는 메서드
+	//받는 메서드
+	public void receive() {
 		Thread t = new Thread(()->{
 			ObjectInputStream ois = null;
 			try {
-				ois = new ObjectInputStream(socket.getInputStream()); //한줄로 만듦
+				ois = new ObjectInputStream(socket.getInputStream());
 				while(true) {
-					String str = ois.readUTF();	//읽어옴
-					if(str.equals("-1")) {		//str(문자열)이 -1이면 break
+					String str = ois.readUTF();
+					if(str.equals("-1")) {
 						break;
 					}
 					System.out.println(str);
@@ -41,9 +31,7 @@ public class Client {
 				System.out.println("예외가 발생해서 읽기 기능을 종료합니다.");
 			}
 		});
-		t.start();	//쓰레드 실행
-		
-		
+		t.start();
 	}
 	
 	//보내는 메서드
@@ -56,7 +44,7 @@ public class Client {
 				while(true) {
 					String str = sc.nextLine();
 					oos.writeUTF(str);
-					oos.flush();	//마지막 문장들 밀어주기
+					oos.flush();
 					if(str.equals("-1")) {
 						break;
 					}
@@ -66,7 +54,7 @@ public class Client {
 				System.out.println("예외가 발생해서 보내기 기능을 종료합니다.");
 			}
 		});
-		t.start();	//send 메서드 안에서 시작
+		t.start();
 	}
 	
 }
