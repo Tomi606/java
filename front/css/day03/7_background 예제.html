@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background 예제</title>
+    <!-- 왼쪽상단에 있는 이미지를 호버하면 가운데로 -->
+    <style>
+        .box {
+            height: 1000px; width: 1000px; border: 1px solid black;
+            background: url(https://image.newsis.com/2023/07/12/NISI20230712_0001313626_web.jpg);
+            background-repeat: no-repeat;
+        }
+        .box:hover {
+            background-position: center center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>
