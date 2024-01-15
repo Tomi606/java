@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴예제</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        .menu { border: 2px solid red; list-style: none;}
+        .menu::after { clear: both; content: ''; display: block;}
+        .menu-item { float: left; height: 50px; width: 33.33%; box-sizing: border-box;}
+        /* 첫번째 요소 제외하고 나머지 2번째 요소부터 왼쪽 테두리 적용 */
+        .menu-item+.menu-item { border-left: 2px solid red;}
+        .menu-link:hover { color: red;}
+        .menu-link {
+            display: block; height: 100%;
+            /* 데코레이션 : none -> 밑줄없앰 */
+            font-size: 20px; text-align: center; color: black; text-decoration: none;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="#" class="menu-link">메뉴1</a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">메뉴2</a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">메뉴3</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>
