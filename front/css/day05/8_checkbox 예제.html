@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkbox 예제</title>
+    <style>
+        [name=gender]{display: none;}
+        /* 성별 아래에 있는 lavbel 태그 */
+        [name=gender]+label { padding-left: 24px; height: 24px; line-height: 24px; position: relative;}
+        [name=gender]:label::before {
+            width: 20px; height: 24px; position: absolute; top: 2px; left: 2px; content: '';
+            background: url(../../static/checkbox_off.png);
+            background-size: 20px 20px;
+        }
+        [name=gender]:checked+label::before {
+            background-image: url(../../static/checkbox_on.png);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="radio" name="male" id="male" name="gender">
+        <label for="male">남성</label>
+    </div>
+    <div class="box">
+        <input type="radio" name="female" id="female" name="gender">
+        <label for="male">여성</label>
+    </div>
+</body>
+</html>
