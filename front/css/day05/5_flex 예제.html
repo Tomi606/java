@@ -45,6 +45,7 @@
             -space-between : 첫번째 아이템과 마지막 아이템을 각 끝에 배치 후
                              아이템 사이의 간격이 일정하도록 배치
             -space-around : 모든 아이템 좌우 간격이 일정하도록 배치
+            -space-evenly : 모든 여백이 동일하도록 아이템을 배치
             */
             justify-content: space-between;
 
@@ -57,12 +58,6 @@
             -baseline : 아이템을 문자 기준선에 정렬
             */
             align-items: flex-start;
-
-            /* align-self
-            -특정 아이템에 교차축 정렬 방법을 바꿀 때 사용하는 속성
-            -align-content는 컨테이너에 적용하지만
-             align-self는 아이템에 적용함. 
-             */
 
              /* align-content
              -교차축의 정렬 방법을 설정, 줄 사이의 간격
@@ -84,6 +79,11 @@
         .box:nth-of-type(3) { background: gray;}
         /* 첫번째 요소만 꽉 채우고 싶을 때 */
         .box:first-of-type { align-self: stretch;}
+        /* align-self
+        -특정 아이템에 교차축 정렬 방법을 바꿀 때 사용하는 속성
+        -align-content는 컨테이너에 적용하지만
+            align-self는 아이템에 적용함. 
+            */
     </style>
 </head>
 <body>
