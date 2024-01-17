@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grid 예제</title>
+    <style>
+        .container {
+            display: grid;
+            /* auto-fit : 반복횟수, (최소 200픽셀, 최대 1프레임) */
+            /* grid-template-columns
+            -각 컬럼의 크기를 지정하는 속성
+            -repeat(), minmax(), auto-fit, auto-fill을 이용해서 지정할 수 있다.
+            -repeat(개수, 크기)
+            -minmax(최소값, 최대값)
+            */
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 200px);
+
+            /* gap(사이) 간격 */
+            /* column-gap: 30px;
+            row-gap: 30px; */
+        }
+        .container .box { 
+            border: 3px solid red;
+        }
+        /* column-start는 아이템에 넣어줌 */
+        /* 1번째 박스 */
+        .container .box:first-of-type {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            background-color: yellow;
+        }
+        /* 2번째 박스 */
+        .container .box:nth-of-type(2) {
+            /* 1번째 행에서 3번째 행 전까지 */
+            grid-row: 1/3;
+            grid-column-start: 3;
+            background-color: gray;
+        }
+        .container .box:nth-of-type(3) {
+            /* 2번째 행에서 4번째 행 전까지 */
+            grid-row: 2/4;
+            /* 1열에서 3열 전까지 */
+            grid-column: 1/3;
+            background-color: blue;
+        }
+        .container .box:nth-of-type(4) {
+            background-color: orange;
+            grid-row-start: 3;
+            grid-column-start: 3;
+        }
+        /* grid-template-areas 속성
+         */
+        .container2 { 
+            display: grid;
+            /* grid-columns, rows를 구현한 후에 */
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 200px);
+            /* areas : " "를 사용하여 직접 써서 출력 */
+            grid-template-areas: 
+                "box1 box1 box1 box2"
+                "box3 box3 box4 box2"
+                "box3 box3 box4 box2"
+                "box3 box3 box5 box5";
+        }
+        .container2 .box:nth-of-type(1) { grid-area: box1; background-color: red;}
+        .container2 .box:nth-of-type(2) { grid-area: box2; background-color: tomato;}
+        .container2 .box:nth-of-type(3) { grid-area: box3; background-color: aqua;}
+        .container2 .box:nth-of-type(4) { grid-area: box4; background-color: yellow;}
+        .container2 .box:nth-of-type(5) { grid-area: box5; background-color: gray;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+    </div>
+    <hr>
+    <div class="container2">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+    </div>
+</body>
+</html>
