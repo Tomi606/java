@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 예제</title>
+</head>
+<body>
+    <script>
+        /* 
+        정수를 입력받아 입력받은 정수만큼 오늘의 할 일을 입력해서 화면에 출력하는 예제
+        -배열 이용
+        -ol태그를 이용하여 오늘의 할 일을 브라우저 화면에 출력
+        */
+       function insertTodoList(toDo) {
+            if(num<=0) {
+                alert('잘못 입력했습니다.');
+                return null;
+            }
+        var arr = [];
+        for(let i=0;i<num;i++) {
+            arr.push(prompt(`오늘의 ${i+1}번째 할 일`));
+        }
+        return arr;
+       }
+
+       function printTodoList(arr) {
+            document.write('<h1>오늘의 할 일</h1>');
+            printOl(arr);
+       }
+       /**
+        * @param {array} items li태그에 넣어 줄 배열 값들 
+        */
+       function printOl(items) {
+            var ol = '<ol>';
+            for(item of items) {
+                ol += `<li>${item}</li>`;
+            }
+            ol += '</ol>';
+            document.write(ol);
+       }
+       var toDo = prompt('오늘의 할 일은 몇가지 인가?', 0);
+       toDo = parseInt(toDo);
+       var arr = insertTodoList(toDo);
+       printTodoList(arr);
+    </script>
+</body>
+</html>
