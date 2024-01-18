@@ -8,14 +8,15 @@
 <body>
     <!-- 두 수를 더하는 함수를 만들고, 호출해서 화면에 테스트 하는 예제 -->
     <script>
-        var num1 = prompt('num1을 입력', 0);
-        var num2 = prompt('num2을 입력', 0);
-        num1 = +num1;
-        num2 = +num2;
-        function add() {
-            document.write(`${num1} + ${num2} = ${num1+num2}`);
+        function sum(num1, num2) {
+            num1 = parseInt(num1);
+            num2 = parseInt(num2);
+            return num1 + num2;
         }
-        add();
+        var num1 = prompt('num1을 입력', 0)??0;
+        var num2 = prompt('num2을 입력', 0)??0;
+        var res = sum(num1, num2); //실수로 매개변수를 하나 빠트리면 해당 매개변수의 값을 자동으로 0을 넣음
+        document.write(`${num1} + ${num2} = ${res}`);
     </script>
 </body>
 </html>
