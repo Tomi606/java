@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수예제</title>
+</head>
+<body>
+    <!-- 두 수를 더하는 함수를 만들고, 호출해서 화면에 테스트 하는 예제 -->
+    <script>
+        var num1 = prompt('num1을 입력', 0);
+        var num2 = prompt('num2을 입력', 0);
+        num1 = +num1;
+        num2 = +num2;
+        function add() {
+            document.write(`${num1} + ${num2} = ${num1+num2}`);
+        }
+        add();
+    </script>
+</body>
+</html>
