@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>예제4</title>
+	<style>
+		.container { width: 600px; margin: 0 auto;}
+		.img-container {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+		.img-box {
+			border: 1px solid black;
+			width: 30%;
+			border-radius: 5px;
+			padding: 5px;
+			cursor: pointer;
+		}
+		.img-box img {
+			width: 100%;
+			display: block;
+			height: 180px;
+			border-radius: 5px;
+		}
+		.show { 
+			border: 1px solid black;
+			padding: 5px;
+			box-sizing: border-box;
+			border-radius: 5px;
+			margin-top: 5px;
+		}
+		.show img {
+			display: block;
+			height: 588px;
+			width: 100%;
+			border-radius: 5px;
+			visibility: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="img-container">
+			<div class="img-box">
+				<img src="https://www.petpostnews.com/news/photo/202307/949_1446_818.jpg" alt="고양이1">
+			</div>
+			<div class="img-box">
+				<img src="https://thumb.photo-ac.com/85/858d616d7515401e7e90778c4abf467b_t.jpeg" alt="고양이2">
+			</div>
+			<div class="img-box">
+				<img src="https://www.petpostnews.com/news/photo/202307/949_1446_818.jpg" alt="고양이3">
+			</div>
+		</div>
+		<!-- 이미지를 보여주는 클래스 -->
+	<div class="show">
+		<img src="" alt="확대">
+		</div>
+	</div>
+	
+	<script>
+		/* 
+		여러개의 이미지가 있고, 이미지를 클릭하면 클릭한 이미지가 크게 보이는 예제
+		*/
+		document.querySelectorAll('.img-box').forEach(element=>{
+			element.onclick = function() {
+				let src = this.getElementsByTagName('img')[0].src;
+				let showImg = document.querySelector('.show img');
+				showImg.src = src;
+				showImg.style.visibility = 'visible';
+			};
+		});
+	</script>
+</body>
+</html>
