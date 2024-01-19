@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>todoList 예제</title>
+</head>
+<body>
+	<!-- onchange : 엔터로 입력 -->
+	<input type="text" class="text" onchange="addTodoList();">
+	<button onclick="addTodoList();">할 일 추가</button>
+	<h1>오늘의 할 일</h1>
+	<ul id="todoList"></ul>
+	<script>
+		/* input 태그를 이용하여 오늘의 할 일을 입력받고
+		추가 버튼을 클릭하면 오늘의 할 일 화면 에 추가되도록 코드를 작성하세요. */
+		function addTodoList() {
+			//innerHtml과 value를 이용해서 구현
+			let textElement = document.getElementsByClassName("text")[0];
+			let todoList = document.getElementById("todoList");
+			//입력한 문자열을 가져옴
+			let todo = textElement.value;
+			//오늘의 할일에 추가, 뒤에다가 추가하기 위해 +=
+			todoList.innerHTML += `<li>${todo}</li>`
+			//입력창에 입력한 문자열을 지움
+			textElement.value = '';
+			//입력창을 포커싱(바로입력)
+			textElement.focus();
+		}
+	</script>
+</body>
+</html>
