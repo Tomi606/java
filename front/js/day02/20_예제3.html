@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>예제3</title>
+	<style>
+		.box { border: 1px solid black; width: 300px; height: 300px;}
+	</style>
+</head>
+<body>
+	<button onclick="pop();">박스 보기 감추기</button>
+	<div class="box"></div>
+	<script>
+		/* 박스와 버튼을 만들고, 버튼을 클릭하면 박스가 사라지고,
+		다시 클릭하면 박스가 보여지도록 코드를 작성 */
+		var popUp = true;
+		function pop() {
+			let box = document.getElementsByClassName("box")[0];
+			//현재 디스플레이 값
+			let display = box.style.display;
+			//디스플레이가 감춰져 있지않으면 블락 아니면 논
+			display = display == 'none'?'block':'none';
+			box.style.display = display;
+		}
+	</script>
+</body>
+</html>
