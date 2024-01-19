@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>스타일 적용</title>
+</head>
+<body>
+	<div class="box">안녕하세요잉</div>
+	<script>
+		//box 이름을 가진 첫번째 요소를
+		let box = document.getElementsByClassName("box")[0];
+		// box.style.color = "green";
+		// box.style.fontSize = "50px";
+		// box.style.backgroundColor = "pink";
+		box.style.cssText = "color : green; font-size : 50px; background-color : pink"
+	</script>
+</body>
+</html>
