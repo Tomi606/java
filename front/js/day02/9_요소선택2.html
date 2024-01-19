@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>요소 선택</title>
+</head>
+<body>
+	<nav id="nav">
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+	<script>
+		let links1 = document.getElementsByClassName('menu-link');
+		console.log(`getElementsClassName : ${links1.length}`); //주석 중 : 3개 검색
+		let links2 = document.querySelectorAll('.menu-link');
+		console.log(`querySelectorAll : ${links2.length}`); //주석 중 : 3개 검색
+	</script>
+
+	<nav id="nav2">
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+	<script>
+		console.log(`getElementsClassName : ${links1.length}`);
+		//nav2 주석 없앰 : 6개 검색, 자동으로 인식해서 가져옴
+		console.log(`querySelectorAll : ${links2.length}`);
+		//nav2 주석 없앰 : 3개 검색, 인식못함
+
+		Array.from(links1).forEach(item=>{
+			console.log(item);
+		});
+		console.log('-----------');
+		links2.forEach(item=>{
+			consol.log(item);
+		});
+	</script>
+</body>
+</html>
