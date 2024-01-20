@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>overflow</title>
+    <style>
+        .container { border: 1px solid black; height: 300px; padding: 50px 0;}
+        .box { background-color: red; height: 400px; border: 2px solid gray;}
+        /* 넘어가는 부분은 숨김 */
+        .c1 { overflow: hidden;}
+        /* 박스 안에 스크롤이 생김 */
+        .c2 { overflow: scroll;}
+        /* 상황에 따라 생길수도 아닐수도 있음 */
+        .c3 { overflow: auto;}
+        /* 스크롤바 안보이게 스크롤할 수 있음 
+        크롬, 사파리, 오페라, 엣지에서 동작*/
+        .c3::-webkit-scrollbar { display: none;}
+        /* 파이어 폭스에서 동작 */
+        .c3 { scrollbar-width: none;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box"></div>
+    </div>
+    <div class="container c1">
+        <div class="box"></div>
+    </div>
+    <div class="container c2">
+        <div class="box"></div>
+    </div>
+    <div class="container c3">
+        <div class="box"></div>
+    </div>
+</body>
+</html>
