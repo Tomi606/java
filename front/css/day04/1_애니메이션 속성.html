@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 속성</title>
+    <!-- animate css 홈페이지에서 애니메이션 사용가능 -->
+    <style>
+        .box {
+            background: yellow; font-size: 20px; font-weight: bold; width: 100px;
+            height: 100px; border: 1px solid black; text-align: center; line-height: 100px;
+            /* 2. 애니메이션 호출 */
+            animation-name: scale_font;
+            /* 2초 실행 */
+            animation-duration: 2s;
+            /* 3번 반복 후 종료 */
+            animation-iteration-count: 3;
+            animation-direction: alternate;
+            /* 크기 변하는 속도 : linear -> 선형으로 등속 */
+            animation-timing-function: linear;
+            animation: scale-font 2s linear infinite alternate;
+        }
+        /* 1. 애니메이션 등록 */
+        @keyframes scale_font {
+            0% {
+                /* box만 적어도 상속되있는 span까지 적용됨 */
+                .box {
+                    font-size: 20px;
+                }
+            }
+            100% {
+                font-size: 50px;
+            }
+        }
+        .box1 {
+            /* 크기 변하는 속도 : ease-in-out -> 지정된 timing-function 속도에 따라 나옴 */
+            animation-timing-function: ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>꽝</span>
+    </div>
+    <div class="box box1">
+        <span>꽝</span>
+    </div>
+</body>
+</html>
