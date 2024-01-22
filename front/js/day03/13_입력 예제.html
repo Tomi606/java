@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>입력 예제</title>
+</head>
+<body>
+	<input type="text" id="text">
+	<script>
+		/*
+		input 창을 추가하고, input 창에 내용이 바뀌면 alert으로 입력된 값을 알려주는 예제
+		-change 이벤트 활용
+		-value 이벤트 활용
+		-내용이 바뀔 때 동작
+		*/
+		let text = document.getElementById("text");
+		text.onchange = function() {
+			let value = this.value;
+			alert(value);
+		}
+
+		/*
+		input 이벤트 : 입력이 발생하면
+		-붙여넣기
+		-키 누름 등과 같은 입력
+		*/
+		// let text = document.getElementById("text");
+		// text.oninput = function() {
+		// 	let value = this.value;
+		// 	alert(value);
+		// }
+	</script>
+</body>
+</html>
