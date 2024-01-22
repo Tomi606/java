@@ -37,13 +37,38 @@
 		*/
 		let btns = document.querySelectorAll(".btn"); //forEach를 이용하기 위해 query 사용
 		let boxes = document.querySelectorAll(".box");
-		btns.forEach((item, index) => {
+
+		// btns[0].onclick = function() {
+		// 	//box 3개 다 감춤
+		// 	boxDisplayNone();
+		// 	//0번지에 해당하는 box를 보이게 함
+		// 	boxes[0].style.display = "block";
+		// }
+		// btns[1].onclick = function() {
+		// 	boxDisplayNone();
+		// 	boxes[1].style.display = "block";
+		// }
+		// btns[2].onclick = function() {
+		// 	boxDisplayNone();
+		// 	boxes[2].style.display = "block";
+		// }
+
+		//위의 인덱스 반복성으로 for문 작성
+		for(let i=0;i<btns.length;i++) {
+			let item = btns[i];
 			item.onclick = function() {
 				boxDisplayNone();
-				//눌린 버튼의 순서와 같은 순서의 박스를 보여줌
-				boxes[index].style.display = "block";
+				boxes[i].style.display = "block";
 			}
-		});
+		}
+
+		// btns.forEach((item, index) => {
+		// 	item.onclick = function() {
+		// 		boxDisplayNone();
+		// 		//눌린 버튼의 순서와 같은 순서의 박스를 보여줌
+		// 		boxes[index].style.display = "block";
+		// 	}
+		// });
 
 		//box 클래스들을 모두 안보이게 하는 함수
 		function boxDisplayNone() {
