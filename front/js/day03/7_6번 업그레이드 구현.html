@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>클릭 이벤트 예제5</title>
+	<!-- 강사님 코드 확인!!!!!!!!!! -->
+	<style>
+		.box {
+			height: 100px;
+			width: 100px;
+			border: 1px solid black;
+		}
+		#box1{ background-color: rebeccapurple;}
+		#box2{ background-color: pink; display: none;}
+		#box3{ background-color: blue; display: none;}
+	</style>
+</head>
+<body>
+	<div class="btn-group">
+		<button class="btn" data-target="#box1">버튼1</button>
+		<button class="btn" data-target="#box2">버튼2</button>
+		<button class="btn" data-target="#box3">버튼3</button>
+	</div>
+	<div class="box-group">
+		<div class="box" id="box1">박스1</div>
+		<div class="box" id="box2">박스2</div>
+		<div class="box" id="box3">박스3</div>
+	</div>
+	<script>
+		/*
+		버튼을 3개 만들고 박스를 3개 만든 후 다음 기능이 동작되도록 구현
+		-기능
+			-버튼 1을 클릭하면 박스 1이 보이고, 박스 2와 박스 3이 감춰짐.
+			-버튼 2을 클릭하면 박스 2가 보이고, 박스 1와 박스 3이 감춰짐.
+			-버튼 3을 클릭하면 박스 3이 보이고, 박스 1와 박스 2이 감춰짐.
+		*/
+		let btns = document.querySelectorAll(".btn"); //forEach를 이용하기 위해 query 사용
+		btns.forEach(function(item){
+			item.onclick = function() {
+				//data-target 속성 값을 읽어와서 선택자로 활용함.
+				let target = this.getAttribute("data-target");
+				displayNone(".box");
+				let targetElement = document.querySelector(target);
+				targetElement.style.display = "block";
+			}
+		});
+
+		//선택자와 일치하는 요소들을 안보이게 감춤
+		//관리자 모드에서 displayNone('.box'); 치면 item들이 none 됨
+		function displayNone(selector) {
+			// 클래스가 올지 아이디가 올지 몰라서 선택자(쿼리)를 넣어줌
+			let elements = document.querySelectorAll(selector);
+			elements.forEach(function(item){
+				item.style.display = "none";
+			});
+		}
+
+	</script>
+</body>
+</html>
