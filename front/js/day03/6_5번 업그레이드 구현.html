@@ -36,7 +36,7 @@
 			-버튼 3을 클릭하면 박스 3이 보이고, 박스 1와 박스 2이 감춰짐.
 		*/
 		let btns = document.querySelectorAll(".btn"); //forEach를 이용하기 위해 query 사용
-		let boxes = document.querySelectorAll("box");
+		let boxes = document.querySelectorAll(".box");
 		btns.forEach((item, index) => {
 			item.onclick = function() {
 				boxDisplayNone();
