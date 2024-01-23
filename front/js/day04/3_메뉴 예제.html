@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>메뉴 예제</title>
+	<style>
+		.menu-list {
+			list-style: none; margin: 0; padding: 0;
+			display: flex;
+		}
+		.menu-item {
+			width: 100%; border: 3px solid black;
+		}
+		.menu-item+.menu-item {
+			margin-left: -3px;
+		}
+		.menu-link {
+			display: block; height: 50px; line-height: 50px;
+			text-align: center; font-weight: bold;
+			text-decoration: none; color: gray;
+			cursor: pointer;
+		}
+		/* 메뉴링크에 액티브가 있으면 */
+		.menu-link.active {
+			color: black;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+	</nav>	
+	<script>
+		/*
+		메뉴 1부터 3까지 있는 메뉴를 구성
+		-메뉴를 선택하면 선택한 메뉴의 배경색이 노란색이 되도록 구현
+		*/
+		let links = document.querySelectorAll(".menu-link");
+		// 1. for 문
+		// for(let i=0;i<links.length;i++) {
+		// 	links[i].onclick = function() {
+		// 		links[0].classList.remove("active");
+		// 		links[1].classList.remove("active");
+		// 		links[2].classList.remove("active");
+		// 		links[i].classList.add("active");
+		// 	}
+		// }
+
+		// 2. for 문
+		// for(link of links) {
+		// 	link.onclick = function() {
+		// 		links[0].classList.remove("active");
+		// 		links[1].classList.remove("active");
+		// 		links[2].classList.remove("active");
+		// 		this.classList.add("active");
+		// 	}
+		// }
+
+		//3. 쿼리는 forEach 사용가능 / linkList는 links와 중복 피하기 위해
+		links.forEach(function(link, index, linkList) {
+			link.onclick = function() {
+				removeClass(linkList, "active");
+				this.classList.add("active");
+			}
+		});
+		//list가 주어지고 해당 클래스 이름이 주어지면 클래스를 지우는 메서드
+		function removeClass(list, className) {
+			for(item of list) {
+				item.classList.remove(className);
+			}
+		}
+
+		// // 첫번째 메뉴1을 선택해서
+		// links[0].onclick = function() {
+		// 	// active 클래스 제거
+		// 	links[0].classList.remove("active");
+		// 	links[1].classList.remove("active");
+		// 	links[2].classList.remove("active");
+		// 	links[0].classList.add("active");
+		// }
+		// links[1].onclick = function() {
+		// 	links[0].classList.remove("active");
+		// 	links[1].classList.remove("active");
+		// 	links[2].classList.remove("active");
+		// 	links[1].classList.add("active");
+		// }
+		// links[2].onclick = function() {
+		// 	links[0].classList.remove("active");
+		// 	links[1].classList.remove("active");
+		// 	links[2].classList.remove("active");
+		// 	links[2].classList.add("active");
+		// }
+	</script>
+</body>
+</html>
