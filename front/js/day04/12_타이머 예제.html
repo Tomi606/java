@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>타이머 예제</title>
+</head>
+<body>
+	<button id="btn">시작</button>
+	<script>
+		/*
+		시작 버튼을 누르면 시간이 흐르는 타이머를 구현하세요.
+		시 : 분 : 초 로 화면에 표시
+		00 : 00 : 00 -> 시작을 누르면 1초 씩 증가
+		*/
+		let count = 0;
+		let time = setInterval(function() {
+			document.write(time);
+		}, 1000);
+		let btn = document.getElementById("btn");
+		btn.onclick = function() {
+			setInterval(callback, time);
+		}
+	</script>
+</body>
+</html>
