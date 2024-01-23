@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>요소 추가 예제</title>
+</head>
+<body>
+	<button id="btn">이미지 추가</button>
+	<div id="box"></div>
+	<script>
+		let btn = document.getElementById("btn");
+		btn.onclick = function() {
+			//1. 속성 추가
+			//<img>
+			let img = document.createElement("img");
+			//src=""
+			let src = document.createAttribute("src");
+			//alt=""
+			let alt = document.createAttribute("alt");
+			//width=""
+			let width = document.createAttribute("width");
+			//src="https://i.namu.wiki/i/N52ICaJW23r4qJ6lOx2WQv7kBMz2LVsW7E1zJ5b7EOTgELyhZDy5jpJBRuOc-dI_QRnIp3HLxPiBgqX0uunIjyzIfw0oei0lvCVD9zUXfYI7MLegHDQgvhKisoJUzBUn8iKZZiO4O8giX4YpA39ZCQ.webp";
+			src.value = "https://i.namu.wiki/i/N52ICaJW23r4qJ6lOx2WQv7kBMz2LVsW7E1zJ5b7EOTgELyhZDy5jpJBRuOc-dI_QRnIp3HLxPiBgqX0uunIjyzIfw0oei0lvCVD9zUXfYI7MLegHDQgvhKisoJUzBUn8iKZZiO4O8giX4YpA39ZCQ.webp";
+			//alt="강아지" (alt = 대체 문자)
+			alt.value = "강아지";
+			//width = 100;
+			width.value = "100";
+			img.setAttributeNode(src);
+			img.setAttributeNode(alt);
+			img.setAttributeNode(width);
+			//<img alt = "강아지" src = "https://i.namu.wiki/i/N52ICaJW23r4qJ6lOx2WQv7kBMz2LVsW7E1zJ5b7EOTgELyhZDy5jpJBRuOc-dI_QRnIp3HLxPiBgqX0uunIjyzIfw0oei0lvCVD9zUXfYI7MLegHDQgvhKisoJUzBUn8iKZZiO4O8giX4YpA39ZCQ.webp";
+			let box = document.getElementById("box");
+			box.append(img);
+		}
+	</script>
+</body>
+</html>
