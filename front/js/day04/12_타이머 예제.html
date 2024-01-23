@@ -4,9 +4,30 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>타이머 예제</title>
+	<style>
+		.box {
+			width: 300px; border: 1px solid black;
+			text-align: center; height: 72px; padding: 20px;
+			box-sizing: border-box; margin: 0 auto;
+			font-size: 50px; line-height: 30px;
+			border-radius: 10px;
+		}
+		.btn-group {
+			width: 300px; margin: 0 auto; display: flex;
+			justify-content: space-between; margin-top: 10px;
+		}
+		.btn-group button {
+			width: 48%; height: 30px; background-color: #fff;
+			border-width: 1px;
+		}
+	</style>
 </head>
 <body>
-	<button id="btn">시작</button>
+	<div class="box">00 : 00 : 00</div>
+	<div class="btn-group">
+		<button class="btn-start">시작</button>
+		<button class="btn-stop">중지</button>
+	</div>
 	<script>
 		/*
 		시작 버튼을 누르면 시간이 흐르는 타이머를 구현하세요.
@@ -14,12 +35,27 @@
 		00 : 00 : 00 -> 시작을 누르면 1초 씩 증가
 		*/
 		let count = 0;
-		let time = setInterval(function() {
-			document.write(time);
-		}, 1000);
-		let btn = document.getElementById("btn");
-		btn.onclick = function() {
-			setInterval(callback, time);
+		let id;
+		let btnStart = document.getElementsByClassName("btn-start")[0];
+		btnStart.onclick = function() {
+			id = setInterval(function() {
+				++count;
+				// 1시간 = 3600초 / count를 3600으로 나눠서 문자열을 정수로 출력
+				let hour = parseInt(count/3600);
+				// hour을 문자열로 캐스팅하고 2자리를 기준으로 자리가 비어있으면 0으로 채운다.
+				hour = String(hour).padStart(2, "0");
+				let minute = parseInt(count/60) % 60;
+				minute = String(minute).padStart(2, "0");
+				let second = count % 60;
+				second = String(second).padStart(2, "0");
+				let result = `${hour} : ${minute} : ${second}`;
+				let box = document.getElementsByClassName("box")[0];
+				box.innerText = result;
+			}, 1000);
+		}
+		let btnStop = document.getElementsByClassName("btn-stop")[0];
+		btnStop.onclick = function() {
+			clearInterval(id);
 		}
 	</script>
 </body>
