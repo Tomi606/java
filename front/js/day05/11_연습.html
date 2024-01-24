@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>연습</title>
+	<style>
+		.container {
+			max-width: 500px; margin: 0 auto;
+		}
+		.box-group {
+			border: 3px solid black; margin-bottom: 20px;
+		}
+		.box {
+			height: 400px; display: none;
+		}
+		.box.select { display: block;}
+		.box1 { background-color: salmon;}
+		.box2 { background-color: seagreen;}
+		.box3 { background-color: teal;}
+
+		.btn-group {
+			display: flex; align-items: center; justify-content: center;
+		}
+
+		.page-group { margin: 0 10px;}
+		.max-page { font-weight: bold;}
+
+		.btn-prev, .btn-next {
+			width: 50px; height: 50px; border-radius: 50%;
+			border-width: 3px; border-color: gray; background-color: white;
+			cursor: pointer;
+		}
+		.btn-prev:hover, .btn-next:hover {
+			background-color: gainsboro; font-weight: bold;
+		} 
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box-group">
+			<div class="box box1 select" data-page="1"></div>
+			<div class="box box2" data-page="2"></div>
+			<div class="box box3" data-page="3"></div>
+		</div>
+		<div class="btn-group">
+			<button class="btn-prev">&lt;</button>
+			<span class="page-group">
+				<span class="cur-page">1</span> / <span class="max-page">3</span>
+			</span>
+			<button class="btn-next">></button>
+		</div>
+	</div>
+	<script>
+		let btnPrev = document.querySelector(".btn-prev");
+		btnPrev.onclick = function() {
+			let select = document.querySelector(".select");
+			let prevElement = select.previousElementSibling;
+			if(!prevElement) {
+				return;
+			}
+			prevElement.classList.add("select");
+			select.classList.remove("select");
+			updatePage();
+		}
+
+		let btnNext = document.querySelector(".btn-next");
+		btnNext.onclick = function() {
+			let select = document.querySelector(".select");
+			let nextElement = select.nextElementSibling;
+			if(!nextElement) {
+				return;
+			}
+			nextElement.classList.add("select");
+			select.classList.remove("select");
+			updatePage();
+		}
+
+		function updatePage() {
+			let select = document.querySelector(".select");
+			let page = select.getAttribute("data-page");
+			let curPage = document.querySelector(".cur-page");
+			curPage.innerText = page;
+		}
+		updatePage();
+	</script>
+</body>
+</html>
