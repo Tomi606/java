@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JQuery 기본 예제</title>
+	<!-- // = https:// -->
+	<script src="//code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="box">1</div>
+		<div class="box">2</div>
+		<div class="box" id="box3">3</div>
+	</div>
+
+	<!-- 나중에 추가된 박스도 이벤트를 등록하고 싶으면 -->
+	<div class="box">4</div>
+
+	<button class="btn-show">show</button>
+	<button class="btn-hide">hide</button>
+	<button class="btn-toggle">toggle</button>
+	<div class="box" id="show" style="background-color: yellow; height: 400px;"></div>
+	<script>
+		/*
+		요소 선택
+		$("선택자")
+
+		-이벤트 등록 -> 선택자가 하나든 여러개든 .이벤트명으로 처리가능
+		$("선택자").이벤트명(function(){
+		});
+		//메소드로 등록이 안되있는 이벤트명은 on 사용
+		//선택자1 안에 있는 선택자2들에게 이벤트 등록
+		$("선택자1").on("이벤트명", "선택자2", function(){
+		});
+		*/
+		let container = $(".container");
+		console.log(container);
+
+		// // 요소 선택후 이벤트 등록
+		// $(".box").click(function(){
+		// 	alert("안녕하세요");
+		// });
+
+		// 나중 추가 박스도 이벤트 등록, 이렇게 사용
+		$(document).on("click", ".box", function() {
+			alert("앙뇽");
+		});
+
+		$(".btn-show").click(function() {
+			$("#show").fadeIn(1000);
+		});
+		$(".btn-hide").click(function() {
+			$("#show").fadeOut(1000);
+		});
+		$(".btn-toggle").click(function() {
+			$("#show").fadeTo(1000, 0.5);
+		});
+	</script>
+</body>
+</html>
