@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>탐색 예제</title>
+	<script src="../../static/jquery.js"></script>
+	<style>
+		/* body 태그 밑에 있는 모든 선택자 */
+		body * { padding: 10px;}
+	</style>
+</head>
+<body>
+	<nav>
+		<div class="container">
+			<ul class="menu-list">
+				<li class="menu-item first">
+					<!-- 주소창보면 html 뒤에 아무것도 안붙음 -->
+					<a href="javascript:void(0)" class="menu-link">메뉴1</a>
+				</li>
+				<li class="menu-item">
+					<a href="javascript:void(0)" class="menu-link">메뉴2</a>
+				</li>
+				<li class="menu-item">
+					<a href="javascript:void(0)" class="menu-link">메뉴3</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<script>
+		/*
+		조상 탐색(위로)
+			-parent() : 부모 요소
+			-parents() : 조상 요소들
+			-parents("선택자") : 조상 요소들 중에서 선택자와 일치하는 요소
+			-parentsUntil("선택자")
+				-조상 요소들 중에서 선택자와 일치하는 조상 요소 사이의 조상 요소들(~까지)
+				-선택자와 일치하는 요소는 선택하지 않음
+
+		자손 탐색(밑으로)
+			-children() : 자식 요소들
+			-children("선택자") : 자식 요소들 중에서 선택자와 일치하는 자식 요소들
+			-find("선택자") : 자손 요소들 중에서 선택자와 일치하는 자손 요소들
+
+		형제 탐색(본인 제외, 옆으로)
+			-siblings() : 모든 형제 요소들
+			-sibling("선택자") : 선택자와 일치하는 형제 요소들
+
+			-next() : 다음 형제 요소
+			-nextAll() : 다음 형제 요소들
+			-nextAll("선택자") : 선택자와 일치하는 다음 형제 요소들
+			-nextUntil("선택자") : 요소와 선택자 사이의 다음 모든 형제 요소들
+
+			-prev() : 이전 형제 요소
+			-prevAll() : 이전 형제 요소들
+			-prevAll("선택자") : 선택자와 일치하는 이전 형제 요소들
+			-prevUntil("선택자") : 요소와 선택자 사이의 이전 모든 형제 요소들
+
+		필터 : 요소가 여러개인 경우, 필터를 통해서 요소들을 선택할 수 있다.(나 포함)
+			-first() : 첫번째 요소
+			-last() : 마지막 요소
+			-eq(숫자) : 숫자번지 요소, 번지는 0부터
+			-filter(선택자) : 선택자와 일치하는 요소들
+			-not(선택자) : 선택자와 일치하지 않는 요소들
+		*/
+
+		// menu-link를 찾고, 백그라운드 칼라를 salmon으로 변경
+		$(".menu-list").find(".menu-link").css("background-color", "salmon");
+
+		//자식 요소들 css 변경
+		$(".menu-list").children().css("background", "gray");
+
+		//부모 태그인 div 태그에 적용
+		$(".menu-list").parent().css("border", "1px solid black");
+
+		//모든 부모의 백그라운드가 palegreen으로 바뀜
+		$(".menu-list").parents().css("background", "palegreen");
+
+		//body nav 태그 합쳐져서 두꺼워 보임. html을 포함하지 않음(until)
+		$(".menu-list").parentsUntil("html").css("border", "1px solid red");
+
+		//인덱스 1번째의 자식 요소 css 변경
+		$(".menu-item").eq(1).children().css("color", "aqua");
+
+		//3번째 요소 이전의 요소의 폰트 크기가 30px
+		$(".menu-item").eq(2).prev().css("font-size", "30px");
+
+		//3번째 요소(2번지) 이전의 요소들에게 글자 꾸미기를 none을 줌
+		$(".menu-item").eq(2).prevAll().children().css("text-decoration", "none");		
+
+		//2번지 요소에서 first 요소 전까지(until은 본인 포함X) 폰트 굵기를 bold로
+		$(".menu-item").eq(2).prevUntil(".first").css("font-weight", "bold");
+
+		//필터, 메뉴 1에 파란 테두리
+		$(".menu-item").filter(".first").css("border", "2px solid blue");
+
+		//not, 첫번째 요소를 제외한 2,3번째 요소에 테두리
+		$(".menu-item").not(".first").css("border", "3px solid black");
+	</script>
+</body>
+</html>
