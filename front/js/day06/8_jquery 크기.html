@@ -8,6 +8,8 @@
 	<style>
 		.box {
 			width: 300px; height: 300px; background-color: tomato;
+			padding: 20px; border: 5px solid black;
+			margin: 30px;
 		}
 	</style>
 </head>
@@ -20,8 +22,15 @@
 		-innerWidth()/innerHeight() : 패딩 + 컨텐츠의 너비 / 높이
 		-outerWidth()/outerHeight() : 테두리 + 패딩 + 컨텐츠의 너비 / 높이
 		-outerWidth(true)/outerHeight(true) : 마진 + 테두리 + 패딩 + 컨텐츠의 너비 / 높이
-		
 		*/
+
+		let box = $(".box");
+		console.log(`컨텐츠 너비 : ${box.width()}`); //컨텐츠 너비 : 300
+		console.log(`패딩까지 너비 : ${box.innerWidth()}`); //패딩까지 너비 : 340
+		console.log(`테두리까지 너비 : ${box.outerWidth()}`); //테두리까지 너비 : 350
+		console.log(`마진까지 너비 : ${box.outerWidth(true)}`); //마진까지 너비 : 410
+		
+		
 	</script>
 </body>
 </html>
