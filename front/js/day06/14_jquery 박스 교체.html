@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>박스 교체 예제</title>
+	<script src="../../static/jquery.js"></script>
+	<!-- 강사님꺼 올라오면 긁어오기 -->
+	<style>
+		.container {
+			width: 500px; margin: 0 auto;
+		}
+		.box-group {
+			margin-bottom: 20px;
+		}
+		.box {
+			height: 400px; display: none;
+		}
+		.box.select { display: block;}
+		.box1 { background-color: salmon;}
+		.box2 { background-color: teal;}
+		.box3 { background-color: slateblue;}
+
+		.btn-group {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.prev-btn, .next-btn {
+			width: 40px; height: 40px;
+			border-radius: 50%; border: 1px solid gainsboro;
+			background-color: gainsboro;
+			font-weight: bold;
+			font-size: 30px;
+			cursor: pointer;
+		}
+		.page-group {
+			margin: 0 10px;
+			font-size: 25px; font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box-group">
+			<!-- select 요소 기준으로 다음 요소가 있는지 확인, 있으면 다음으로 select로 옮겨주고 앞의 select는 지운다. -->
+			<div class="box box1 select" data-page="1">1</div>
+			<div class="box box2" data-page="2">2</div>
+			<div class="box box3" data-page="3">3</div>
+		</div>
+		<div class="btn-group">
+			<button class="prev-btn">&lt;</button>
+			<span class="page-group">
+				<span class="cur-page">1</span> / <span class="last-page">3</span>
+			</span>
+			<button class="next-btn">></button>
+		</div>
+	</div>
+	<script>
+		/*박스 3개 만들고 <를 누르면 마지막 페이지로 가는 버튼*/
+
+		//다음 버튼 클릭 이벤트
+		$(".next-btn").click(function() {
+			//.select 요소를 선택, 변수에 저장하는 이유? 밑에 select가 추가될 때 결과가 달라질 수 있어서
+			let now = $(".select");
+			//.select 요소의 다음 요소가 있으면
+			if(now.next().length) {
+					//다음 요소에 select 클래스를 추가
+					now.next().addClass("select");
+				}
+			//없으면
+				else{
+				//처음 요소에 select 클래스를 추가(클래스 이름을 쓰는거니까 '.'쓰면 안됨)
+				$(".box").first().addClass("select");
+			}
+			//기존에 있던 select 클래스를 제거
+			now.removeClass("select");
+			drawPage();
+			});
+			
+			//이전 버튼 클릭 이벤트
+			$(".prev-btn").click(function() {
+				//.select 요소를 선택
+				let now = $(".select");
+				//.select 요소의 이전 요소가 있으면
+				if(now.prev().length) {
+					//이전 요소에 select 클래스를 추가
+					now.prev().addClass("select");
+				}
+				//없으면
+				else {
+					//마지막 요소에 select 클래스를 추가
+				$(".box").last().addClass("select");
+				}
+				//기존에 있던 select 클래스를 제거
+				now.removeClass("select");
+				drawPage();
+			});
+
+			//페이지 숫자
+			function drawPage() {
+				/*
+				index() : 부모 요소를 기준으로 선택 요소가 몇번지인지 알려주는 메서드. 0부터 시작
+				*/
+				let index = $(".select").index();
+				// //현재 페이지 번호
+				// alert(index+1);
+				$(".cur-page").text(index+1);
+			}
+	</script>
+</body>
+</html>
