@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>탭메뉴 예제</title>
+	<script src="../../static/jquery.js"></script>
+	<style>
+		.tab-menu {
+			list-style: none; display: flex;
+			margin-top: 50px; padding: 0;
+			justify-content: center;
+		}
+		.tab-item {
+			border: 3px solid black;
+			width: 200px;
+		}
+		.tab-item+.tab-item {
+			margin-left: -3px;
+		}
+		.tab-link {
+			display: block; height: 50px; line-height: 50px;
+			text-align: center;
+			text-decoration: none; color: gray;
+			cursor: pointer;
+		}
+		.tab-link:hover {
+			color: black; font-weight: bold;
+		}
+		.box-group {
+			border: 3px solid black; margin-bottom: 20px;
+			
+		}
+		.box {
+			display: none; height: 400px;
+		}
+		.box1 { background-color: gray;}
+		.box2 { background-color: salmon;}
+		.box3 { background-color: darkcyan;}
+	</style>
+</head>
+<body>
+	<nav>
+		<ul class="tab-menu">
+			<li class="tab-item">
+				<a href="#" class="tab-link">메뉴1</a>
+			</li>
+			<li class="tab-item">
+				<a href="#" class="tab-link">메뉴2</a>
+			</li>
+			<li class="tab-item">
+				<a href="#" class="tab-link">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+	<br>
+	<div class="box-group">
+		<div class="box box1">1</div>
+		<div class="box box2">2</div>
+		<div class="box box3">3</div>
+	</div>
+	<script>
+
+	</script>
+</body>
+</html>
