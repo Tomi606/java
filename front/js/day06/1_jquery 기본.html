@@ -23,12 +23,12 @@
 	<div class="box" id="show" style="background-color: yellow; height: 400px;"></div>
 	<script>
 		/*
-		요소 선택
-		$("선택자")
+		요소 선택 : $("선택자")
 
-		-이벤트 등록 -> 선택자가 하나든 여러개든 .이벤트명으로 처리가능
+		이벤트 등록 -> 선택자가 하나든 여러개든 .이벤트명으로 처리가능
 		$("선택자").이벤트명(function(){
 		});
+
 		//메소드로 등록이 안되있는 이벤트명은 on 사용
 		//선택자1 안에 있는 선택자2들에게 이벤트 등록
 		$("선택자1").on("이벤트명", "선택자2", function(){
@@ -47,15 +47,6 @@
 			alert("앙뇽");
 		});
 
-		$(".btn-show").click(function() {
-			$("#show").fadeIn(1000);
-		});
-		$(".btn-hide").click(function() {
-			$("#show").fadeOut(1000);
-		});
-		$(".btn-toggle").click(function() {
-			$("#show").fadeTo(1000, 0.5);
-		});
 	</script>
 </body>
 </html>
