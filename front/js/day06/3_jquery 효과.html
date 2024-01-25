@@ -4,20 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>효과</title>
+	<script src="../../static/jquery.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="box">1</div>
-		<div class="box">2</div>
-		<div class="box" id="box3">3</div>
-	</div>
-
-	<!-- 나중에 추가된 박스도 이벤트를 등록하고 싶으면 -->
-	<div class="box">4</div>
-
 	<button class="btn-show">show</button>
 	<button class="btn-hide">hide</button>
 	<button class="btn-toggle">toggle</button>
+	<button class="btn-to">to</button>
 	<div class="box" id="show" style="background-color: yellow; height: 400px;"></div>
 	<script>
 		/*
@@ -40,18 +33,6 @@
 			slideDown(속도, 콜백함수)
 			slideToggle(속도, 콜백함수)
 		*/
-		let container = $(".container");
-		console.log(container);
-
-		// // 요소 선택후 이벤트 등록
-		// $(".box").click(function(){
-		// 	alert("안녕하세요");
-		// });
-
-		// 나중 추가 박스도 이벤트 등록, 이렇게 사용
-		$(document).on("click", ".box", function() {
-			alert("앙뇽");
-		});
 
 		$(".btn-show").click(function() {
 			$("#show").fadeIn(1000);
@@ -60,6 +41,9 @@
 			$("#show").fadeOut(1000);
 		});
 		$(".btn-toggle").click(function() {
+			$("#show").fadeToggle(1000);
+		});
+		$(".btn-to").click(function() {
 			$("#show").fadeTo(1000, 0.5);
 		});
 	</script>
