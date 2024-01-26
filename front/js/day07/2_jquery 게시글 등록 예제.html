@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jquery 게시글 등록 예제</title>
+	<script src="../../static/jquery.js"></script>
+	<style>
+		/* 게시글 등록 */
+		.container {
+			max-width: 500px;
+			/* 가운데 정렬 */
+			margin: 0 auto;
+		}
+		.input-box { margin-top: 10px;}
+		/* 인풋박스 아래에 있는 라벨 태그는 */
+		.input-box>.label {
+			/*block으로 해서 밑으로 */
+			display: block;
+		}
+		.input-box>.input {
+			display: block; width: 100%; height: 30px;
+			border-radius: 5px; border: 1px solid gray;
+			margin-top: 5px; padding-left: 5px; box-sizing: border-box;
+		}
+		.input-box>.text-area {
+			height: 200px;
+		}
+		.btn {
+			width: 100%; box-sizing: border-box; background-color: white;
+			border: 1px solid gray; border-radius: 5px; margin-top: 15px;
+			line-height: 30px; border-color: darkolivegreen;
+			display: block;
+		}
+		.btn:hover {
+			cursor: pointer; background-color: azure;
+		}
+
+		/* 게시글 리스트 */
+		.table {
+			width: 100%;
+			/* 테두리를 ~~ */
+			border-collapse: collapse;
+		}
+		.table tr {
+			border: 1px solid black; border-width: 1px 0;
+			height: 30px;
+		}
+		/* tbody 밑에 있는 tr 호버(tbody는 호버하지 않기위해) */
+		.table.table-hover>tbody>tr:hover {
+			background-color: azure;
+		}
+		.modal-box {
+			position: fixed; top: 0; bottom: 0; left: 0; right: 0;
+			background-color: rgba(0, 0, 0, 0.3);
+			/* 모달 박스를 숨김 */
+			display: none;
+		}
+		/* 모달 박스 안에 있는 이너 박스 */
+		.modal-box .inner-box{
+			background-color: white; width: 500px;
+			height: 400px; margin: 100px auto 0; position: relative;
+		}
+		.modal-box .btn-close {
+			position: absolute; top: 0; right: 0; width: 30px; height: 30px;
+			text-decoration: none; color: black; text-align: center;
+			line-height: 30px;
+		}
+	</style>
+</head>
+<body>
+	<form action="" class="container">
+		<h1>게시글 등록</h1>
+		<div class="input-box">
+			<!-- 라벨 태그로 인풋을 연결해줬기 때문에 입력창이 연결됨 -->
+			<label for="title" class="label">제목 : </label>
+			<input type="text" name="title" id="title" class="input" placeholder="제목을 입력하세요." > 
+		</div>
+		<div class="input-box">
+			<label for="writer" class="label">작성자 : </label>
+			<input type="text" name="writer" id="writer" class="input" placeholder="작성자를 입력하세요." > 
+		</div>
+		<div class="input-box">
+			<label for="title" class="label">내용 : </label>
+			<textarea name="content" id="content" rows="10" class="input text-area" placeholder="내용을 입력하세요."></textarea>
+		</div>
+		<button class="btn">등록</button>
+	</form>
+		<hr>
+		<div class="container">
+			<h1>게시글 리스트</h1>
+			<table class="table table-hover">
+				<thead>
+					<th>번호</th>
+					<th class="title">제목</th>
+					<th class="writer">작성자</th>
+					<th>조회수</th>
+				</thead>
+				<tbody>
+					<!-- 4개 행 합침
+					<th colspan="4">등록된 게시글이 없습니다.</th> -->
+				</tbody>
+			</table>
+		</div>
+		<div class="modal-box">
+			<div class="inner-box">
+				<a href="#" class="btn-close">X</a>
+				<div class="content-box"></div>
+			</div>
+		</div>
+		<!-- function만 board.js에 옮겨서 script src로 연결 -->
+		<script src="board.js"></script>
+		<script>
+			display(list);
+
+			//제목 클릭시 이벤트 처리
+			$(document).on("click", ".link", linkClick);
+
+			// 버튼에 클릭 이벤트 등록
+			$(".btn").click(btnClick);
+			//X 버튼을 누르면 안보임
+			$(".btn-close").click(function() {
+				$(".modal-box").hide();
+				display(list);
+			});
+		</script>
+</body>
+</html>
