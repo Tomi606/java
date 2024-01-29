@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>정규표현식 게시글 등록</title>
+		<script src="../../static/jquery.js"></script>
+		<style>
+			.container {
+				margin: 0 auto;
+				max-width: 800px;
+			}
+			.input-box {
+				margin-bottom: 10px;
+			}
+			.input-box>.label {
+				display: block;
+				margin-bottom: 5px;
+			}
+			.input-box>.input {
+				height: 30px; width: 100%; display: block;
+				border-radius: 5px; border: 1px solid gray;
+				font-size: 20px; padding-left: 10px;
+			}
+			.input-box>.text-area {
+				height: 100px;
+			}
+			.btn {
+				width: 100%; line-height: 30px; display: block;
+				box-sizing: border-box;
+				border: 1px solid none; border-radius: 5px;
+				background-color: white;
+				margin-top: 10px; margin-left: 7px;
+			}
+			.btn:hover {
+				background-color: azure;
+				font-weight: bold;
+				cursor: pointer;
+			}
+			[class^=error] {
+				color: red;
+				font-size: 18px;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="" class="container">
+			<h1>게시글 등록</h1>
+			<div class="input-box">
+				<label for="title" class="label">제목 : </label>
+				<input type="text" name="title" id="title" class="input" placeholder="제목을 입력하세요.">
+				<label class="error-title"></label>
+			</div>
+			<div class="input-box">
+				<label for="writer" class="label">작성자 : </label>
+				<input type="text" name="writer" id="writer" class="input" placeholder="작성자를 입력하세요.">
+				<label class="error-writer"></label>
+			</div>
+			<div class="input-box">
+				<label for="content" class="label">내용 : </label>
+				<textarea name="content" id="content" cols="10" class="input text-area" placeholder="내용을 입력하세요."></textarea>
+				<label class="error-content"></label>
+			</div>
+			<button class="btn">등록</button>
+		</form>
+		<script>
+			$("form").submit(function() {
+				let titleRegex = /^[a-zA-Z0-9ㄱ-힣?!,\.]{0,50}$/;
+				let writerRegex = /^[a-zA-Z0-9ㄱ-힣]{0,10}$/;
+
+				let titleValue = $("[name=title]").val();
+				let writerValue = $("[name=writer]").val();
+				let contentValue = $("[name=content]").val();
+				let submitOK = true;
+
+				// 경고 문구 초기화
+				$(".error-title").text("");
+				$(".error-writer").text("");
+				$(".error-content").text("");
+
+				// 제목
+				if(!titleValue.trim().length) {
+					$(".error-title").text("필수항목 입니다.");
+					submitOK = false;
+				}
+				if(!titleRegex.test(titleValue.trim())) {
+					$(".error-title").text("제목은 영문, 한글, 숫자, 특수기호(?!,.)만 사용가능하며, 최대 50자까지 작성할 수 있습니다.");
+					submitOK = false;
+				}
+
+				// 작성자
+				if(!writerValue.trim().length) {
+					$(".error-writer").text("필수항목 입니다.");
+					submitOK = false;
+				}
+				if(!writerRegex.test(writerValue.trim())) {
+					$(".error-writer").text("작성자는 영어, 한글, 숫자만 사용가능하며, 최대 10자까지 작성할 수 있습니다.");
+					submitOK = false;
+				}
+
+				// 내용
+				if(!contentValue.trim().length) {
+					$(".error-content").text("필수항목 입니다.");
+					submitOK = false;
+				}
+
+				// 앞뒤 공백 제거 후 전송
+				if(submitOK) {
+					$("[name=title]").val(titleValue.trim());
+					$("[name=writer]").val(writerValue.trim());
+					$("[name=content]").val(contentValue.trim());
+				}
+				return false;
+			});
+		</script>
+	</body>
+</html>

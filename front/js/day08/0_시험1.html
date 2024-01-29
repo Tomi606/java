@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>1. 회원가입 예제</title>
+	<style>
+		.container {
+			width: 100%;
+			height: auto;
+		}
+		.input-box {
+			margin: 5px 0;
+		}
+		.input-box::after {
+			clear: both; content: ''; display: block;
+		}
+		.input-box label {
+			float: left;
+			width: 180px;
+		}
+		.input-box input {
+			float: left;
+			box-sizing: border-box;
+			/* 연산자 사이는 무조건 공백!!! */
+			width: calc(90% - 50px);
+		}
+		.text-center {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<form action="">
+		<fieldset class="container">
+			<legend>회원가입</legend>
+			<div class="input-box">
+				<label for="id">아이디</label>
+				<input type="text" id="id" name="id" placeholder="아이디를 입력하세요.">
+			</div>
+			<div class="input-box">
+				<label for="pw">비밀번호</label>
+				<input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요.">
+			</div>
+			<div class="input-box">
+				<label for="pw2">비밀번호 확인</label>
+				<input type="text" id="pw2" name="pw2" placeholder="비밀번호를 확인하세요.">
+			</div>
+			<div class="input-box text-center">
+				<button class="btn">작성하기</button>
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>
