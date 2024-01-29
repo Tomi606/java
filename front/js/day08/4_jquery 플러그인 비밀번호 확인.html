@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- 
+		제목 : 한글, 영문, 숫자, .?! 가능, 제목은 최소 한글자이상, 최대 50자입니다.
+		작성자 : 필수항목입니다, 특수문자 체크
+		내용 : 필수항목입니다.
+	 -->
+	<title>jquery 플러그인 비밀번호 확인</title>
+	<script src="../../static/jquery.js"></script>
+	<style>
+		.container {
+			/* 그냥 width를 쓰면 밑에 스크롤이 생긴다.
+			max를 사용하면 화면을 작게해도 스크롤이 없다. */
+			max-width: 500px;
+			margin: 0 auto;
+		}
+		.input-box {
+			margin-bottom: 10px;
+		}
+		.input-box>.label {
+			display: block;
+			margin-bottom: 5px;
+		}
+		.input-box>.input {
+			height: 30px; width: 100%; display: block;
+			border-radius: 5px; border: 1px solid gray;
+			font-size: 15px; padding-left: 10px; margin-bottom: 5px;
+		}
+		.input-box>.text-area {
+			height: 200px;
+		}
+		.btn {
+			width: 100%; line-height: 30px; display: block;
+			box-sizing: border-box; background-color: white;
+			border: 1px solid red; border-radius: 5px; font-size: 15px;
+			margin-top: 15px; margin-left: 5px;
+		}
+		.btn:hover {
+			background-color: azure;
+			cursor: pointer;
+		}
+		[class^=error] {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<form action="" class="container">
+		<div class="input-box">
+			<label for="">비번</label>
+			<input type="text" id="pwd" name="pw" class="input" placeholder="비번을 입력하세요.">
+			<label class="error-title"></label>
+		</div>
+		<div class="input-box">
+			<label for="">비번 확인</label>
+			<input type="text" id="pwd2" name="pw2" class="input" placeholder="비번 확인을 입력하세요.">
+			<label class="error-writer"></label>
+		</div>
+		<button class="btn">등록</button>
+	</form>
+	<script>
+		{
+			rules : {
+				pw : {
+					required : true;
+				},
+				pw2 : {
+					equalTo : pwd
+				}
+			},
+			// 유효성 검사 실패 시 출력할 문구
+			messages : {
+				pw : {
+					required : "필수항목입니다."
+				},
+				pw2 : {
+					equalTo : "비밀번호와 일치하지 않습니다."
+				}
+			}
+		};
+		$.validator.addMethod(
+			"regex",
+			function(value, element, regex) {
+				var re = new RegEx(regex);
+				// js에서는 논리연산자가 true false 말고도 값을 줘도 사용 가능
+				// ||는 처음 온 코드가 참이면 return
+				return this.optional(element) || re.test(value);
+			},
+			"정규표현식을 확인하세요."
+		);
+	</script>
+</body>
+</html>
