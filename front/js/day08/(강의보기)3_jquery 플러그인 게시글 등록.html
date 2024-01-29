@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- 
+		제목 : 한글, 영문, 숫자, .?! 가능, 제목은 최소 한글자이상, 최대 50자입니다.
+		작성자 : 필수항목입니다, 특수문자 체크
+		내용 : 필수항목입니다.
+	 -->
+	<title>jquery 정규표현식 게시글 등록</title>
+	<script src="../../static/jquery.js"></script>
+	<style>
+		.container {
+			/* 그냥 width를 쓰면 밑에 스크롤이 생긴다.
+			max를 사용하면 화면을 작게해도 스크롤이 없다. */
+			max-width: 500px;
+			margin: 0 auto;
+		}
+		.input-box {
+			margin-bottom: 10px;
+		}
+		.input-box>.label {
+			display: block;
+			margin-bottom: 5px;
+		}
+		.input-box>.input {
+			height: 30px; width: 100%; display: block;
+			border-radius: 5px; border: 1px solid gray;
+			font-size: 15px; padding-left: 10px; margin-bottom: 5px;
+		}
+		.input-box>.text-area {
+			height: 200px;
+		}
+		.btn {
+			width: 100%; line-height: 30px; display: block;
+			box-sizing: border-box; background-color: white;
+			border: 1px solid red; border-radius: 5px; font-size: 15px;
+			margin-top: 15px; margin-left: 5px;
+		}
+		.btn:hover {
+			background-color: azure;
+			cursor: pointer;
+		}
+		[class^=error] {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<form action="" class="container">
+		<h1>게시글 등록</h1>
+		<div class="input-box">
+			<label for="title" class="label">제목 : </label>
+			<input type="text" id="title" name="title" class="input" placeholder="제목을 입력하세요.">
+			<label class="error-title"></label>
+		</div>
+		<div class="input-box">
+			<label for="writer" class="label">작성자 : </label>
+			<input type="text" id="writer" name="writer" class="input" placeholder="작성자를 입력하세요.">
+			<label class="error-writer"></label>
+		</div>
+		<div class="input-box">
+			<label for="content" class="label">내용 : </label>
+			<textarea name="content" id="content" cols="10" class="input text-area" placeholder="내용을 입력하세요."></textarea>
+			<label class="error-content"></label>
+		</div>
+		<button class="btn">등록</button>
+	</form>
+	<script>
+		rules : {
+			/*
+			name을 입력
+			name : {
+				옵션 : 값,
+				옵션 : 값
+			}
+			-옵션
+				-required : 필수 항목
+				-maxlength : 최대 글자수
+				-minlength : 최소 글자수
+				-equalTo : 다른 요소 값과 같은지 확인(주로 비밀번호 확인)
+					-rules에 equalTo : 비교할 요소의 아이디값을 가져옴
+				-digits : 숫자만 있는지 체크
+				-email : 이메일 형식 체크
+				-url : url 형식인지 체크
+			*/
+			title : {
+				required : true, //필수 항목으로 설정
+				maxlength : 50,
+				regex : /^[a-zA-Z0-9ㄱ-힣?!,\.]{0,50}$/,
+				// equalTo : 아이디 필요
+			},
+			writer : {
+				required : true,
+				maxlength : 20,
+				regex : /^[a-zA-Z0-9]{0,20}$/
+			},
+			content : {
+				required : true
+			}
+		},
+		// 유효성 검사 실패 시 출력할 문구
+		messages : {
+			title : {
+				required : "필수항목입니다.",
+				maxlength : "최대 ${0}자여야 합니다.",
+				regex : "제목은 영문, 한글, 숫자, 특수기호(.,!?)만 사용가능합니다."
+			},
+			writer : {
+				required : "필수항목입니다.",
+				maxlength : "최대 ${0}자여야 합니다.",
+				regex : "닉네임은 영문, 숫자만 사용 가능합니다.";
+			},
+			content : {
+				required : "필수항목입니다."
+			}
+		};
+		$.validator.addMethod(
+			"regex",
+			function(value, element, regex) {
+				var re = new RegEx(regex);
+				// js에서는 논리연산자가 true false 말고도 값을 줘도 사용 가능
+				// ||는 처음 온 코드가 참이면 return
+				return this.optional(element) || re.test(value);
+			},
+			"정규표현식을 확인하세요."
+		);
+	</script>
+</body>
+</html>

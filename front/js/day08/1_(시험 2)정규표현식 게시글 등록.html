@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- 
+		제목 : 한글, 영문, 숫자, .?! 가능, 제목은 최소 한글자이상, 최대 50자입니다.
+		작성자 : 필수항목입니다, 특수문자 체크
+		내용 : 필수항목입니다.
+	 -->
+	<title>정규표현식 게시글 등록</title>
+	<style>
+		.container {
+			/* 그냥 width를 쓰면 밑에 스크롤이 생긴다.
+			max를 사용하면 화면을 작게해도 스크롤이 없다. */
+			max-width: 500px;
+			margin: 0 auto;
+		}
+		.input-box {
+			margin-bottom: 10px;
+		}
+		.input-box>.label {
+			display: block;
+			margin-bottom: 5px;
+		}
+		.input-box>.input {
+			height: 30px; width: 100%; display: block;
+			border-radius: 5px; border: 1px solid gray;
+			font-size: 15px; padding-left: 10px; margin-bottom: 5px;
+		}
+		.input-box>.text-area {
+			height: 200px;
+		}
+		.btn {
+			width: 100%; line-height: 30px; display: block;
+			box-sizing: border-box; background-color: white;
+			border: 1px solid red; border-radius: 5px; font-size: 15px;
+			margin-top: 15px; margin-left: 5px;
+		}
+		.btn:hover {
+			background-color: azure;
+			cursor: pointer;
+		}
+		[class^=error] {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<form action="" class="container">
+		<h1>게시글 등록</h1>
+		<div class="input-box">
+			<label for="title" class="label">제목 : </label>
+			<input type="text" id="title" name="title" class="input" placeholder="제목을 입력하세요.">
+			<label class="error-title"></label>
+		</div>
+		<div class="input-box">
+			<label for="writer" class="label">작성자 : </label>
+			<input type="text" id="writer" name="writer" class="input" placeholder="작성자를 입력하세요.">
+			<label class="error-writer"></label>
+		</div>
+		<div class="input-box">
+			<label for="content" class="label">내용 : </label>
+			<textarea name="content" id="content" cols="10" class="input text-area" placeholder="내용을 입력하세요."></textarea>
+			<label class="error-content"></label>
+		</div>
+		<button class="btn">등록</button>
+	</form>
+	<script>
+		//제목, 작성자, 내용 변수 생성
+		let title = document.querySelector("[name=title]");
+		let writer = document.querySelector("[name=writer]");
+		let content = document.querySelector("[name=content]");
+		//에러 변수 생성
+		let titleError = document.querySelector(".error-title");
+		let writerError = document.querySelector(".error-writer");
+		let contentError = document.querySelector(".error-content");
+		//submit으로 전송하기 위해 form으로 변수 생성
+		let form = document.querySelector("form");
+		
+		/* 
+		return을 안 쓸 경우
+		등록을 눌렀을 때의 url : ?title=&writer=&content=
+		-name이 title인 요소의 값을 서버로 전송
+		-name이 writer인 요소의 값을 서버로 전송
+		-name이 content인 요소의 값을 서버로 전송
+		-name은 반드시 필요한 요소
+
+		return false를 쓸 경우 : 서버로 전송을 막음
+		등록을 눌렀을 때도 서버의 전송이 막혀서 url이 바뀌지 않는다.
+			잘못된 아이디, 비번을 입력할 때 서버로 전송하는 것을 막음
+		*/
+		//this를 안쓸거기 때문에 화살표 함수 사용 가능
+		form.onsubmit = function() {
+			// 각 요소의 정규표현식 적용
+			// 슬래쉬 2개, 시작^, 끝$, 점(.)은 역슬래쉬.(그냥 .도 의미가 있어서), + : 1개 이상
+			// {0, 50} : 최소 1자 ~ 최대 50자, {,50} : 최대 글자만 50자 이하, 0을 안넣으면 필수항목입니다. 가 출력이 안됨.
+			let titleRegex = /^[a-zA-Z0-9ㄱ-힣?!,\.]{0,50}$/;
+			// 작성자를 영문으로만 지정
+			// * : 0개 이상 ~ 무한대
+			let writerRegex = /^[a-zA-Z0-9]{0,20}$/;
+			// 현재 입력된 각 요소의 값(value)
+			let titleValue = title.value;
+			let writerValue = writer.value;
+			let contentValue= content.value;
+			let submitOK = true;
+
+			// 에러 박스 내용 초기화, 초기화 해야 이전 내역이 남지 않음.
+			titleError.innerText = "";
+			writerError.innerText = "";
+			contentError.innerText = "";
+			
+			// 제목 필수 항목 처리
+			// trim() : 첫글자 앞 공백, 뒷글자 뒤 공백 지워줌, 공백은 \t, \n, &nbsp; 같은 공백
+			if(!titleValue.trim().length) {	//자바일 때 : if(titleValue.trim().length != 0)
+				titleError.innerText = "필수항목입니다.";
+				submitOK = false;
+			}
+			// 제목의 유효성 검사
+			if(!titleRegex.test(titleValue.trim())) {
+				titleError.innerText = "제목은 영문, 한글, 숫자, 특수기호(.,!?)만 사용가능하며, 최대 50자 까지 작성할 수 있습니다.";
+				submitOK = false;
+			}
+
+			// 작성자 필수 항목 처리
+			if(!writerValue.trim().length) {
+				writerError.innerText = "필수항목입니다.";
+				submitOK = false;
+			}
+			// 작성자 유효성 검사
+			if(!writerRegex.test(writerValue.trim())) {
+				writerError.innerText = "닉네임은 영문, 숫자만 사용 가능하며, 최대 20자 까지 작성할 수 있습니다.";
+				submitOK = false;
+			}
+
+			// 내용 필수 항목 처리
+			if(!contentValue.trim().length) {
+				contentError.innerText = "필수항목입니다.";
+				submitOK = false;
+			}
+			
+			return submitOK;
+		}
+	</script>
+</body>
+</html>
