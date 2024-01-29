@@ -19,11 +19,15 @@
 		.input-box {
 			margin-bottom: 10px;
 		}
+			/* 
+			선택자1 선택자2 : 선택자1이 조상이고, 선택자2가 자손. 자손은 자식, 손자, 증손자 등
+			선택자1>선택자2 : 선택자1이 부모이고, 선택자2가 자식
+			*/
 		.input-box>.label {
 			display: block;
 			margin-bottom: 5px;
 		}
-		.input-box>.input {
+		.input-box .input {
 			height: 30px; width: 100%; display: block;
 			border-radius: 5px; border: 1px solid gray;
 			font-size: 15px; padding-left: 10px; margin-bottom: 5px;
