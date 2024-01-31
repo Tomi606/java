@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>1. 회원가입 예제</title>
+	<style>
+		/* .container로 width를 100%로 맟추면 브라우저 창을 넘어간다.
+				왜? padding width도 포함되기 때문에 box-sizing: border box; 값을 구현하지 않으면
+						브라우저 창 밖으로 넘어가게
+		 */
+		.container {
+			width: 100%;
+			height: auto;
+			box-sizing: border-box;
+		}
+		.input-box {
+			margin: 5px 0;
+		}
+		.input-box::after {
+			clear: both; content: ''; display: block;
+		}
+		.input-box label {
+			float: left;
+			width: 110px;
+		}
+		.input-box input {
+			float: left;
+			box-sizing: border-box;
+			/* 연산자 사이는 무조건 공백!!! */
+			/* 100% 에서 몇px을 빼느냐에 따라 input 태그가 block이 될 수도 아닐 수도 있음 */
+			width: calc(100% - 110px);
+		}
+		.text-center {
+			text-align: center;
+		}
+
+		/* 기사 테이블 */
+		.table {
+			margin-top: 10px; border: 1px solid black;
+			width: 100%;
+			text-align: center;
+		}
+		.table th, .table td {
+			border: 1px solid black;
+		}
+		.table thead, .table tfoot {
+			background-color: tomato;
+			font-weight: bold; text-align: center;
+		}
+		.table tbody {
+			background-color: rgb(245, 233, 231);
+		}
+	</style>
+</head>
+<body>
+	<form action="">
+		<fieldset class="container">
+			<legend>회원가입</legend>
+			<div class="input-box">
+				<label for="id">아이디</label>
+				<input type="text" id="id" name="id" placeholder="아이디를 입력하세요.">
+			</div>
+			<div class="input-box">
+				<label for="pw">비밀번호</label>
+				<input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요.">
+			</div>
+			<div class="input-box">
+				<label for="pw2">비밀번호 확인</label>
+				<input type="text" id="pw2" name="pw2" placeholder="비밀번호를 확인하세요.">
+			</div>
+			<div class="input-box text-center">
+				<button class="btn">작성하기</button>
+			</div>
+		</fieldset>
+	</form>
+	<hr>
+
+	<!-- 기사 테이블 -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th colspan="2">기사 제목</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>2</td>
+				<td>오늘의 날씨는?</td>
+				<td>
+					<a href="#">
+						<button>기사보기</button>
+					</a>
+				</td>
+				<td>10</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>오늘의 뉴스는 무엇인가요?</td>
+				<td>
+					<a href="#">
+						<button>기사보기</button>
+					</a>
+				</td>
+				<td>100</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<td colspan="3">기사 개수</td>
+			<td>2</td>
+		</tfoot>
+	</table>
+</body>
+</html>
