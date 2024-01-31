@@ -5,6 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>정규표현식 게시글 등록</title>
 		<script src="../../static/jquery.js"></script>
+		<!-- 시험볼 때 밑의 코드 넣어서 작성 -->
+		<script src="//code.jquery.com/jquery-3.7.1.js"></script>
 		<style>
 			.container {
 				margin: 0 auto;
@@ -66,15 +68,17 @@
 		</form>
 		<script>
 			$("form").submit(function() {
+				// 정규표현식 변수 생성
 				let titleRegex = /^[a-zA-Z0-9ㄱ-힣?!,\.]{0,50}$/;
 				let writerRegex = /^[a-zA-Z0-9ㄱ-힣]{0,10}$/;
 
+				// 입력 변수 생성
 				let titleValue = $("[name=title]").val();
 				let writerValue = $("[name=writer]").val();
 				let contentValue = $("[name=content]").val();
 				let submitOK = true;
 
-				// 경고 문구 초기화
+				// 새로고침 시(새 창을 띄울때) 경고 문구 초기화
 				$(".error-title").text("");
 				$(".error-writer").text("");
 				$(".error-content").text("");
