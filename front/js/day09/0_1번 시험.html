@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>1번 시험</title>
+	<style>
+		/* 회원가입 */
+		.input-box {
+			margin: 5px auto;
+			width: 100%;
+		}
+		.input-box::after {
+			clear: both;
+			content: '';
+			display: block;
+		}
+		/* 라벨 가운데 정렬 */
+		.label {
+			font-weight: bold;
+			float: left;
+			text-align: center;
+		}
+		.input {
+			padding-left: 5px;
+			margin-left: 10px;
+			width: calc(100% - 100px);
+			float: left;
+			margin-left: 40px;
+		}
+		.content-box {
+			line-height: 100px;
+		}
+		.content-label {
+			line-height: 100px;
+		}
+		.text-center {
+			margin-top: 20px;
+			text-align: center;
+		}
+		.chooseFile {
+			margin-left: 10px;
+		}
+
+		/* 공지사항 테이블 */
+		.table {
+			margin: 0 auto;
+			border: 1px solid black;
+			width: 100%;
+		}
+		.table th, .table td {
+			border: 1px solid black;
+		}
+		thead {
+			background-color: tomato;
+			color: white;
+		}
+		tbody {
+			background-color: blanchedalmond;
+		}
+		tfoot {
+			background-color: tomato;
+			color: white;
+			text-align: center;
+			font-weight: bold;
+		}
+		.table .number {
+			max-width: 15px;
+		}
+		.table .view {
+			max-width: 20px;
+		}
+		.tbody .go-btn {
+			margin-right: -52px;
+		}
+	</style>
+</head>
+<body>
+	<form action="insert.no" method="post">
+		<fieldset>
+			<legend>공지사항 작성하기</legend>
+			<div class="input-box">
+				<label for="title" class="label">제목</label>
+				<input type="text" id="title" name="title" class="input" placeholder="제목을 입력하시오.">
+			</div>
+			<div class="input-box">
+				<label for="content" class="label content-label">내용</label>
+				<input type="text" id="content" name="content" class="input content-box" placeholder="내용을 입력하시오.">
+			</div>
+			<div class="input-box">
+				<label for="uploadFile" class="label">첨부파일</label>
+				<button id="uploadFile" name="uploadFile" class="chooseFile">파일 선택</button> 선택된 파일 없음
+			</div>
+			<div class="input-box text-center">
+				<button>작성하기</button>
+			</div>
+		</fieldset>
+	</form>
+	<hr>
+
+	<!-- 공지사항 테이블 -->
+	<table class="table">
+		<thead class="thead">
+			<th class="number">번호</th>
+			<th colspan="2" class="title">제목</th>
+			<th class="writer">작성자</th>
+			<th class="date">작성일</th>
+			<th class="view">조회수</th>
+		</thead>
+		<tbody class="tbody">
+			<tr>
+				<td>9</td>
+				<td class="title">공지사항 제목 9</td>
+				<td>
+					<a href="#">
+						<button class="go-btn">바로가기</button>
+					</a>
+				</td>
+				<td>user01</td>
+				<td>2021-03-29</td>
+				<td>34</td>
+			</tr>
+		</tbody>
+		<tbody class="tbody">
+			<tr>
+				<td>6</td>
+				<td>공지사항 제목 6</td>
+				<td>
+					<a href="#">
+						<button class="go-btn">바로가기</button>
+					</a>
+				</td>
+				<td>answ445</td>
+				<td>2021-03-12</td>
+				<td>67</td>
+			</tr>
+		</tbody>
+		<tbody class="tbody">
+			<tr>
+				<td>3</td>
+				<td>공지사항 제목 3</td>
+				<td>
+					<a href="#">
+						<button class="go-btn">바로가기</button>
+					</a>
+				</td>
+				<td>testg12</td>
+				<td>2021-03-01</td>
+				<td>98</td>
+			</tr>
+		</tbody>
+		<tbody class="tbody">
+			<tr>
+				<td>2</td>
+				<td>공지사항 제목 2</td>
+				<td>
+					<a href="#">
+						<button class="go-btn">바로가기</button>
+					</a>
+				</td>
+				<td>palwe3</td>
+				<td>2021-01-02</td>
+				<td>85</td>
+			</tr>
+		</tbody>
+		<tbody class="tbody">
+			<tr>
+				<td>1</td>
+				<td>공지사항 제목 1</td>
+				<td>
+					<a href="#">
+						<button class="go-btn">바로가기</button>
+					</a>
+				</td>
+				<td>xml23</td>
+				<td>2020-12-24</td>
+				<td>124</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<td colspan="4">전체공지사항 갯수</td>
+			<td colspan="2">5개</td>
+		</tfoot>
+	</table>
+</body>
+</html>
