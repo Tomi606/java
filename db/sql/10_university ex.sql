@@ -30,7 +30,7 @@ group by st_major;
 select le_title as "강의명", count(co_st_num) as "수강생 수"
 from course
 join lecture on co_le_num = le_num
-group by le_num; -- le_title로 하지 않은 이유? unique를 쓰지 않았고 중복될 수 있기 때문에
+group by le_num; -- le_title로 하지 않은 이유? unique를 쓰지 않았고, 강의의 제목이 중복될 수 있기 때문에
 
 
 
