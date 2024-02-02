@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS BOARD(
 	NUM INT AUTO_INCREMENT,
     -- 제목 최대 50자 비울 수 없다
     TITLE VARCHAR(50) NOT NULL,
-    -- 텍스트 문자열길이 비울 수 없다
+    -- 텍스트 문자열 길이 비울 수 없다
     CONTENT LONGTEXT NOT NULL,
     -- 조회수 정수 비울 수 없다 default를 이용해 초기 설정을 0으로 함
     VIEW INT NOT NULL DEFAULT 0,
@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS BOARD(
     -- 외래키 지정, 내 아이디와 상대방 아이디를 연결
     FOREIGN KEY(ID) REFERENCES MEMBER(ID)
 );
+-- key MUL이 외래키로 지정된 것
 DESC BOARD;
 
 # MEMBER 테이블에 가입일 컬럼 DATE를 추가(만들어진 테이블에 새 속성 추가)

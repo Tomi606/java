@@ -44,7 +44,7 @@ desc Lecture;
 
 drop table if exists Course;
 create table if not exists Course(
-	co_num char(5) not null primary key,
+	co_num int primary key,
     co_st_num char(10) not null,
     foreign key(co_st_num) references Student(st_num),
     co_le_num int not null,

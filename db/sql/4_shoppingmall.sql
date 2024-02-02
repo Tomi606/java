@@ -1,6 +1,4 @@
 # 쇼핑몰 사이트 ERDcloud
-#영어랑 한글이랑 바꼈으니 수정하기...
-
 DROP DATABASE IF EXISTS shoppingmall;
 CREATE DATABASE IF NOT EXISTS shoppingmall;
 
@@ -9,114 +7,113 @@ USE shoppingmall;
 DROP TABLE IF EXISTS `member`;
 
 CREATE TABLE `member` (
-	`회원아이디`	varchar(15)	primary key,
-	`회원비번`	varchar(20) not null	NULL,
-	`회원이메일`	varchar(40) not null	NULL,
-	`회원전화번호`	varchar(11) not null	NULL,
-	`회원권한`	varchar(10) not null default "user"	,
-	`로그인 실패횟수`	int not null default "0"	
+	`me_id`	varchar(13)	PRIMARY KEY,
+	`me_pw`	varchar(20) NOT	NULL,
+	`me_email`	varchar(30) NOT	NULL,
+	`me_phone`	varchar(13) NOT	NULL,
+	`me_authority`	varchar(10) NOT NULL DEFAULT "USER",
+	`me_try_count`	int NOT NULL DEFAULT 0
 );
 
 DROP TABLE IF EXISTS `certification`;
 
 CREATE TABLE `certification` (
-	`인증코드`	char(6) primary key,
-	`만료기간`	int, -- datetime으로 수정
-	`회원아이디`	varchar(15) not null
+	`ce_num`	int	PRIMARY KEY,
+	`ce_code`	char(6) NOT	NULL,
+	`ce_limit`	datetime NOT NULL,
+	`ce_me_id`	varchar(13)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `category`;
 
 CREATE TABLE `category` (
-	`분류코드`	char(6) primary key,
-	`분류명`	varchar(20) not null
+	`ca_num`	int	PRIMARY KEY AUTO_INCREMENT,
+	`ca_name`	varchar(10) NOT	NULL
 );
 
 DROP TABLE IF EXISTS `product`;
 
 CREATE TABLE `product` (
-	`제품코드`	char(6) primary key,
-	`제품명`	varchar(30) not null,
-	`제품내용`	longtext,
-	`제품가격`	int not null default "0",
-	`분류코드`	char(6) not null
+	`pr_code`	varchar(15)	PRIMARY KEY,
+	`pr_title`	varchar(50) NOT	NULL,
+	`pr_content`	text NOT NULL,
+	`pr_price`	int NOT NULL DEFAuLT 0,
+	`pr_ca_num`	int	NOT NULL
+);
+
+DROP TABLE IF EXISTS `image`;
+
+CREATE TABLE `image` (
+	`im_num`	int	PRIMARY KEY AUTO_INCREMENT,
+	`im_file`	varchar(50) NOT	NULL,
+	`im_pr_code`	varchar(15)	NOT NULL
+);
+
+DROP TABLE IF EXISTS `basket`;
+
+CREATE TABLE `basket` (
+	`ba_num`	int	PRIMARY KEY AUTO_INCREMENT,
+	`ba_amount`	int NOT NULL DEFAULT 0,
+	`ba_me_id`	varchar(13)	NOT NULL,
+	`ba_pr_code`	varchar(15)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
-	`주문코드`	char(6) primary key auto_increment,
-	`주문일`	date not null default current_timestamp	NULL,
-	`주문상태`	varchar(10) not null default "결제완료",
-	`주문수량`	int not null default 0,
-	`주문결제액`	int not null,
-	`회원아이디`	varchar(15) not null,
-	`제품코드`	char(6) not null
-);
-
-DROP TABLE IF EXISTS `shopping basket`;
-
-CREATE TABLE `shopping basket` (
-	`장바구니코드`	char(6) primary key,
-	`장바구니수량`	int not null,
-	`회원아이디`	varchar(15) not null,
-	`제품코드`	char(6) not null
-);
-
-DROP TABLE IF EXISTS `thumbnail`;
-
-CREATE TABLE `thumbnail` (
-	`썸네일 코드`	char(6) primary key,
-	`썸네일파일명`	text not null,
-	`제품코드`	char(6) not null
+	`or_num`	int	PRIMARY KEY AUTO_INCREMENT,
+	`or_date`	datetime NOT NULL DEFAULT current_timestamp,
+	`or_state`	varchar(10) NOT NULL DEFAULT "결제완료"	NULL,
+	`or_amount`	int NOT NULL DEFAULT 0	NULL,
+	`or_total_price`	int NOT	NULL,
+	`or_me_id`	varchar(13)	NOT NULL,
+	`or_pr_code`	varchar(15)	NOT NULL
 );
 
 ALTER TABLE `certification` ADD CONSTRAINT `FK_member_TO_certification_1` FOREIGN KEY (
-	`회원아이디`
+	`ce_me_id`
 )
 REFERENCES `member` (
-	`회원아이디`
+	`me_id`
 );
 
 ALTER TABLE `product` ADD CONSTRAINT `FK_category_TO_product_1` FOREIGN KEY (
-	`분류코드`
+	`pr_ca_num`
 )
 REFERENCES `category` (
-	`분류코드`
+	`ca_num`
+);
+
+ALTER TABLE `image` ADD CONSTRAINT `FK_product_TO_image_1` FOREIGN KEY (
+	`im_pr_code`
+)
+REFERENCES `product` (
+	`pr_code`
+);
+
+ALTER TABLE `basket` ADD CONSTRAINT `FK_member_TO_basket_1` FOREIGN KEY (
+	`ba_me_id`
+)
+REFERENCES `member` (
+	`me_id`
+);
+ALTER TABLE `basket` ADD CONSTRAINT `FK_product_TO_basket_1` FOREIGN KEY (
+	`ba_pr_code`
+)
+REFERENCES `product` (
+	`pr_code`
 );
 
 ALTER TABLE `order` ADD CONSTRAINT `FK_member_TO_order_1` FOREIGN KEY (
-	`회원아이디`
+	`or_me_id`
 )
 REFERENCES `member` (
-	`회원아이디`
+	`me_id`
 );
 
 ALTER TABLE `order` ADD CONSTRAINT `FK_product_TO_order_1` FOREIGN KEY (
-	`제품코드`
+	`or_pr_code`
 )
 REFERENCES `product` (
-	`제품코드`
+	`pr_code`
 );
-
-ALTER TABLE `shopping basket` ADD CONSTRAINT `FK_member_TO_shopping basket_1` FOREIGN KEY (
-	`회원아이디`
-)
-REFERENCES `member` (
-	`회원아이디`
-);
-
-ALTER TABLE `shopping basket` ADD CONSTRAINT `FK_product_TO_shopping basket_1` FOREIGN KEY (
-	`제품코드`
-)
-REFERENCES `product` (
-	`제품코드`
-);
-
-ALTER TABLE `thumbnail` ADD CONSTRAINT `FK_product_TO_thumbnail_1` FOREIGN KEY (
-	`제품코드`
-)
-REFERENCES `product` (
-	`제품코드`
-);
-
