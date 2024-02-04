@@ -5,11 +5,11 @@ select * from `order` where or_me_id = "abcd123";
 select * from product where pr_ca_num = 1;
 
 # 기타(1), 자동차(5), 의류(3)에 포함된 모든 제품을 조회하는 쿼리
-select * from product where pr_ca_num = 1 or pr_ca_num = 3 or pr_ca_num = 5;
 select * from product where pr_ca_num in (1, 3, 5);
+-- select * from product where pr_ca_num = 1 or pr_ca_num = 3 or pr_ca_num = 5;
 
-# 등록된 제품들의 카테고리 번호를 조회하는 쿼리
-select distinct pr_ca_num from product;
+# 등록된 제품의 이름, 제품들의 카테고리 번호를 조회하는 쿼리
+select distinct pr_title, pr_ca_num from product;
 
 # 가격이 높은 순으로 제품을 정렬하는 쿼리, 가격이 같은 경우 pr_code 순으로
 select * from product order by pr_price desc, pr_code;
@@ -40,10 +40,10 @@ select or_me_id as '구매아이디', sum(or_total_price) as '총 구매금액'
 from `order` 
 -- 반품, 환불이 아닌경우는 포함 안시킴(이런 세세한 항목 잘 체크!)
 where or_me_id = "abcd123" and or_state not in("반품", "환불")
-group by or_me_id; 
+group by or_me_id;
 
 # 제품별 판매된 개수를 조회하는 쿼리
-select or_pr_code, sum(or_amount) 
+select or_pr_code as '주문 상품 코드', sum(or_amount) as '총 주문 수량'
 from `order` 
 where or_state not in("반품", "활불") 
 group by or_pr_code;
@@ -89,6 +89,7 @@ left join `order` on pr_code = or_pr_code
 -- 판매상태가 null 이거나 판매상태가 환불, 반품이 아닌 경우
 where or_state is null or or_state not in("환불", "반품")
 group by pr_code;
+
 -- 2) right
 select pr_title as 제품명, ifnull(sum(or_amount), 0) as 판매수량
 from  `order`

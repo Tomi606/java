@@ -13,11 +13,12 @@ use shoppingmall;
 select * from shoppingmall;
 # 관리자가 다음의 제품을 등록할 때 필요한 쿼리
 # 1. 카테고리를 등록 : 기타
-insert into category values(null, "기타");
+insert into category values(null, "기타"); -- null = ca_num이 auto_increment
 # 2. 등록된 기타 카테고리의 기본키를 확인 후 아래 제품에 추가 : 클릭으로 추가함
 select * from category;
 # 3. 코드 : ABC001, 제품명 : 텀블러, 가격 : 20000, 내용 : 스타벅스 텀블러입니다, 카테고리 : 기타
 insert into `product` values("ABC001", "텀블러", "스타벅스 텀블러입니다.", 20000, 1);
+select * from `product`;
 # 카테고리 추가 : 전자제품, 의류, 식품, 자동차
 insert into category (CA_NAME) values("전자제품"),("의류"),("식품"),("자동차");
 select * from category;
@@ -55,12 +56,14 @@ select * from member;
 
 # abcd123 회원이 마우스를 장바구니에 2개 담았을 때 실행되는 쿼리
 insert into basket(ba_amount, ba_me_id, ba_pr_code) values (2, "abcd123", "ELC001");
+insert into basket() values(null, 3, "abc123", "CAR001");
+-- select ba_me_id, ba_amount from basket;
 
 # abcd123 회원이 마우스를 장바구니에 3개 담았을 때 실행되는 쿼리
 -- 장바구니에 제품을 추가하게 수량이 변경한다고 요구사항에 정의됨 -> update(요구사항에 맞게 쿼리를 작성)
 update basket set ba_amount = 3 where ba_me_id = "abcd123" and ba_pr_code = "ELC001";
 select * from basket where ba_me_id = "abcd123";
-select * from product where pr_code = "ELC002";
+select * from product where pr_code = "ELC001";
 # abcd123 회원이 키보드를 장바구니에 1개 담았을 때 실행되는 커리
 insert into basket(ba_amount, ba_me_id, ba_pr_code) values (1, "abcd123", "ELC002");
 
@@ -73,8 +76,4 @@ insert into `order`(or_amount, or_total_price, or_me_id, or_pr_code)
 # 장바구니에 담긴 제품을 구매하면 장바구니에는 해당 제품을 제거
 delete from basket where ba_num = 1;
 delete from basket where ba_num = 2;
-
-
-
-
-
+select * from basket;
