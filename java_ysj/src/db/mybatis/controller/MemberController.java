@@ -1,5 +1,5 @@
 package db.mybatis.controller;
-
+//2번
 import java.util.ArrayList;
 import java.util.Scanner;
 

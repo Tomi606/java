@@ -1,5 +1,5 @@
 package db.mybatis.model.vo;
-
+//8번
 import java.util.Date;
 
 import lombok.Data;

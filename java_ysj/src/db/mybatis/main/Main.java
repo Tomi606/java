@@ -1,5 +1,5 @@
 package db.mybatis.main;
-
+//1번
 import java.util.Scanner;
 
 import db.mybatis.controller.MemberController;
