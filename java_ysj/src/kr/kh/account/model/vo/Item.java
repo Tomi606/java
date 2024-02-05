@@ -16,7 +16,7 @@ public class Item {
     String it_content;
 
     public Item(int categoryNum, String date, int money, String content) throws ParseException {
-    	it_num = categoryNum;
+    	it_ca_num = categoryNum;
     	it_money = money;
     	it_content = content;
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
