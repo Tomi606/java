@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="db.mybatis.dao.MemberDAO">
 	<!-- 태그에는 insert, select, update, delete가 들어감 -->
-	<!-- id는 DAO의 메서드명과 같아야 함 -->>
+	<!-- id는 DAO의 메서드명과 같아야 함 -->
 	<insert id="insertMember">
 	<!-- member.id는 member.getId()를 호출 -->
 	<!-- #을 이용할 때와 $를 이용할 때 차이

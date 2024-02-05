@@ -11,6 +11,5 @@ public interface MemberDAO {
 	boolean insertMember(@Param("member")MemberVO member);
 
 	ArrayList<MemberVO> selectMemberList();
-	
-	
+
 }
