@@ -15,5 +15,4 @@
 		insert into item(it_date, it_money, it_ca_num, it_content)
 		values(#{item.it_date}, #{item.it_money}, #{item.it_ca_num}, #{item.it_content})
 	</insert>
-	
 </mapper>

@@ -77,7 +77,7 @@ public class AccountController {
 		for(Category category : categoryList) {
 			System.out.println(category);
 		}
-		//분류가 안뜸***!!!!!
+		//분류가 안뜸*** 이유 : MySQL을 실행하지 않고 자바를 실행해서
 		System.out.println("분류를 선택하세요 : ");
 		int categoryNum = sc.nextInt();
 		//날짜
