@@ -26,8 +26,10 @@ public class MemberController {
 			insertMember();
 			break;
 		case 2 : 
+			//updateMember();
 			break;
 		case 3 : 
+			//deleteMember();
 			break;
 		case 4 : 
 			printMember();
