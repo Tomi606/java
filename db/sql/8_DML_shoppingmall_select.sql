@@ -97,3 +97,92 @@ right join product on pr_code = or_pr_code
 where or_state is null or or_state not in("환불", "반품")
 group by pr_code;
 
+------------------------------------------------------
+# 2/6
+
+# 모든 제품을 조회하는 쿼리 (O)
+select * from product;
+
+# 모든 카테고리를 조회하는 쿼리 (O)
+select * from category;
+
+# 제품별 카테고리를 조회(카테고리, 제품) (O)
+-- 1)
+select ca_name as 카테고리, pr_title as 제품명
+from category
+join product on pr_ca_num = ca_num;
+-- 2)
+select ca_name as 카테고리, pr_title 제품명
+from product
+join category on ca_num = pr_ca_num;
+
+# 기타 카테고리에 포함된 모든 제품을 조회 (O)
+-- 1)
+select ca_name as 카테고리명, pr_title as 제품명
+from category
+join product on pr_ca_num = ca_num
+where ca_name = "기타";
+-- 2)
+select ca_name, product.*
+from product
+join category on ca_num = pr_ca_num
+where ca_name = "기타";
+
+# abcd123 회원이 주문한 제품 목록을 조회 (O)
+-- 1)
+select me_id as id명, pr_title as 제품명
+from `order`
+join product on or_pr_code = pr_code
+join `member` on or_me_id = me_id
+where me_id = "abcd123";
+-- 2)
+-- order에 or_me_id가 있다.
+select or_date, or_state, or_amount, or_total_price, pr_title
+from `order`
+join product on pr_code = or_pr_code
+where or_me_id = "abcd123";
+
+# 제품별 판매수량을 조회하는 쿼리 (△)
+-- 1) 안 팔린 상품은 나오지 않는다.
+select pr_title as 제품명, or_amount as 판매수량
+from product
+join `order` on or_pr_code = pr_code;
+-- 2) 안 팔린 상품도 조회 된다.
+select product.*, ifnull(sum(or_amount), 0) as 판매수량
+from `order`
+right join product on pr_code = or_pr_code
+-- 판매는 됬지만 판매는 안됬을 때 or 판매 상태가 null 일 때
+where or_state not in("환불", "반품") or or_state is null
+group by pr_code;
+
+# 인기 제품 조회(인기 제품은 누적 판매량을 기준으로) (O)
+select product.*, ifnull(sum(or_amount), 0) as 판매수량
+from `order`
+right join product on pr_code = or_pr_code
+-- 판매는 됬지만 판매는 안됬을 때 or 판매 상태가 null 일 때
+where or_state not in("환불", "반품") or or_state is null
+group by pr_code
+					-- 제품 가격이 같을 때 오름차순
+order by 판매수량 desc, pr_price asc
+-- 한 페이지에 5개 보임
+limit 0, 5;
+
+# 가격이 제일 비싼 제품을 조회 (O)
+-- 1)
+select pr_title as 제품명, pr_price as 가격
+from product
+where pr_price > 20000
+order by pr_price desc;
+-- 2)
+select *
+from product
+order by pr_price desc
+limit 0,1;
+
+
+
+
+
+
+
+
