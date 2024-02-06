@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- 6번 -->
+<!-- 6번, 주로 Mapper에서 문법 오류가 잘 뜬다!(자동으로 문법을 체크안하기 때문)-->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -13,7 +13,10 @@
 	</select>
 	<insert id="insertItem">
 		insert into item(it_date, it_money, it_ca_num, it_content)
-		values(#{item.it_date}, #{item.it_money}, #{item.it_ca_num}, #{item.it_content})
+		values(#{item.it_date},
+				#{item.it_money},
+				#{item.it_ca_num},
+				#{item.it_content})
 	</insert>
 	<select id="selectItemListByDate" resultType="kr.kh.account.model.vo.Item">
 		select item.*, ca_ty_name as it_ty_name, ca_name as it_ca_name 
@@ -23,7 +26,12 @@
 		where it_date like concat(#{it_date}, '%') 
 	</select>
 	<update id="updateItem">
-		update item set it_ca_num = #{item.it_ca_num}, it_date = #{item.it_date}, it_money = #{item.it_money}, it_content = #{item.it_content} 
+	<!-- update는 정수랑 문자열만 입력 가능 -->
+		update item 
+		set it_ca_num = #{item.it_ca_num}, 
+			it_date = #{item.it_date}, 
+			it_money = #{item.it_money}, 
+			it_content = #{item.it_content} 
 		where it_num = #{item.it_num}
 		<!-- sql에선 에러나는게 당연(xml에서만 지원하는 문법이기 때문에) -->
 	</update>
