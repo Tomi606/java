@@ -16,6 +16,12 @@ public interface AccountService {
 	//@param에 입력된 아이를 호출
 	List<Category> getCategoryList(@Param("ty_name")String type);
 
-	boolean insertItem(Item item, String type);
+	boolean insertItem(Item item);
+
+	List<Item> getItemListByDate(String date);
+
+	boolean updateItem(Item item);
+
+	boolean deleteItem(int it_num);
 
 }

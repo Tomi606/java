@@ -15,4 +15,19 @@
 		insert into item(it_date, it_money, it_ca_num, it_content)
 		values(#{item.it_date}, #{item.it_money}, #{item.it_ca_num}, #{item.it_content})
 	</insert>
+	<select id="selectItemListByDate" resultType="kr.kh.account.model.vo.Item">
+		select item.*, ca_ty_name as it_ty_name, ca_name as it_ca_name 
+		from item 
+		join category on ca_num = it_ca_num
+		<!-- 시작 부분만 같으면 조회, concat : 붙이는? 역할 -->
+		where it_date like concat(#{it_date}, '%') 
+	</select>
+	<update id="updateItem">
+		update item set it_ca_num = #{item.it_ca_num}, it_date = #{item.it_date}, it_money = #{item.it_money}, it_content = #{item.it_content} 
+		where it_num = #{item.it_num}
+		<!-- sql에선 에러나는게 당연(xml에서만 지원하는 문법이기 때문에) -->
+	</update>
+	<delete id="deleteItem">
+		delete * from item where it_num = #{it_num}
+	</delete>
 </mapper>

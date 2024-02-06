@@ -48,11 +48,11 @@ public class AccountController {
 		switch(menu) {
 		case 1 : insertAccount();
 			break;
-		case 2 : //updateAccount();
+		case 2 : updateAccount();
 			break;
-		case 3 : //deleteAccount();
+		case 3 : deleteAccount();
 			break;
-		case 4 : //selectAccount();
+		case 4 : selectAccount();
 			break;
 		case 5 : System.out.println("이전으로 돌아갑니다.");
 			break;
@@ -60,7 +60,81 @@ public class AccountController {
 		}
 	}
 
-	private void insertAccount() {
+	private void selectAccount() {
+		System.out.println("날짜를 입력하세요(yyyy-MM-dd 또는 yyyy-MM 또는 yyyy) : ");
+		String date = sc.next();
+		List<Item> itemList = accountService.getItemListByDate(date);
+		if(itemList == null || itemList.size() == 0) {
+			System.out.println("조회할 내역이 없습니다.");
+			return;
+		}
+		for(Item tmp : itemList) {
+			System.out.println(tmp);
+		}
+	}
+
+	private void deleteAccount() {
+		System.out.println("날짜를 입력하세요(yyyy-MM-dd) : ");
+		String date = sc.next();
+		List<Item> itemList = accountService.getItemListByDate(date);
+		
+		if(itemList == null || itemList.size() == 0) {
+			System.out.println("수정할 내역이 없습니다.");
+			return;
+		}
+		for(Item item : itemList) {
+			System.out.println(item);
+		}
+		System.out.print("삭제할 내역 번호를 선택하세요 : ");
+		int it_num = sc.nextInt();
+		//입력한 내역 변호가 잘못된 값인지 확인
+		if(!itemList.contains(new Item(it_num))) {
+			System.out.println("잘못된 내역 번호입니다.");
+			return;
+		}
+		if(accountService.deleteItem(it_num)) {
+			System.out.println("내역을 삭제했습니다.");
+		} else {
+			System.out.println("내역을 삭제하지 못했습니다.");
+		}
+	}
+
+	private void updateAccount() {
+		System.out.print("날짜를 입력하세요(yyyy-MM-dd) : ");
+		String date = sc.next();
+		//service에게 리스트 요청
+		List<Item> itemList = accountService.getItemListByDate(date);
+		//list가 비었거나 사이즈가 0일 때
+		if(itemList == null || itemList.size() == 0) {
+			System.out.println("수정할 내역이 없습니다.");
+			return;
+		}
+		//수정할 내역이 있으면 수정 가능한 내역을 출력
+		for(Item item : itemList) {
+			System.out.println(item);
+		}
+		System.out.print("내역 번호를 선택하세요 : ");
+		int it_num = sc.nextInt();
+		//입력한 내역 변호가 잘못된 값인지 확인
+		if(!itemList.contains(new Item(it_num))) {
+			System.out.println("잘못된 내역 번호입니다.");
+			return;
+		}
+		try {
+			//item에는 기본키를 제외한 나머지가 들어가 있다.
+			Item item = inputItem();
+			item.setIt_num(it_num);
+			if(accountService.updateItem(item)) {
+				System.out.println("내역 수정이 완료되었습니다.");
+			} else {
+				System.out.println("내역을 수정하지 못했습니다.");
+			}
+		} catch (ParseException e) {
+			System.out.println("날짜를 잘못 입력하여 내역을 수정하지 못했습니다.");
+		}
+	}
+
+	private Item inputItem() throws ParseException {
 		//수입/지출 선택
 		List<Type> typeList = accountService.getTypeList();
 		for(int i=0;i<typeList.size();i++) {
@@ -90,10 +164,14 @@ public class AccountController {
 		sc.nextLine();
 		System.out.println("내용을 입력하세요 : ");
 		String content = sc.nextLine();
-		
+														//type : 수입/지출
+		return new Item(categoryNum, date, money, content, type);
+	}
+	
+	private void insertAccount() {
 		try {
-			Item item = new Item(categoryNum, date, money, content);
-			if(accountService.insertItem(item, type)) {
+			Item item = inputItem();
+			if(accountService.insertItem(item)) {
 				System.out.println("내역을 추가했습니다.");
 			} else {
 				System.out.println("내역을 추가하지 못했습니다.");
