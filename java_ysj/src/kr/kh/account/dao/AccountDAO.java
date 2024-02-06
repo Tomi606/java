@@ -20,9 +20,10 @@ public interface AccountDAO {
 
 	List<Item> selectItemListByDate(@Param("it_date")String dateStr);
 
-	//@Param에 item으로 들어갔기 때문에 item.으로 들어간다.
+	//Item으로(@Param에 item으로) 들어갔기 때문에 item.으로 들어간다.
 	boolean updateItem(@Param("item")Item item);
-
+	
+	//int나 String은 멤버변수가 없기 때문에 () 안에 있는 객체만 호출하면 된다.
 	boolean deleteItem(@Param("it_num")int it_num);
 
 }
