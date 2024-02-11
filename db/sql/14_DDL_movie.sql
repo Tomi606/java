@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS `seat`;
 CREATE TABLE `seat` (
 	`s_num`	int	primary key auto_increment,
 	`s_name`	varchar(3) not null,
-	`sc_num`	int	NOT NULL
+	`s_sc_num`	int	NOT NULL
 );
 
 DROP TABLE IF EXISTS `screen`;
@@ -158,9 +158,18 @@ CREATE TABLE `ticketing_list` (
 	`tl_s_num`	int	NOT NULL
 );
 
+DROP TABLE IF EXISTS `price`;
+
+CREATE TABLE `price` (
+	`pr_num`	int	primary key auto_increment,
+	`pr_type`	varchar(5)	NOT NULL,
+	`pr_price`	int	NOT NULL
+);
+
+
 -- 위의 PK 코드는 삭제 
 ALTER TABLE `seat` ADD CONSTRAINT `FK_screen_TO_seat_1` FOREIGN KEY (
-	`sc_num`
+	`s_sc_num`
 )
 REFERENCES `screen` (
 	`sc_num`
@@ -291,4 +300,3 @@ ALTER TABLE `ticketing_list` ADD CONSTRAINT `FK_seat_TO_ticketing_list_1` FOREIG
 REFERENCES `seat` (
 	`s_num`
 );
-
