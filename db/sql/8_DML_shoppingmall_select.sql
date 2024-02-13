@@ -179,10 +179,58 @@ from product
 order by pr_price desc
 limit 0,1;
 
+-- 2/13 --------------------------------------------
+# 카테고리별 등록된 제품 수 조회
+select * 
+from category
+join `product` on ca_num = pr_ca_num
+group by ca_num;
 
+select ca_name, if(count(pr_ca_num) > 0, count(pr_ca_num), '등록된 제품 없음') as '카테고리별 제품수' 
+from `product`
+-- right join을 해야 모든 카테고리별 제품을 볼 수 있다.
+right join category on pr_ca_num = ca_num
+group by ca_num;
 
+# 회원별 누적 주문 금액을 조회하는 쿼리
+select me_id, sum(or_total_price)
+from `member`
+right join `order` on or_me_id = me_id
+group by me_id;
 
+select member.*, ifnull(sum(or_total_price), 0) as '누적 주문 금액'
+from `order`
+-- join만 쓰면 해당안되는 회원은 조회가 안된다.
+right join member on or_me_id = me_id
+group by me_id;
 
+# 회원별 등급을 조회하는 쿼리(등급은 기본이 브론즈, 누적 금액이 5만원 이상이면 실버, 누적 금액이 8만원 이상이면 골드)
+# case 문 활용
+select me_id as 아이디,
+case 
+	when ifnull(sum(or_total_price), 0) >= 50000 then '실버'
+	when ifnull(sum(or_total_price), 0) >= 80000 then '골드'
+	else '브론즈'
+	end as '등급'
+from `order`
+right join member on or_me_id = me_id
+group by me_id;
+
+# 제품 첨부파일을 추가한 후, 추가한 파일이 이미지인지 동영상인지 조회하는 쿼리
+-- JPG, PNG는 이미지, MP4는 동영상
+select * from `product`
+join image on pr_code = im_pr_code
+between im_file = '%.JPG' and im_file = '%.PNG';
+
+-- right : im_file 문자열에서 오른쪽에서 3글자를 추출
+select 
+case right(im_file, 3)
+	when 'JPG' then '이미지'
+    when 'PNG' then '이미지'
+    when 'MP4' then '영상'
+    end as 종류,
+    im_file
+from image;
 
 
 
