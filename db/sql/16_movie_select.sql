@@ -209,3 +209,7 @@ FROM
     movie
 WHERE
     mv_title LIKE '%카%';
+    
+-- 2/13 -----------------------------------------
+# 2월 9, 10일에 예매 가능한 영화 목록을 조회하는 쿼리
+select * from movie where mv_date = 2024-02-09;
