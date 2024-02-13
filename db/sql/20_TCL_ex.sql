@@ -9,3 +9,12 @@ update product set pr_price = 2000 where pr_code = 'FOO002';
 
 rollback; -- 트랙잭션을 쓰고 롤백을 써야 돌아감
 select * from product;
+
+savepoint a;
+
+update product set pr_price = 1000 where pr_code = 'FOO002';
+
+rollback to a;
+
+commit;
+select * from product;
