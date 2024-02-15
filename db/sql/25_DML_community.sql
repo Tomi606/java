@@ -135,3 +135,105 @@ END //
 DELIMITER ;
 
 CALL BOARD_RECOMMEND('abc123', 1, -1);
+
+use community;
+# 공지 커뮤니티에 1페이지에 등록된 게시글 목록을 조회하는 쿼리
+select * 
+from board 
+where bo_co_num = (select co_num from community where co_name = '공지')
+-- order by를 통해 내림차순
+order by bo_num desc
+-- limit을 통해 페이지 제한
+limit 0, 10;
+select * from board;
+
+# 3번 게시글을 상세 조회하는 쿼리
+select * from board where bo_num = 3;
+
+# abc123회원이 3번 게시글에 확인했습니다 라고 댓글을 달았을 때 쿼리
+insert into comment(cm_bo_num, cm_me_id, cm_content) values(3, 'abc123', '확인했습니다.'); 
+select * from comment;
+
+# 3번 게시글에 등록된 댓글 1페이지를 조회하는 쿼리
+select * 
+from comment
+where cm_bo_num = 3
+order by bo_num desc
+-- 한페이지에 댓글 최대 5개
+limit 0, 5;
+select * from comment;
+
+# 신고 사유
+insert into `report_type` values('욕설'), ('허위사실유포'), ('음란'), ('커뮤니티에 맞지 않음'), ('기타');
+
+# admin이 1번 댓글을 '기타'로 신고(신고하려면 사유필요 -> 사유등록먼저)
+-- 댓글과 외래키가 연결이 안됨
+-- table : 게시글인지 댓글인지, target : *번 게시글/댓글
+insert 
+into report(rp_me_id, rp_rt_name, rp_table, rp_content, rp_state, rp_target)
+values('admin', '기타', 'comment', '', '신고접수', 1);
+
+# 관리자가 신고 내역을 조회 -> 신고접수된 내역을 조회
+select * from report where rp_state = '신고접수';
+select * from report;
+# 관리자가 1번 신고내역을 '신고반려' 로 처리했을 때
+update report 
+set rp_state = '신고반려'
+where rp_num = 1;
+
+# abc123 회원이 1번 게시글을 '기타', '내용없음'으로 신고
+insert 
+into report(rp_me_id, rp_rt_name, rp_table, rp_content, rp_state, rp_target)
+values('abc123', '기타', 'board', '', '신고접수', 1);
+
+# qwe123 회원이 1번 게시글을 '기타', '내용없음'으로 신고
+insert 
+into report(rp_me_id, rp_rt_name, rp_table, rp_content, rp_state, rp_target)
+values('qwe123', '기타', 'board', '', '신고접수', 1);
+
+# admin 관리자가 1번 게시글을 '기타', '내용없음'으로 신고
+insert 
+into report(rp_me_id, rp_rt_name, rp_table, rp_content, rp_state, rp_target)
+values('admin', '기타', 'board', '', '신고접수', 1);
+
+# 관리자가 1번 게시글을 신고 내역을 모두 '신고처리'로 처리
+update report 
+set rp_state = '신고처리'
+where rp_target = 1 and rp_table = 'board' and rp_state = '신고접수';
+
+SELECT 
+    COUNT(*)
+FROM
+    report
+WHERE
+    rp_target = 1 AND rp_table = 'board'
+        AND rp_state = '신고처리';
+        
+# 신고처리된 게시글의 신고수를 수정
+UPDATE board 
+SET 
+    bo_report_count = (SELECT 
+            COUNT(*)
+        FROM
+            report
+        WHERE
+            rp_target = 1 AND rp_table = 'board'
+                AND rp_state = '신고처리')
+WHERE
+    bo_num = 1;
+# 3번 신고된 1번 게시글을 삭제하고, 1번 게시글을 작성한 작성자에게 1달 이용정지를 적용
+-- 1번 게시글을 삭제하기 위해 1번 게시글에 댓글들을 삭제
+delete from comment where cm_bo_num = 1;
+-- 1번 게시글을 삭제하기 위해 1번 게시글을 추천한 추천 정보를 삭제
+delete from recommend where re_bo_num = 1;
+-- 1번 게시글을 삭제
+delete from board where bo_num = 1;
+-- abc123 회원 1달 이용정지
+update member 
+set me_ms_state = '기간정지', me_stop = date_add(now(), interval 1 month)
+where me_id = 'abc123';
+
+# qwe123 회원이 회원을 탈퇴
+update member set me_ms_state = '탈퇴' where me_id = 'qwe123';
+-- delete from `member` where me_id = qwe123;
+select * from member;

@@ -10,7 +10,7 @@ CREATE TABLE `member` (
 	`me_ms_state`	varchar(10)	NOT NULL,
 	`me_pw`	varchar(15)	NOT NULL,
 	`me_email`	varchar(30)	NOT NULL,
-	`me_autorithy`	varchar(10)	NOT NULL default 'USER',
+	`me_autority`	varchar(10)	NOT NULL default 'USER',
 	`me_stop`	datetime null,
 	`me_fail`	int	NOT NULL default 0
 );
