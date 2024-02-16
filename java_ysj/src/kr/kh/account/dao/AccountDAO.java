@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import kr.kh.account.model.vo.Category;
 import kr.kh.account.model.vo.Item;
 import kr.kh.account.model.vo.Type;
+import kr.kh.account.pagenation.Criteria;
 
 //5번
 public interface AccountDAO {
@@ -25,5 +26,7 @@ public interface AccountDAO {
 	
 	//int나 String은 멤버변수가 없기 때문에 () 안에 있는 객체만 호출하면 된다.
 	boolean deleteItem(@Param("it_num")int it_num);
+
+	List<Item> selectItemListSearch(@Param("cri")Criteria cri);
 
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import kr.kh.account.model.vo.Category;
 import kr.kh.account.model.vo.Item;
 import kr.kh.account.model.vo.Type;
+import kr.kh.account.pagenation.Criteria;
 
 //3번
 public interface AccountService {
@@ -20,8 +21,11 @@ public interface AccountService {
 
 	List<Item> getItemListByDate(String date);
 
+	List<Item> getItemListByDate(Criteria cri);
+	
 	boolean updateItem(Item item);
 
 	boolean deleteItem(int it_num);
+
 
 }
