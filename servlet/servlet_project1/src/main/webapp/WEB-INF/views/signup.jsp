@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입, 2. jsp 생성</title>
+<!-- 부트스트랩5 css/js -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -42,7 +45,7 @@
 	    <input type="password" class="form-control" id="pw2" placeholder="비밀번호 확인" name="pw2">
 	</div>
 	<div class="mb-3 mt-3">
-	    <label for="email" class="form-label">비번확인:</label>
+	    <label for="email" class="form-label">이메일:</label>
 	    <input type="text" class="form-control" id="email" placeholder="이메일을 입력하세요." name="email">
 	</div>
 		<button class="btn btn-outline-success col-12">회원가입</button>

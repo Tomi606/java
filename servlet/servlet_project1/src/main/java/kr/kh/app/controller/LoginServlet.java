@@ -37,11 +37,14 @@ public class LoginServlet extends HttpServlet {
 		//session : request에 있다. 로그인 연결 유지, 서버쪽에 저장됨. 연결끊김 또는 시간만료가 되면 세션이 사라짐.
 		if(user != null) {
 			//세션에 회원 정보를 저장하여 로그인 유지
-			HttpSession session = request.getSession(); //요청한 정보(request, 서버쪽에서 만들어짐)에서 세션을 가져옴
+			HttpSession session = request.getSession(); //request(요청한 정보, 서버쪽에서 만들어짐)에 있는 세션을 가져옴
 			session.setAttribute("user", user); //세션에 user라는 이름으로 회원 정보 저장
-			//로그인이 성공하면 웹 브라우저에 toString이 출력됨
+			response.sendRedirect(request.getContextPath() + "/"); //로그인 성공하면 메인페이지로 이동
 		}
-		doGet(request, response);
+		else {
+			//실패하면 그 페이지에 남음
+			doGet(request, response);
+		}
 	}
 
 }
