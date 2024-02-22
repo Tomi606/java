@@ -8,14 +8,13 @@
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
         <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/DB명"/>
-        <property name="username" value="사용자계정"/>
-        <property name="password" value="비밀번호"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/community"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
       </dataSource>
     </environment>
   </environments>
   <mappers>
-    <mapper resource="경로/Mapper명1.xml"/>
-    <mapper resource="경로/Mapper명2.xml"/>
+    <mapper resource="kr/kh/app/dao/MemberMapper.xml"/>
   </mappers>
 </configuration>

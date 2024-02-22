@@ -7,10 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.kh.app.model.vo.MemberVO;
+import kr.kh.app.service.MemberService;
+import kr.kh.app.service.MemberServiceImp;
+
 @WebServlet("/signup")
 public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private MemberService memberService = new MemberServiceImp();
+	
     public SignUpServlet() {
     }
 
@@ -24,6 +29,11 @@ public class SignUpServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String email = request.getParameter("email");
+		//id가 중복일 때
+		if(memberService.signup(new MemberVO(id, pw, email))) {
+			
+		}
+		
 		System.out.println("ID : " + id);
 		System.out.println("PW : " + pw);
 		System.out.println("이메일 : " + email);

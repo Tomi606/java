@@ -4,9 +4,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메인</title>
+<!-- 부트스트랩5 css/js -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%=request.getContextPath() %>/">KH Cafe</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="<%=request.getContextPath() %>/signup">회원가입</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%=request.getContextPath() %>/login">로그인</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 	<%
 	//java를 이용하고 싶으면 <%%.>태그사용
 	int num = 10;
@@ -34,5 +55,7 @@
 		let str = `나이 : \${age}`;
 		console.log(str);
 	</script>
+	${user}
+	${age}
 </body>
 </html>
