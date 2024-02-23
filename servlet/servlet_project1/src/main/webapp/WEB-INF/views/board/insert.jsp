@@ -35,7 +35,7 @@
   </div>
 </nav>
 <div class="container">
-	<form action="<c:url value="/board/insert" />" method="post">
+	<form action="<c:url value="/board/insert"/>" method="post">
 		<div class="mb-3 mt-3">
 		    <label for="title" class="form-label">제목:</label>
 		    <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요.">
