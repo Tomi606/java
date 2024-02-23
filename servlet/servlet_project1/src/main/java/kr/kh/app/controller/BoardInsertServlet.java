@@ -1,6 +1,7 @@
 package kr.kh.app.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.BoardService;
 import kr.kh.app.service.BoardServiceImp;
@@ -32,7 +34,9 @@ public class BoardInsertServlet extends HttpServlet {
 			return; //밑의 코드 실행되면 안되니까 리턴
 		}
 		
-		//유저 정보가 있으면 board/insert.jsp로 이동
+		//게시판 전체를 가져옴
+		ArrayList<CommunityVO> list = boardService.getCommunityList();
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/board/insert.jsp").forward(request, response);
 	}
 
@@ -48,7 +52,8 @@ public class BoardInsertServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String writer = user.getMe_id(); //작성자는 id를 가져와서
-		BoardVO board = new BoardVO(1, title, content, writer);
+		int co_num = Integer.parseInt(request.getParameter("community")); //Param은 항상 문자열로 가져오기 때문에 int로 형변환을 해야함!
+		BoardVO board = new BoardVO(co_num, title, content, writer);
 		//service에게 게시글을 주면서 등록하라고 시킴
 		if(boardService.insertBoard(board)) {
 			//등록에 성공하면
