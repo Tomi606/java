@@ -6,13 +6,14 @@
 	<!-- 
 	resultMap은 클래스 멤버 이름과 테이블의 속성 이름이 다른 경우 맵핑하기 위해 사용됨, 지금은 서브쿼리를 위해 사용 
 	property는 클래스 멤버 변수 이름, column은 테이블 속성 이름, board 변수 복붙
-	collection
-	community(BoardVO에 적은 멤버변수명과 일치해야 함) property에 저장하기 위한 작업
-	column="bo_co_num" 값을 활용하겠습니다.
-	select="selectCommunity" selectCommunity 메서드를 실행하겠습니다.
+	<collection>
+	 : community(BoardVO에 적은 멤버변수명과 일치해야 함) property에 저장하기 위한 작업
+	community의 타입(ofType)이 kr.kh.app.model.vo.CommunityVO이다.
+	column="bo_co_num" 값(게시글의 게시판(카테고리) 번호)을 활용하겠습니다.
+	select="selectCommunity"로 조회해서 property="community"에 대입하겠습니다.
 	-> list.jsp가서 ${board.bo_co_num} -> ${board.community.co_name}으로 수정
 	<호출되는 순>
-	selectBoardList -> BoardMap -> selectCommunity
+	selectBoardList -> BoardMap(<resultMap id="BoardMap">) -> selectCommunity
 	-->
 	<resultMap type="kr.kh.app.model.vo.BoardVO" id="BoardMap">
 		<id property="bo_num" column="bo_num"/>
