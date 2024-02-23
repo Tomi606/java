@@ -3,6 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.app.dao.BoardDAO">
+	<!-- 
+	resultMap은 클래스 멤버 이름과 테이블의 속성 이름이 다른 경우 맵핑하기 위해 사용됨, 지금은 서브쿼리를 위해 사용 
+	property는 클래스 멤버 변수 이름, column은 테이블 속성 이름, board 변수 복붙
+	collection
+	community(BoardVO에 적은 멤버변수명과 일치해야 함) property에 저장하기 위한 작업
+	column="bo_co_num" 값을 활용하겠습니다.
+	select="selectCommunity" selectCommunity 메서드를 실행하겠습니다.
+	-> list.jsp가서 ${board.bo_co_num} -> ${board.community.co_name}으로 수정
+	<호출되는 순>
+	selectBoardList -> BoardMap -> selectCommunity
+	-->
+	<resultMap type="kr.kh.app.model.vo.BoardVO" id="BoardMap">
+		<id property="bo_num" column="bo_num"/>
+		<result property="bo_co_num" column="bo_co_num"/>
+		<result property="bo_me_id" column="bo_me_id"/>
+		<result property="bo_title" column="bo_title"/>
+		<result property="bo_content" column="bo_content"/>
+		<result property="bo_view" column="bo_view"/>
+		<result property="bo_report_count" column="bo_report_count"/>
+		<collection property="community" ofType="kr.kh.app.model.vo.CommunityVO"
+					column="bo_co_num" select="selectCommunity"/>
+	</resultMap>
+	
 	<insert id="insertBoard">
 		insert into board(bo_co_num, bo_title, bo_me_id, bo_content) 
 		values(#{board.bo_co_num}, #{board.bo_title}, #{board.bo_me_id}, #{board.bo_content})
@@ -10,4 +33,13 @@
 	<select id="selectCommunityList" resultType="kr.kh.app.model.vo.CommunityVO">
 		select * from community
 	</select>
+	<select id="selectBoardList" resultMap="BoardMap">
+		select * from board order by bo_num desc
+	</select>
+	<select id="selectCommunity" resultType="kr.kh.app.model.vo.CommunityVO">
+		select * from community where co_num = #{bo_co_num}
+	</select>
 </mapper>
+<!-- selectCommunity
+select * from community where co_num = #{bo_co_num}
+community를 조회하는데 bo_co_num을 넘겨주겠다. -->
