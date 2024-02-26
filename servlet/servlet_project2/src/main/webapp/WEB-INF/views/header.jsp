@@ -16,15 +16,22 @@
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				 <li class="nav-item">
-					<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
-				 </li>
-				 <li class="nav-item">
-					<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-				 </li>
-				 <li class="nav-item">
-					<a class="nav-link" href="<c:url value="/---"/>">게시판</a>
-				 </li>  
+				<c:if test="${user == null}">
+					 <li class="nav-item">
+						<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
+					 </li>
+					 <li class="nav-item">
+						<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
+					 </li>
+				</c:if>
+					 <li class="nav-item">
+						<a class="nav-link" href="<c:url value="/board"/>">게시판</a>
+					 </li>
+				<c:if test="${user != null}">
+					 <li class="nav-item">
+						<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
+					 </li>
+				</c:if>
 			</ul>
 		</div>
 	</div>

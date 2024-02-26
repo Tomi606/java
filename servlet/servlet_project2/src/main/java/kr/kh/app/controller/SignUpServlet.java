@@ -24,7 +24,8 @@ public class SignUpServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//화면에서 보낸 데이터를 가져옴
-		String id = request.getParameter("id"); //form태그 안 입력 태그에 name이 id요소의 값을 가져옴
+		//form태그 안 입력 태그에 name이 id요소의 값을 가져옴
+		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String email = request.getParameter("email");
 		//이용중이라는 회원 상태가 DB에 저장되있는 경우

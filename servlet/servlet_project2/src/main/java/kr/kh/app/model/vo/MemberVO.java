@@ -25,5 +25,11 @@ public class MemberVO {
 		this.me_email = me_email;
 		this.me_ms_state = me_ms_state;
 	}
+
+	//id 중복검사
+	public MemberVO(String me_id) {
+		this.me_id = me_id;
+	}
+	
 		
 }
