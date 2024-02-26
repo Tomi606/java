@@ -33,12 +33,14 @@ public class SignUpServlet extends HttpServlet {
 		boolean res = memberService.signup(member);
 		if(res) {
 			//성공하면 메인페이지(sendRedirect는 url을 바꿔줌)
-			response.sendRedirect(request.getContextPath() + "/");
+			request.setAttribute("msg", "회원가입에 성공했습니다.");
+			request.setAttribute("url", "");
 		} else {
 			//실패하면 회원가입 페이지
-			response.sendRedirect(request.getContextPath() + "/signup");
+			request.setAttribute("msg", "회원가입에 실패했습니다.");
+			request.setAttribute("url", "signup");
 		}
-		//doGet은 지워준다.
+		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
 	}
 
 }

@@ -44,6 +44,15 @@ public class MemberServiceImp implements MemberService {
 //			return false;
 //		}
 //		//각 항목 유효성 검사
+		
+		//아래 예외 처리는 아이디 중복체크 검사를 안 했기 때문에 발생하는 예외를 임시 처리하기 위한 방법
+		try {
+			boolean res = memberDao.insertMember(member);
+			return res;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 //		if(member.getMe_id() != "$[a-zA-Z0-9]{8,15}^") {
 //			System.out.println("아이디는 영 대소문자, 숫자 8~15자만 사용가능 합니다.");
 //			return false;
