@@ -22,7 +22,7 @@
 		<label for="pw" class="form-label">비번:</label>
 		<input type="password" class="form-control" id="pw" placeholder="Enter pw" name="pw">
 	</div>
-	<button type="submit" class="btn btn-outline-danger col-12">로그인</button>
+		<button type="submit" class="btn btn-outline-danger col-12">로그인</button>
 	</form>
 </div>
 </body>
