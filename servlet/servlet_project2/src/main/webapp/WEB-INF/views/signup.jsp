@@ -28,7 +28,7 @@
 	</div>
 	<div class="mb-3 mt-3">
 		<label for="email" class="form-label">이메일:</label>
-		<input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+		<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
 	</div>
 	<button type="submit" class="btn btn-outline-success col-12">회원가입</button>
 	</form>
