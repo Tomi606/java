@@ -15,10 +15,10 @@
 		}
 		let redirectURL = '${url}' //서버에서 보낸 url을 변수에 저장
 		if(redirectURL != '') {
-			locateion.href = '<c:url value="/${url}"/>';
+			location.href = '<c:url value="/${url}"/>';
 		}
 		else {
-			locateion.href = '<c:url value="/"/>';
+			location.href = '<c:url value="/"/>';
 		}
 	</script>
 </body>
