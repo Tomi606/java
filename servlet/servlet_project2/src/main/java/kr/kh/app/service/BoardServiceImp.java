@@ -40,7 +40,7 @@ public class BoardServiceImp implements BoardService {
 		|| !checkString(board.getBo_content())) {
 			return false;
 		}
-		return boardDao.insertBoard();
+		return boardDao.insertBoard(board);
 	}
 	
 	//문자열이 null이거나 빈 문자열이면 false, 아니면 true를 반환하는 메서드
