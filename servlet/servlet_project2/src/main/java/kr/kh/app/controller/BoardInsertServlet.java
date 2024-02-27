@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.Session;
-
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.BoardService;
 import kr.kh.app.service.BoardServiceImp;
@@ -37,6 +36,10 @@ public class BoardInsertServlet extends HttpServlet {
 		}
 		//있으면 게시글 등록 화면을 전송
 		else {
+			//서비스에게 게시판 리스트를 가져오라고 시킴 : getCommunityList
+			ArrayList<CommunityVO> list = boardService.getCommunityList();	
+			//화면에 게시판 리스트를 보냄
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/views/board/insert.jsp").forward(request, response);
 		}
 	}
@@ -60,8 +63,8 @@ public class BoardInsertServlet extends HttpServlet {
 		//회원 정보가 있으면
 		//작성자에 회원 아이디를 저장
 		String writer = user.getMe_id();
-		//게시판 번호는 1번으로 저장
-		int co_num = 1;
+		//게시판 번호는 1번으로 저장 -> 고른걸로 설정
+		int co_num = Integer.parseInt(request.getParameter("community"));
 		//제목, 내용, 작성자, 게시판 번호를 이용하여 게시글 객체를 생성
 		BoardVO board = new BoardVO(title, content, writer, co_num);
 		//서비스에게 게시글 객체를 주면서 등록하라고 시킴
