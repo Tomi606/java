@@ -56,7 +56,7 @@
 		    <label for="content" class="form-label">내용:</label>
 		    <textarea rows="10" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."></textarea>
 		</div>
-		<button class="btn btn-outline-warning col-12">글 등록</button>
+		<a href="<c:url value="/board/insert"/>" class="btn btn-outline-danger">글등록</a>
 	</form>
 </div>
 </body>
