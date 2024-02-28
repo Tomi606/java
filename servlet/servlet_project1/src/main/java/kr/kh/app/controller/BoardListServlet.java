@@ -33,7 +33,7 @@ public class BoardListServlet extends HttpServlet {
 		
 		//검색어, 검색 타입, 현재 페이지, 한 페이지 컨텐츠 개수르 이용하여 현재 페이지 정보 객체를 생성
 		//현재 페이지 객체 cri 생성
-		Criteria cri = new Criteria(page, 2, type, search);
+		Criteria cri = new Criteria(page, 3, type, search);
 		//검색어, 검색타입에 맞는 전체 게시글 개수를 가져옴
 		int totalCount = boardService.getTotalCount(cri); //cri 정보를 주고 현재 컨텐츠 개수를 가져오세요
 		PageMaker pm = new PageMaker(5, cri, totalCount);
