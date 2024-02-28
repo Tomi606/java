@@ -47,7 +47,6 @@ public class BoardDeleteServlet extends HttpServlet {
 		}
 		//message.jsp 화면을 전송
 		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
-		request.getRequestDispatcher("/WEB-INF/views/board/delete.jsp").forward(request, response);
 	}
 
 }

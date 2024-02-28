@@ -98,4 +98,36 @@ public class BoardServiceImp implements BoardService {
 		return boardDao.deleteBoard(num);
 
 	}
+
+	//! 연산자 잘 붙이기
+	@Override
+	public boolean updateBoard(BoardVO board, MemberVO user) {
+		if(user == null
+		|| !checkString(user.getMe_id())) {			
+			return false;
+		}
+		if(board == null
+		|| !checkString(board.getBo_title())
+		|| !checkString(board.getBo_content())) {
+			return false;
+		}
+		//게시글 번호를 이용하여 게시글을 가져옴
+		BoardVO dbBoard = boardDao.selectBoard(board.getBo_num());
+		//게시글 작성자와 회원 아이디를 비교하여 다르면 false 반환
+		if(dbBoard == null
+		|| !dbBoard.getBo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		//같으면 게시글 수정
+		return boardDao.updateBoard(board);
+	}
+	
+	//str이 비었을 때 false 메서드
+	private boolean checkString(String str) {
+		if(str == null
+		|| str.length() == 0) {
+			return false;
+		}
+		return true;
+	}
 }

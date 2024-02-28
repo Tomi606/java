@@ -5,15 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 등록</title>
-<!-- 부트스트랩5 css/js -->
+<title>게시글 수정</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <div class="container">
-	<form action="<c:url value="/board/insert"/>" method="post">
+	<form action="<c:url value="/board/update"/>" method="post">
+	<!-- hidden으로 보드 넘버를 가림 -->
+		<input type="hidden" name="num" value="${board.bo_num}">
 		<div class="mb-3 mt-3">
 		    <label for="community" class="form-label">게시판:</label>
 		    <select class="form-control" id="community" name="community">
@@ -24,18 +25,19 @@
 		</div>
 		<div class="mb-3 mt-3">
 		    <label for="title" class="form-label">제목:</label>
-		    <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요.">
+		    <input type="text" class="form-control" id="title" name="title" value="${board.bo_title}" placeholder="제목을 입력하세요.">
 		</div>
 		<div class="mb-3 mt-3">
 		    <label for="writer" class="form-label">작성자:</label>
-		    <input type="text" class="form-control" id="writer" name="writer" value="${user.me_id}">
+		    <input type="text" class="form-control" id="writer" name="writer" value="${user.me_id}" readonly>
 		</div>
 		<div class="mb-3 mt-3">
 		    <label for="content" class="form-label">내용:</label>
-		    <textarea rows="10" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."></textarea>
+		    <textarea rows="10" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">${board.bo_content}</textarea>
 		</div>
-		<a href="<c:url value="/board/insert"/>" class="btn btn-outline-danger">글등록</a>
+		<button class="btn btn-outline-danger">글수정</button>
 	</form>
+	<!-- a태그가 아니라 -> button 태그로 수정 후 value도 삭제 -->
 </div>
 </body>
 </html>
