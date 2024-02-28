@@ -11,26 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="<c:url value="/"/>">KH Cafe</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-      	<c:if test="${user == null}">
-	        <li class="nav-item">
-	          <a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-	        </li>
-      	</c:if>
-      </ul>
-    </div>
-  </div>
-</nav>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 <div class="container">
 	<!-- 
 	/login을 처리하는 서블릿을 추가한 후 login.jsp와 연결하는 작업
