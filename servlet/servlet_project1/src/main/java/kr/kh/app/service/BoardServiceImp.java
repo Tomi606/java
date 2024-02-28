@@ -69,4 +69,15 @@ public class BoardServiceImp implements BoardService {
 		}
 		return boardDao.selectTotalCount(cri);
 	}
+
+	//num은 객체가 아니기 때문에 검색해서 없으면 바로 null로 처리되서 if문 돌릴 필요 X
+	@Override
+	public BoardVO getBoard(int num) {
+		return boardDao.selectBoard(num);
+	}
+
+	@Override
+	public boolean updateView(int num) {
+		return boardDao.updateView(num);
+	}
 }

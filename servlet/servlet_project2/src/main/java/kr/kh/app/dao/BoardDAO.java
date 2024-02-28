@@ -15,4 +15,6 @@ public interface BoardDAO {
 
 	ArrayList<CommunityVO> selectCommunityList();
 
+	BoardVO selectBoard(@Param("num") int num);
+
 }

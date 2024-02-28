@@ -20,7 +20,7 @@
 	 <!-- 3. id와 pw를 입력받아 서버로 전송하는 코드를 작성(post방식(비번)으로 전송) 
 	 method를 post로 해준다. 생략하면 기본 get으로
 	 -->
-	<form action="<%=request.getContextPath() %>/login" method="post">
+	<form action="<c:url value="/login"/>" method="post">
 		<h1>로그인</h1>
 		<div class="mb-3 mt-3">
 		    <label for="id" class="form-label">아이디:</label>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="mb-3 mt-3">
 		    <label for="pw" class="form-label">비밀번호:</label>
-		    <input type="text" class="form-control" id="pw" placeholder="비밀번호를 입력하세요." name="pw">
+		    <input type="password" class="form-control" id="pw" placeholder="비밀번호를 입력하세요." name="pw">
 		</div>
 		<button class="btn btn-outline-success col-12">로그인</button>
 	</form>

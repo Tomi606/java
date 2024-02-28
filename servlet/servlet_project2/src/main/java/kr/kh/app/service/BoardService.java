@@ -13,4 +13,6 @@ public interface BoardService {
 
 	ArrayList<CommunityVO> getCommunityList();
 
+	BoardVO getBoard(int num);
+
 }
