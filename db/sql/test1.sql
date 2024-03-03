@@ -87,8 +87,8 @@ create table B(
     id varchar(10)
 );
 
-insert into B values(1, 'abc123', 'abc123');
-insert into M values('제목1', 'abc123');
+insert into B values(2, '제목1', 'abc123');
+insert into M values('abc123', 'abc123');
 
 # 테이블 B의 id 속성이 테이블 M의 id 속성에 참조되는 경우 join 하는 쿼리
 select * from B join M on B.id = M.id;
