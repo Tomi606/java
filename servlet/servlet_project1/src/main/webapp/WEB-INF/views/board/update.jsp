@@ -65,7 +65,7 @@
 					'value': `\${num}`
 				})
 			attachment.prepend(inputHidden);
-			//sapn태그를 삭제
+			//span태그를 삭제
 			this.parentElement.remove();
 			//input file 추가
 			let inputFile =  
