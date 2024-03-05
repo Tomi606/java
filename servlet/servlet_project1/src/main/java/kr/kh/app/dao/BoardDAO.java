@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommunityVO; //select mapper 만들때 복붙
+import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.pagination.Criteria;
 
 public interface BoardDAO {
@@ -26,4 +27,9 @@ public interface BoardDAO {
 
 	boolean updateBoard(@Param("board")BoardVO board);
 
+	void insertFile(@Param("file")FileVO file);
+	
+	FileVO selectFileByBo_num(@Param("num")int num);
+	
+	void deleteFile(@Param("fi_num")int fi_num);
 }

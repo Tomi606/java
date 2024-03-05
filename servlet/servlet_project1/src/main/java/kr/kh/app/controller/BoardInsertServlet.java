@@ -1,14 +1,16 @@
 package kr.kh.app.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommunityVO;
@@ -17,22 +19,30 @@ import kr.kh.app.service.BoardService;
 import kr.kh.app.service.BoardServiceImp;
 
 @WebServlet("/board/insert")
+@MultipartConfig(
+		maxFileSize = 1024 * 1024 * 10, //10Mb
+		maxRequestSize = 1024 * 1024 * 10 * 3, //10Mb 최대 3개
+		fileSizeThreshold = 1024 * 1024 //1Mb : 파일 업로드 시 메모리에 저장되는 임시 파일 크기
+	)
 public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardServiceImp();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//게시글 작성은 회원만 작성 가능하기 때문에 아래 작업을 진행 - 게시글 등록은 회원만 가능, 비회원은 등록 불가능(요구사항)
-		//로그인한 회원 정보를 가져옴 => session 에서 user(로그인서블렛에서 정한게 "user"라서) 정보를 가져옴
+		//MemberFilter 추가로 인해 불필요한 코드 주석 처리
+		/*
+		//게시글은 회원만 작성 가능하기 때문에 아래 작업을 진행
+		//로그인한 회원 정보를 가져옴 => 세션에서 user 정보를 가져옴  
 		HttpSession session = request.getSession();
-		MemberVO user = (MemberVO)session.getAttribute("user"); //getAttribute는 Object 클래스
-		//MemberVO user = (MemberVO)request.getSession().getAttribute("user"); 위의 코드를 1줄로 작성
-		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		//MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 		//회원정보가 없으면 게시글 리스트로 이동
 		if(user == null) {
-			response.sendRedirect(request.getContextPath() + "/board/list");
-			return; //밑의 코드 실행되면 안되니까 리턴
+			response.sendRedirect(request.getContextPath()+"/board/list");
+			return;
 		}
+
+		*/
 		
 		//게시판 전체를 가져옴
 		ArrayList<CommunityVO> list = boardService.getCommunityList();
@@ -45,17 +55,22 @@ public class BoardInsertServlet extends HttpServlet {
 		//로그인이 풀리면 게시글을 작성할 수 없게 해야하기 때문에
 		MemberVO user = (MemberVO)request.getSession().getAttribute("user"); //위의 코드를 1줄로 작성
 
+		//MemberFilter 추가로 인해 불필요한 코드 주석 처리
+		/*
 		if(user == null) {
-			response.sendRedirect(request.getContextPath() + "/board/list");
+			response.sendRedirect(request.getContextPath()+"/board/list");
 			return;
 		}
+		}*/
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String writer = user.getMe_id(); //작성자는 id를 가져와서
 		int co_num = Integer.parseInt(request.getParameter("community")); //Param은 항상 문자열로 가져오기 때문에 int로 형변환을 해야함!
 		BoardVO board = new BoardVO(co_num, title, content, writer);
+		//첨부파일을 가져옴
+		Part filePart = request.getPart("file");
 		//service에게 게시글을 주면서 등록하라고 시킴
-		if(boardService.insertBoard(board)) {
+		if(boardService.insertBoard(board, filePart)) {
 			//등록에 성공하면
 			response.sendRedirect(request.getContextPath() + "/board/list");
 		}
@@ -66,5 +81,7 @@ public class BoardInsertServlet extends HttpServlet {
 		}
 		
 	}
-
+	
 }
+
+
