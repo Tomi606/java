@@ -57,8 +57,8 @@ public class BoardUpdateServlet extends HttpServlet {
 			return; //return을 쓰면 else할 필요없이 바로 상세화면으로 이동
 		}
 		//게시글의 첨부파일을 가져와서 화면에 전송
-		FileVO file = boardService.getFile(num);
-		request.setAttribute("file", file);
+		//FileVO file = boardService.getFile(num);
+		//request.setAttribute("file", file);
 		
 		//같으면
 		//3. 게시판을 가져와서 화면에 전달 : 보드서비스의 getCommunityList()
