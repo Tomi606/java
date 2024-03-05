@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <div class="container">
-	<form action="<c:url value="/board/update"/>" method="post">
+	<form action="<c:url value="/board/update"/>" method="post" enctype="multipart/form-data">
 		<h1>게시글 수정</h1>
 	<!-- hidden으로 보드 넘버를 가림 -->
 		<input type="hidden" name="num" value="${board.bo_num}">

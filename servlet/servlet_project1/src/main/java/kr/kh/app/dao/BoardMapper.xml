@@ -103,6 +103,10 @@
 	<delete id="deleteFile">
 		delete from file where fi_num = #{fi_num}
 	</delete>
+	
+	<select id="selectFile" resultType="kr.kh.app.model.vo.FileVO">
+		select * from file where fi_num = #{fi_num}
+	</select>
 </mapper>
 <!-- selectCommunity
 select * from community where co_num = #{bo_co_num}

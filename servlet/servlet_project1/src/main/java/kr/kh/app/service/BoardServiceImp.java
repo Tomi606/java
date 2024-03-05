@@ -149,7 +149,7 @@ public class BoardServiceImp implements BoardService {
 
 	//! 연산자 잘 붙이기
 	@Override
-	public boolean updateBoard(BoardVO board, MemberVO user) {
+	public boolean updateBoard(BoardVO board, MemberVO user, int fi_num, Part file) {
 		if(user == null
 		|| !checkString(user.getMe_id())) {			
 			return false;
@@ -166,6 +166,14 @@ public class BoardServiceImp implements BoardService {
 		|| !dbBoard.getBo_me_id().equals(user.getMe_id())) {
 			return false;
 		}
+		//첨부파일 추가
+		uploadFile(file, board.getBo_num());
+		
+		//첨부파일 삭제
+		FileVO fileVo = boardDao.selectFile(fi_num);
+		deleteFile(fileVo);
+		
+		
 		//같으면 게시글 수정
 		return boardDao.updateBoard(board);
 	}
