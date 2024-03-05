@@ -147,7 +147,7 @@ public class BoardServiceImp implements BoardService {
 
 	//! 연산자 잘 붙이기
 	@Override
-	public boolean updateBoard(BoardVO board, MemberVO user, int fi_num, Part file) {
+	public boolean updateBoard(BoardVO board, MemberVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
 		if(user == null
 		|| !checkString(user.getMe_id())) {			
 			return false;
@@ -165,11 +165,15 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		}
 		//첨부파일 추가
-		uploadFile(file, board.getBo_num());
+		for(Part file : fileList) {			
+			uploadFile(file, board.getBo_num());
+		}
 		
 		//첨부파일 삭제
-		FileVO fileVo = boardDao.selectFile(fi_num);
-		deleteFile(fileVo);
+		for(int fi_num : nums) {
+			FileVO fileVo = boardDao.selectFile(fi_num);
+			deleteFile(fileVo);			
+		}
 		
 		
 		//같으면 게시글 수정

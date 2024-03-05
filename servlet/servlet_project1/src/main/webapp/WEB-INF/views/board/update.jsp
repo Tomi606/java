@@ -38,33 +38,64 @@
 		</div>
 		<div class="mb-3 mt-3" id="attachment">
 		    <label class="form-label">첨부파일:</label>
-		    <c:choose>
-		    	<c:when test="${file != null }">
-		    		<span class="form-control">${file.fi_ori_name} <a id="btnDel" class="text-right" data-target="${file.fi_num}">X</a> </span>
-		    	</c:when>
-		    	<c:otherwise>
+		    <c:forEach items="${fileList}" var="file">
+		    		<span class="form-control">${file.fi_ori_name} <a href="#" id="btnDel" class="btn-del" data-target="${file.fi_num}">X</a> </span>
+		    	<c:forEach begin="1" end="${3 - fileList.size()}">
 		    		<input type="file" name="file" class="form-control">
-		    	</c:otherwise>
-		    </c:choose>
+		    	</c:forEach>
+		    </c:forEach>
 		</div>
-		<button class="btn btn-outline-danger col-12">글수정</button>
+		<button class="btn btn-outline-danger col-12">글 수정</button>
 	</form>
 	<!-- a태그가 아니라 -> button 태그로 수정 후 value도 삭제 -->
 </div>
 <script type="text/javascript">
-	let btnDel = document.querySelector("#btnDel");
+	let btnDel = document.querySelectorAll(".btn-del");
 	let attachment = document.querySelector("#attachment");
-	btnDel.onclick = function(e) {
-		e.preventDefault();
-		//input hidden으로 삭제할 첨부파일 번호를 추가
-		let num = this.getAttribute("data-target");
-		let str = `<input type="hidden" name="fi_num" value="\${num}"`;
-		attachment.innerHTML += str;
-		//span 태그를 삭제함
-		let span = attachment.querySelector("span.form-control");
-		attachment.removeChild(span);
-		let input = `<input type="file" name="file">`;
-		attachment.innerHTML += input;
+	
+	btnDel.forEach((element)=>{
+		element.onclick = function(e) {
+			e.preventDefault();
+			//input hidden으로 삭제할 첨부파일 번호를 추가
+			let num = element.getAttribute("data-target");
+			let inputHidden = 
+				createElement('input', null, {
+				'type' : 'hidden',
+				'name' : 'fi_num',
+				'value' : `\${num}`
+			})
+			attachment.prepend(inputHidden);
+			//span 태그를 삭제함
+			this.parentElement.remove();
+			span.remove();
+			//input file 추가
+			let inputFile = 
+				createElement('input', null, {
+					'type' : 'file',
+					'name' : 'file',
+					'value' : 'form-control'
+				});
+			attachment.append(inputFile);
+		}
+	});
+	
+	fuction createElement(tagName, text, attrs) {
+		let element = document.createElement(tagName);
+		if(text) {
+			let textNode = document.creatTextNode(text);
+			element.append(textNode);
+		}
+		//속성이 없으면
+		if(!attrs) {
+			return element;
+		}
+		//속성이 있으면
+		for(key in attrs) {
+			let attr = document.createAttribute(key);
+			attr.value = attrs[key];
+			element.setAttributeNode(attr);
+		}
+		return element;
 	}
 </script>
 </body>
