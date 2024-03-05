@@ -13,6 +13,7 @@ import javax.servlet.http.Part;
 
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommunityVO;
+import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.BoardService;
 import kr.kh.app.service.BoardServiceImp;
@@ -55,15 +56,16 @@ public class BoardUpdateServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
 			return; //return을 쓰면 else할 필요없이 바로 상세화면으로 이동
 		}
+		//게시글의 첨부파일을 가져와서 화면에 전송
+		FileVO file = boardService.getFile(num);
+		request.setAttribute("file", file);
+		
 		//같으면
-		else {
-			//3. 게시판을 가져와서 화면에 전달 : 보드서비스의 getCommunityList()
-			ArrayList<CommunityVO> list = boardService.getCommunityList();
-			//서비스에게 게시판 리스트를 가져오라고 시킴
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("/WEB-INF/views/board/update.jsp").forward(request, response);			
-		}
-
+		//3. 게시판을 가져와서 화면에 전달 : 보드서비스의 getCommunityList()
+		ArrayList<CommunityVO> list = boardService.getCommunityList();
+		//서비스에게 게시판 리스트를 가져오라고 시킴
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/WEB-INF/views/board/update.jsp").forward(request, response);			
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

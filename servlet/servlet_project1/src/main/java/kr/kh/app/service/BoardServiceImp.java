@@ -38,7 +38,7 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public boolean insertBoard(BoardVO board, Part filePart) {
+	public boolean insertBoard(BoardVO board, ArrayList<Part> partList) {
 		//제목 null
 		if(board == null 
 		 ||!checkString(board.getBo_content())
@@ -54,26 +54,24 @@ public class BoardServiceImp implements BoardService {
 		if(!res) {
 			return false;
 		}
-		String fileName = FileUploadUtils.upload(uploadPath, filePart);
-		String fileOriName = FileUploadUtils.getFileName(filePart);
-		FileVO file = new FileVO(board.getBo_num(), fileName, fileOriName);
-		boardDao.insertFile(file);
 
 		//첨부파일 업로드
-		uploadFile(filePart, board.getBo_num());
+		for(Part filePart : partList) {
+			uploadFile(filePart, board.getBo_num());
+		}
 		return res;
 	}
 
-	private void uploadFile(Part filePart, int bo_num) {
+	private void uploadFile(Part partList, int bo_num) {
 		//업로드할 첨부 파일이 없으면
-		if(filePart == null) {
+		if(partList == null) {
 			return ;
 		}
-		String fileOriName = FileUploadUtils.getFileName(filePart);
+		String fileOriName = FileUploadUtils.getFileName(partList);
 		if(fileOriName == null || fileOriName.length() == 0) {
 			return;
 		}
-		String fileName = FileUploadUtils.upload(uploadPath, filePart);
+		String fileName = FileUploadUtils.upload(uploadPath, partList);
 		FileVO file = new FileVO(bo_num, fileName, fileOriName);
 		boardDao.insertFile(file);
 		
