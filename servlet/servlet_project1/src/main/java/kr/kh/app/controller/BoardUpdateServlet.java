@@ -48,7 +48,6 @@ public class BoardUpdateServlet extends HttpServlet {
 		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
 		//게시글 작성자와 회원아이디가 같은지 확인
 		if(board == null
-		//|| user == null
 		|| !board.getBo_me_id().equals(user.getMe_id())) {
 			//다르면 게시글 상세로 보내고, 작성자가 아닙니다라고 메세지를 띄움
 			request.setAttribute("msg", "작성자가 아닙니다.");
@@ -94,7 +93,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		String numsStr [] = request.getParameterValues("fi_num");
 		//문자열 -> 숫자로 바꿈
 		ArrayList<Integer> nums = new ArrayList<Integer>();
-		if(numsStr != null) {		
+		if(numsStr != null) {
 			for(String numStr : numsStr) {
 				try {
 					int fi_num = Integer.parseInt(numStr);

@@ -13,10 +13,10 @@
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <!-- readonly - 서버로 전송가능, 읽기만 가능(수정 불가능) -->
 <div class="container">
-<c:choose>
+	<c:choose>
 		<c:when test="${board != null }">
 			<h1>게시글 상세</h1>
-			<div >
+			<div>
 				<div class="mb-3 mt-3">
 				    <label for="community" class="form-label">게시판:</label>
 				    <input type="text" class="form-control" id="community" name="community" readonly value="${board.community.co_name}">

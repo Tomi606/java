@@ -39,10 +39,10 @@
 		<div class="mb-3 mt-3" id="attachment">
 		    <label class="form-label">첨부파일:</label>
 		    <c:forEach items="${fileList}" var="file">
-		    		<span class="form-control">${file.fi_ori_name}<a href="#" class="btn-del" data-target="${file.fi_num}">X</a></span>
-		    	<c:forEach begin="1" end="${3 - fileList.size()}">
-		    		<input type="file" name="file" class="form-control">
-		    	</c:forEach>
+		    	<span class="form-control">${file.fi_ori_name}<a href="#" class="btn-del" data-target="${file.fi_num}">X</a></span>
+	    	</c:forEach>
+	    	<c:forEach begin="1" end="${3 - fileList.size()}">
+	    		<input type="file" name="file" class="form-control">
 		    </c:forEach>
 		</div>
 		<button class="btn btn-outline-danger col-12">글 수정</button>
@@ -54,43 +54,41 @@
 	let attachment = document.querySelector("#attachment");
 	
 	btnDel.forEach((element)=>{
-		element.onclick = function(e) {
+		element.onclick = function(e){
 			e.preventDefault();
 			//input hidden으로 삭제할 첨부파일 번호를 추가
-			let num = element.getAttribute("data-target");
+			let num = this.getAttribute("data-target");
 			let inputHidden = 
 				createElement('input', null, {
-				'type' : 'hidden',
-				'name' : 'fi_num',
-				'value' : `\${num}`
-			})
+					'type' : 'hidden',
+					'name' : 'fi_num',
+					'value': `\${num}`
+				})
 			attachment.prepend(inputHidden);
-			//span 태그를 삭제함
+			//sapn태그를 삭제
 			this.parentElement.remove();
-			span.remove();
 			//input file 추가
-			let inputFile = 
+			let inputFile =  
 				createElement('input', null, {
 					'type' : 'file',
 					'name' : 'file',
-					'value' : 'form-control'
+					'class': 'form-control'
 				});
 			attachment.append(inputFile);
 		}
-	});
 	
-	fuction createElement(tagName, text, attrs) {
+	});
+
+	function createElement(tagName, text, attrs){
 		let element = document.createElement(tagName);
-		if(text) {
-			let textNode = document.creatTextNode(text);
+		if(text){
+			let textNode = document.createTextNode(text);
 			element.append(textNode);
 		}
-		//속성이 없으면
-		if(!attrs) {
+		if(!attrs){
 			return element;
 		}
-		//속성이 있으면
-		for(key in attrs) {
+		for(key in attrs){
 			let attr = document.createAttribute(key);
 			attr.value = attrs[key];
 			element.setAttributeNode(attr);
