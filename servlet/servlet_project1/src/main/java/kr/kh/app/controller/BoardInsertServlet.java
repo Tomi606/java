@@ -1,6 +1,5 @@
 package kr.kh.app.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,10 +19,10 @@ import kr.kh.app.service.BoardServiceImp;
 
 @WebServlet("/board/insert")
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 * 10, //10Mb
-		maxRequestSize = 1024 * 1024 * 10 * 3, //10Mb 최대 3개
-		fileSizeThreshold = 1024 * 1024 //1Mb : 파일 업로드 시 메모리에 저장되는 임시 파일 크기
-	)
+	maxFileSize = 1024 * 1024 * 10, //10Mb
+	maxRequestSize = 1024 * 1024 * 10 * 3, //10Mb 최대 3개
+	fileSizeThreshold = 1024 * 1024 //1Mb : 파일 업로드 시 메모리에 저장되는 임시 파일 크기
+)
 public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardServiceImp();
@@ -41,7 +40,6 @@ public class BoardInsertServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/board/list");
 			return;
 		}
-
 		*/
 		
 		//게시판 전체를 가져옴
@@ -57,10 +55,10 @@ public class BoardInsertServlet extends HttpServlet {
 
 		//MemberFilter 추가로 인해 불필요한 코드 주석 처리
 		/*
-		if(user == null) {
-			response.sendRedirect(request.getContextPath()+"/board/list");
-			return;
-		}
+			if(user == null) {
+				response.sendRedirect(request.getContextPath()+"/board/list");
+				return;
+			}
 		}*/
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -78,8 +76,7 @@ public class BoardInsertServlet extends HttpServlet {
 		}
 		else {
 			//실패하면
-			doGet(request, response);
-			//또는 response.sendRedirect(request.getContextPath() + "/board/insert"); -> insert로 보냄
+			response.sendRedirect(request.getContextPath()+"/board/insert");
 		}
 		
 	}

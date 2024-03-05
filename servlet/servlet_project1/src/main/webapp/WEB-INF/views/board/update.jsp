@@ -39,7 +39,7 @@
 		<div class="mb-3 mt-3" id="attachment">
 		    <label class="form-label">첨부파일:</label>
 		    <c:forEach items="${fileList}" var="file">
-		    		<span class="form-control">${file.fi_ori_name} <a href="#" id="btnDel" class="btn-del" data-target="${file.fi_num}">X</a> </span>
+		    		<span class="form-control">${file.fi_ori_name}<a href="#" class="btn-del" data-target="${file.fi_num}">X</a></span>
 		    	<c:forEach begin="1" end="${3 - fileList.size()}">
 		    		<input type="file" name="file" class="form-control">
 		    	</c:forEach>

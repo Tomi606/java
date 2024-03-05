@@ -62,21 +62,6 @@ public class BoardServiceImp implements BoardService {
 		return res;
 	}
 
-	private void uploadFile(Part partList, int bo_num) {
-		//업로드할 첨부 파일이 없으면
-		if(partList == null) {
-			return ;
-		}
-		String fileOriName = FileUploadUtils.getFileName(partList);
-		if(fileOriName == null || fileOriName.length() == 0) {
-			return;
-		}
-		String fileName = FileUploadUtils.upload(uploadPath, partList);
-		FileVO file = new FileVO(bo_num, fileName, fileOriName);
-		boardDao.insertFile(file);
-		
-	}
-
 	@Override
 	public ArrayList<CommunityVO> getCommunityList() {
 		return boardDao.selectCommunityList();
@@ -125,31 +110,21 @@ public class BoardServiceImp implements BoardService {
 		//게시글의 첨부파일을 서버 폴더에서 삭제(실제 파일)
 		//게시글의 첨부파일을 DB에서 삭제
 		//게시글에 있는 첨부파일 정보을 가져옴
-		//FileVO file = boardDao.selectFileByBo_num(num);
+		ArrayList<FileVO> fileList = boardDao.selectFileByBo_num(num);
 
-		//deleteFile(file);
+		for(FileVO file : fileList) {			
+			deleteFile(file);
+		}
 		//같으면 게시글 삭제 후 삭제 여부를 반환
 		return boardDao.deleteBoard(num);
 
-	}
-	
-	private void deleteFile(FileVO fileVo) {
-		if(fileVo == null) {
-			return;
-		}
-		File file = new File(uploadPath 
-				+ fileVo.getFi_name().replace('/', File.separatorChar));
-		if(file.exists()) {
-			file.delete();
-		}
-		boardDao.deleteFile(fileVo.getFi_num());
 	}
 
 	//! 연산자 잘 붙이기
 	@Override
 	public boolean updateBoard(BoardVO board, MemberVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
 		if(user == null
-		|| !checkString(user.getMe_id())) {			
+		|| user.getMe_id() == null) {			
 			return false;
 		}
 		if(board == null
@@ -187,6 +162,32 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		}
 		return true;
+	}
+	
+	private void uploadFile(Part filePart, int bo_num) {
+		//업로드할 첨부 파일이 없으면
+		if(filePart == null) {
+			return ;
+		}
+		String fileOriName = FileUploadUtils.getFileName(filePart);
+		if(fileOriName == null || fileOriName.length() == 0) {
+			return;
+		}
+		String fileName = FileUploadUtils.upload(uploadPath, filePart);
+		FileVO file = new FileVO(bo_num, fileName, fileOriName);
+		boardDao.insertFile(file);
+	}
+	
+	private void deleteFile(FileVO fileVo) {
+		if(fileVo == null) {
+			return;
+		}
+		File file = new File(uploadPath 
+				+ fileVo.getFi_name().replace('/', File.separatorChar));
+		if(file.exists()) {
+			file.delete();
+		}
+		boardDao.deleteFile(fileVo.getFi_num());
 	}
 
 	@Override
