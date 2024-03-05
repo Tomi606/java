@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommunityVO;
+import kr.kh.app.model.vo.FileVO;
 
 public interface BoardDAO {
 
@@ -16,5 +17,7 @@ public interface BoardDAO {
 	ArrayList<CommunityVO> selectCommunityList();
 
 	BoardVO selectBoard(@Param("num") int num);
+
+	void insertFile(@Param("file")FileVO fileVo);
 
 }
