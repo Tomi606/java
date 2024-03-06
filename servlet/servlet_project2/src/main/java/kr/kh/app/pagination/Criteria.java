@@ -26,7 +26,7 @@ public class Criteria {
 
 	public Criteria(int page, int perPageNum, String type, String search) {
 		this(page, perPageNum);
-		this.type = type == null? "" : type;
+		this.type = type == null? "all" : type;
 		this.search = search == null? "" : search;
 	}
 
