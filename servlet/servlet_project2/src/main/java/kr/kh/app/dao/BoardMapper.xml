@@ -26,13 +26,13 @@ https://everyday-coding-diary.tistory.com/38 링크 참고
 
 		select * from board 
 		<choose>
-
+			<!-- 전체 검색 -->
 			<when test='cri.type == "all"'>
 				where 
 					bo_title like concat('%',#{cri.search}, '%') or 
 					bo_me_id like concat('%',#{cri.search}, '%')
 			</when>
-
+			<!-- 제목 또는 작성자 검색 -->
 			<otherwise>
 				where
 					${cri.type} like concat('%',#{cri.search}, '%')
@@ -59,19 +59,20 @@ https://everyday-coding-diary.tistory.com/38 링크 참고
 	<select id="selectTotalCount" resultType="int">
 		select count(*) from board 
 		<choose>
-
+			<!-- 전체 검색 -->
 			<when test='cri.type == "all"'>
 				where 
 					bo_title like concat('%',#{cri.search}, '%') or 
 					bo_me_id like concat('%',#{cri.search}, '%')
 			</when>
-
+			<!-- 제목 또는 작성자 검색 -->
 			<otherwise>
 				where
 					${cri.type} like concat('%',#{cri.search}, '%')
 			</otherwise>
 		</choose>
 	</select>
+	
 	<update id="updateView">
 		update board
 		set
@@ -79,16 +80,19 @@ https://everyday-coding-diary.tistory.com/38 링크 참고
 		where
 			bo_num = #{num}
 	</update>
+	
 	<select id="selectBoard" resultMap="BoardMap">
 		select * from board
 		where
 			bo_num = #{num}
 	</select>
+	
 	<delete id="deleteBoard">
 		delete from board
 		where
 			bo_num = #{num}
 	</delete>
+	
 	<update id="updateBoard">
 		update board set
 			bo_title = #{board.bo_title},
@@ -97,8 +101,17 @@ https://everyday-coding-diary.tistory.com/38 링크 참고
 		where
 			bo_num = #{board.bo_num}
 	</update>
+	
 	<insert id="insertFile">
 		insert into file(fi_bo_num, fi_name, fi_ori_name)
 		values(#{file.fi_bo_num},#{file.fi_name},#{file.fi_ori_name})
 	</insert>
+	
+	<select id="selectFileList" resultType="kr.kh.app.model.vo.FileVO">
+		select * from file where fi_bo_num = #{bo_num}
+	</select>
+	
+	<delete id="deleteFile">
+		delete from file where fi_num = #{fi_num}
+	</delete>
 </mapper>

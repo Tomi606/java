@@ -11,26 +11,26 @@ import kr.kh.app.pagination.Criteria;
 
 public interface BoardDAO {
 
-	ArrayList<BoardVO> selectBoardList();
+	ArrayList<BoardVO> selectBoardList(@Param("cri")Criteria cri);
 
 	boolean insertBoard(@Param("board")BoardVO board);
 
 	ArrayList<CommunityVO> selectCommunityList();
 
-	BoardVO selectBoard(@Param("num") int num);
-
-	void insertFile(@Param("file")FileVO fileVo);
-
-	ArrayList<BoardVO> selectBoardList(@Param("cri")Criteria cri);
-
 	int selectTotalCount(@Param("cri")Criteria cri);
 
 	boolean updateView(@Param("num")int num);
+
+	BoardVO selectBoard(@Param("num")int num);
 
 	boolean deleteBoard(@Param("num")int num);
 
 	boolean updateBoard(@Param("board")BoardVO board);
 
+	void insertFile(@Param("file")FileVO fileVo);
+
 	ArrayList<FileVO> selectFileList(@Param("bo_num")int num);
+
+	void deleteFile(@Param("fi_num")int fi_num);
 
 }

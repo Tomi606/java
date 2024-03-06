@@ -182,8 +182,7 @@ public class BoardServiceImp implements BoardService {
 		if(fileVo == null) {
 			return;
 		}
-		File file = new File(uploadPath 
-				+ fileVo.getFi_name().replace('/', File.separatorChar));
+		File file = new File(uploadPath + fileVo.getFi_name().replace('/', File.separatorChar));
 		if(file.exists()) {
 			file.delete();
 		}

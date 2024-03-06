@@ -47,31 +47,38 @@ public class FileUploadUtils {
 		}
 	}
 	//년/월/일 폴더를 만들어서 해당 경로를 반환
-		private static String calculatePath(String uploadPath) {
-			Calendar cal = Calendar.getInstance();
-			//\\2024
-			String yearPath = File.separator + cal.get(Calendar.YEAR);
-			//\\2024\\03
-			String monthPath = yearPath + File.separator 
-				+ new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-			//\\2024\\03\\04
-			String datePath = monthPath + File.separator 
-				+ new DecimalFormat("00").format(cal.get(Calendar.DATE));
-			makeDir(uploadPath, yearPath, monthPath, datePath);
-			return datePath;
+	private static String calculatePath(String uploadPath) {
+		Calendar cal = Calendar.getInstance();
+		//\\2024
+		String yearPath = File.separator + cal.get(Calendar.YEAR);
+		//\\2024\\03
+		String monthPath = yearPath + File.separator 
+			+ new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		//\\2024\\03\\04
+		String datePath = monthPath + File.separator 
+			+ new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		makeDir(uploadPath, yearPath, monthPath, datePath);
+		return datePath;
+	}
+	//uploadPath를 기준으로 paths들 폴더가 없으면 폴더를 생성해주는 메서드
+	private static void makeDir(String uploadPath, String ... paths) {
+		int lastIndex = paths.length - 1;
+		//마지막 경로에 해당하는 폴더가 있으면 종료
+		if(new File(uploadPath + paths[lastIndex]).exists()) {
+			return;
 		}
-		//uploadPath를 기준으로 paths들 폴더가 없으면 폴더를 생성해주는 메서드
-		private static void makeDir(String uploadPath, String ... paths) {
-			int lastIndex = paths.length - 1;
-			//마지막 경로에 해당하는 폴더가 있으면 종료
-			if(new File(uploadPath + paths[lastIndex]).exists()) {
-				return;
-			}
-			for(String path : paths) {
-				File dir = new File(uploadPath + path);
-				if(!dir.exists()) {
-					dir.mkdir();
-				}
+		for(String path : paths) {
+			File dir = new File(uploadPath + path);
+			if(!dir.exists()) {
+				dir.mkdir();
 			}
 		}
+	}
+
+	public static void deleteFile(String fileName) {
+		File file = new File(fileName); //null 체크할 필요 없는 이유 : 파일명이 잘못되도 빈 생성자로 만들어지기 때문
+		if(file.exists()) {
+			file.delete();
+		}
+	}
 }
