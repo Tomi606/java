@@ -125,7 +125,7 @@ public class BoardServiceImp implements BoardService {
 	@Override
 	public boolean updateBoard(BoardVO board, MemberVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
 		if(user == null
-		|| user.getMe_id() == null) {			
+		|| user.getMe_id() == null) {
 			return false;
 		}
 		if(board == null
