@@ -85,7 +85,7 @@ public class BoardServiceImp implements BoardService {
 		if(!checkString(fileOriginalName)) {
 			return;
 		}
-		String fileName = FileUploadUtils.upload("uploadPath", part);
+		String fileName = FileUploadUtils.upload(uploadPath, part);
 		//DB에 추가
 		FileVO fileVo = new FileVO(bo_num, fileName, fileOriginalName);
 		boardDao.insertFile(fileVo);
