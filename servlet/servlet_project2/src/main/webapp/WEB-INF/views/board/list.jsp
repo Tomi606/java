@@ -21,7 +21,7 @@
 	타입의 name을 type으로 지정. 왜? Criteria에 type으로 되어 있어서
 	검색어의 name을 search로 지정. 
 	 -->
-	<form action="<c:url value="/board/list"/>">
+	<form action="<c:url value="/board/list"/>" class="mb-3 mt-3">
 		<div class="input-group">
 			<select class="form-control" name="type">
 				<option value="all" <c:if test='${pm.cri.type == "all"}'>selected</c:if>>전체</option>
