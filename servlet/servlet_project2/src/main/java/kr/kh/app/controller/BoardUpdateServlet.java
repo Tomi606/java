@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,12 @@ import kr.kh.app.service.BoardService;
 import kr.kh.app.service.BoardServiceImp;
 
 @WebServlet("/board/update")
+@MultipartConfig(
+		//이 어노테이션이 있어야 업데이트 가능
+		maxFileSize = 1024 * 1024 * 10, //10Mb
+		maxRequestSize = 1024 * 1024 * 10 * 3, //10Mb 최대 3개
+		fileSizeThreshold = 1024 * 1024 //1Mb : 파일 업로드 시 메모리에 저장되는 임시 파일 크기
+	)
 public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +47,6 @@ public class BoardUpdateServlet extends HttpServlet {
 		ArrayList<FileVO> fileList = boardService.getFileList(num);
 		//가져온 첨부파일 리스트를 화면에 전송
 		request.setAttribute("fileList", fileList);
-		
 		
 		//게시글과 게시판 리스트를 화면에 전송
 		request.setAttribute("list", list);

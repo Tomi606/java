@@ -67,7 +67,6 @@
 			$(this).parent().remove();
 			
 		})
-		
 	</script>
 </div>
 </body>
