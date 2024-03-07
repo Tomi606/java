@@ -38,4 +38,8 @@ public interface BoardDAO {
 
 	RecommendVO selectRecommend(@Param("bo_num")int boNum, @Param("me_id")String me_id);
 
+	void insertRecommend(@Param("re")RecommendVO recommend);
+
+	void updateRecommend(@Param("re")RecommendVO recommend);
+
 }
