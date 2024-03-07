@@ -31,6 +31,10 @@
 				<label for="title" class="form-label">조회수</label>
 				<input type="text" class="form-control" readonly="readonly" value="${board.bo_view}">
 			</div>
+			<div class="mb-3 mt-3 clearfix">
+				<button type="button" class="btn btn-outline-success btn-up float-start col-6" data-state="1">추천</button>
+				<button type="button" class="btn btn-outline-success btn-down float-end col-6" data-state="-1">비추천</button>				
+			</div>
 			<div class="mb-3 mt-3">
 				<label for="content" class="form-label">내용</label>
 				<textarea rows="10" class="form-control" readonly>${board.bo_content }</textarea>
@@ -54,5 +58,28 @@
 		<a href="<c:url value="/board/update?num=${board.bo_num }"/>" class="btn btn-outline-danger">수정</a>
 	</c:if>
 </div>
+
+<script src="//code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	$(".btn-up, .btn-down").click(function(){
+		let state = $(this).data('state');
+		let boNum = '${board.bo_num}'; //' '로하는 이유 : 삭제했을 때 ''는 빈문자열로라도 채울 수 있기 때문
+		$.ajax({
+			url : '<c:url value="/recommend"/>',
+			method : 'get',
+			async : true, //동기/비동기 선택, true : 비동기(앞의 작업이 끝나지 않아도 다음 작업을 함), false : 동기(앞의 작업이 끝날 때 까지 기다림)
+			data : { //보낼 데이터를 객체로 보냄 / 속성이름 : 변수명, 따옴표 안붙혀도 됨
+				"state" : state,
+				"boNum" : boNum
+			},
+			success : function(data) {
+				console.log(data);
+			},
+			error : function(a, b, c) {
+				console.error("예외 발생");
+			}
+		}); //ajax end
+	}); //click end
+</script>
 </body>
 </html>

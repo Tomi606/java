@@ -30,4 +30,6 @@ public interface BoardService {
 
 	ArrayList<FileVO> getFileList(int num);
 
+	int recommend(int boNum, int state, String me_id);
+
 }
