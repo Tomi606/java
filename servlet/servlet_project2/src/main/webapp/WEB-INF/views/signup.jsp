@@ -36,33 +36,36 @@
 	<button type="submit" class="btn btn-outline-success col-12">회원가입</button>
 	</form>
 </div>
-<script src="//code.jquery.com/jquery-3.6.1.js"></script>
+<script src="//code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript">
-	let flag = false; //중복 확인 버튼 누름 유무
+	let flag = false;
 	$("#idCheck").click(function(){
+		
 		let id = $("[name=id]").val();
 		$.ajax({
 			url : '<c:url value="/id/check"/>',
 			method : 'get',
-			async : true, 
+			async : true, //동기/비동기 선택, true : 비동기, false : 동기
 			data : {
 				"id" : id
 			},
-			sucess : function(data) {
-				if(data) {
+			success : function(data){
+				if(data){
 					alert("사용 가능한 아이디입니다.");
-				}else {
+					flag = true;
+				}else{
 					alert("이미 사용중인 아이디입니다.");
 				}
 			},
-			error : function(a, b, c) {
+			error : function (a, b, c) {
 				console.error("예외 발생");
 			}
-		}); //ajax end
-	}); //click end
-	$("form").submit(function() {
+		});//ajax end
+		
+	});//click end
+	$("form").submit(function(){
 		if(!flag){
-			alert("아이디 중복을 검사하세요");
+			alert("아이디 중복 검사를 해야합니다.");
 			return false;
 		}
 	})
