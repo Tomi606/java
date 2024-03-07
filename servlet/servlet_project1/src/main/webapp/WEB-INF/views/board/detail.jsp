@@ -38,7 +38,7 @@
 				    <input type="text" class="form-control" id="view" name="view" readonly value="${board.bo_view }">
 			  	</div>
 			  	<div class="mb-3 mt-3 clearfix">
-			  		<button type="button" id="btnUp" data-state="1" class="btn btn-outline-success col-5 float-start">추천</button>
+			  		<button type="button" id="btnUp" data-state="1" class="btn btn-outline-danger col-5 float-start">추천</button>
 			  		<button type="button" id="btnDown" data-state="-1" class="btn btn-outline-danger col-5 float-end">비추천</button>
 			  	</div>
 			  	<div class="mb-3 mt-3">
@@ -96,15 +96,45 @@
 		.then(response => response.text())
 		.then(data => {
 			let str = state == 1 ? '추천' : '비추천';
+			initRecommendBtn(btnUp);
+			initRecommendBtn(btnDown);
+			
 			switch(data) {
-			case "1" : alert('게시글을 추천했습니다.'); break;
-			case "-1" : alert('게시글을 비추천했습니다.'); break;
+			case "1" :
+				alert('게시글을 추천했습니다.'); 
+				selectRecommendBtn(btnUp);
+				break;
+			case "-1" : 
+				alert('게시글을 비추천했습니다.'); 
+				selectRecommendBtn(btnDown);
+				break;
 			case "0" : alert(`게시글 \${str}을 취소했습니다.`); break;
 			default : alert(data);
 			}
 		})
 		.catch(error => console.error(error));
 	}
+	//추천/비추 버튼을 기본으로 돌리는 함수 btn-outline-danger
+	function initRecommendBtn(btn) {
+		btn.classList.remove('btn-danger');
+		btn.classList.add('btn-outline-danger');
+		
+	}
+	//추천/비추 버튼을 선택했을 때 색상을 지정하는 함수
+	function selectRecommendBtn(btn) {
+		btn.classList.remove('btn-outline-danger');
+		btn.classList.add('btn-danger');
+		
+	}
+	//추천/비추 버튼 누른 후 새로고침 또는 나갔다 들어왔을 때 버튼 누름이 유지되는 함수
+	<c:if test="${recommend != null}">
+		if(${recommend.re_state == 1}) {
+			selectRecommendBtn(btnUp);
+		}
+		else if(${recommend.re_state == -1}) {
+			selectRecommendBtn(btnDown);
+		}
+	</c:if>
 </script>
 </body>
 </html>

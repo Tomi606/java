@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.FileVO;
+import kr.kh.app.model.vo.MemberVO;
+import kr.kh.app.model.vo.RecommendVO;
 import kr.kh.app.service.BoardService;
 import kr.kh.app.service.BoardServiceImp;
 
@@ -29,16 +31,25 @@ public class BoardDetailServlet extends HttpServlet {
 			//예외가 뜨면 num이 0으로 들어간다.
 			num = 0;
 		}
-		//서비스에게 게시글 번호를 주면서 게시글 주회수를 증가하라고 명령
+		//서비스에게 게시글 번호를 주면서 게시글 조회수를 증가하라고 명령
 		boardService.updateView(num);
 		//boardService에게 게시글 번호(num)을 주면서 게시글(detail)을 가져오라고 명령
 		BoardVO board = boardService.getBoard(num);
 		//화면에 게시글을 전송
 		request.setAttribute("board", board);
+		
+		//첨부파일(file)
 		//서비스에게 게시글 번호를 주면서 첨부파일을 가져오라고 시킴
 		ArrayList<FileVO> fileList = boardService.getFile(num);
 		//첨부파일을 화면에 전송
 		request.setAttribute("fileList", fileList);
+		
+		//추천(recommend)
+		//회원의 추천 상태를 가져옴(회원(re_me_id) + 게시글 번호(re_bo_num))
+		MemberVO user = (MemberVO)request.getSession().getAttribute("user"); //회원의 정보
+		RecommendVO recommend = boardService.getRecommend(user, num); //num = 게시글 번호
+		request.setAttribute("recommend", recommend);
+		
 		//화면을 전송
 		request.getRequestDispatcher("/WEB-INF/views/board/detail.jsp").forward(request, response);
 	}
