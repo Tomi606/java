@@ -19,6 +19,9 @@
 		<input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
 	</div>
 	<div class="mb-3 mt-3">
+		<button type="button" class="btn btn-outline-success col-12" id="idCheck">아이디 중복 검사</button>
+	</div>
+	<div class="mb-3 mt-3">
 		<label for="pw" class="form-label">비번:</label>
 		<input type="password" class="form-control" id="pw" placeholder="Enter pw" name="pw">
 	</div>
@@ -33,5 +36,39 @@
 	<button type="submit" class="btn btn-outline-success col-12">회원가입</button>
 	</form>
 </div>
+<script src="//code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+	let flag = false; //중복 확인 버튼 누름 유무
+	$("#idCheck").click(function(){
+		let id = $("[name=id]").val();
+		$.ajax({
+			url : '<c:url value="/id/check"/>',
+			method : 'get',
+			async : true, 
+			data : {
+				"id" : id
+			},
+			sucess : function(data) {
+				if(data) {
+					alert("사용 가능한 아이디입니다.");
+				}else {
+					alert("이미 사용중인 아이디입니다.");
+				}
+			},
+			error : function(a, b, c) {
+				console.error("예외 발생");
+			}
+		}); //ajax end
+	}); //click end
+	$("form").submit(function() {
+		if(!flag){
+			alert("아이디 중복을 검사하세요");
+			return false;
+		}
+	})
+	$("[name=id]").change(function(){
+		flag = false;
+	})
+</script>
 </body>
 </html>
