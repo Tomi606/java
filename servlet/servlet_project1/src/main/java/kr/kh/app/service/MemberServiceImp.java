@@ -70,5 +70,11 @@ public class MemberServiceImp implements MemberService {
 		//비번이 다르면 null 리턴
 		return null;
 	}
+
+	@Override
+	public boolean checkId(String id) {
+		MemberVO member = memberDao.selectMember(id);
+		return member == null;
+	}
 }
 
