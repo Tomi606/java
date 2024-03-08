@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.BoardDAO;
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.MemberVO;
@@ -230,5 +231,38 @@ public class BoardServiceImp implements BoardService {
 			return null;
 		}
 		return boardDao.selectRecommend(user.getMe_id(), num);
+	}
+
+	@Override
+	public boolean insertComment(CommentVO comment) {
+		if( comment == null || 
+			!checkString(comment.getCm_content())) {
+			return false;
+		}
+		return boardDao.insertComment(comment);
+	}
+
+	@Override
+	public ArrayList<CommentVO> getCommentList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria(1,2);
+		}
+		return boardDao.selectCommentList(cri);
+	}
+
+	@Override
+	public boolean deleteComment(int num, MemberVO user) {
+		if(user == null) {			
+			return false;
+		}
+		//댓글 번호와 일치하는 댓글을 가져옴
+		CommentVO comment = boardDao.selectComment(num);
+		//댓글 작성자가 회원인지 확인하여 아니면 false 리턴
+		if(comment == null
+		|| !comment.getCm_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		//맞으면 삭제 요청
+		return boardDao.deleteComment(num);
 	}
 }

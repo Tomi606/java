@@ -120,6 +120,26 @@
 	<update id="updateRecommend">
 		update recommend set re_state = #{re.re_state} where re_num = #{re.re_num}
 	</update>
+	
+	<insert id="insertComment">
+		insert into comment(cm_bo_num, cm_content, cm_me_id)
+		values(#{co.cm_bo_num},#{co.cm_content},#{co.cm_me_id})
+	</insert>
+	
+	<select id="selectCommentList" resultType="kr.kh.app.model.vo.CommentVO">
+		select * from comment 
+		where cm_bo_num = #{cri.boNum}
+		order by cm_num desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectComment" resultType="kr.kh.app.model.vo.CommentVO">
+		select * from comment where cm_num = #{cm_num}
+	</select>
+	
+	<delete id="deleteComment">
+		delete from comment where cm_num = #{cm_num}
+	</delete>
 </mapper>
 <!-- selectCommunity
 select * from community where co_num = #{bo_co_num}
