@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.BoardDAO;
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.MemberVO;
@@ -239,6 +240,23 @@ public class BoardServiceImp implements BoardService {
 	public RecommendVO getRecommend(int num, MemberVO user) {
 		
 		return null;
+	}
+
+	@Override
+	public ArrayList<CommentVO> getCommentList(Criteria cri) {
+		if(cri == null) {			
+			return null;
+		}
+		return boardDao.selectCommentList(cri);
+	}
+
+	@Override
+	public int getTotalCountComment(Criteria cri) {
+		//cri가 null(현재 페이지 정보가 null)이면 어떤 게시글인지 알 수 없기 때문에 0 리턴
+		if(cri == null) {
+			return 0;
+		}
+		return boardDao.selectTotalCountComment(cri);
 	}
 		
 }
