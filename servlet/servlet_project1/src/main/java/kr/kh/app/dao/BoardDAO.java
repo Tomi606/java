@@ -9,6 +9,7 @@ import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.CommunityVO; //select mapper 만들때 복붙
 import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.RecommendVO;
+import kr.kh.app.pagination.CommentCriteria;
 import kr.kh.app.pagination.Criteria;
 
 public interface BoardDAO {
@@ -50,4 +51,8 @@ public interface BoardDAO {
 	CommentVO selectComment(@Param("cm_num")int num);
 
 	boolean deleteComment(@Param("cm_num")int num);
+
+	int selectTotalCountComment(@Param("cri")CommentCriteria cri);
+
+	boolean updateComment(@Param("co") CommentVO comment);
 }

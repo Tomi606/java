@@ -10,6 +10,7 @@ import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.model.vo.RecommendVO;
+import kr.kh.app.pagination.CommentCriteria;
 import kr.kh.app.pagination.Criteria;
 
 public interface BoardService {
@@ -41,5 +42,9 @@ public interface BoardService {
 	ArrayList<CommentVO> getCommentList(Criteria cri);
 
 	boolean deleteComment(int num, MemberVO user);
+
+	int getTotalCountComment(CommentCriteria cri);
+
+	boolean updateComment(CommentVO comment);
 
 }

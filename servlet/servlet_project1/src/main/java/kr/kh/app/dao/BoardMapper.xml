@@ -140,6 +140,15 @@
 	<delete id="deleteComment">
 		delete from comment where cm_num = #{cm_num}
 	</delete>
+	
+	<select id="selectTotalCountComment" resultType="int">
+		select count(*) from comment 
+		where cm_bo_num = #{cri.boNum}
+	</select>
+	
+	<update id="updateComment">
+		update comment set cm_content = #{co.cm_content} where cm_num = #{co.cm_num}
+	</update>
 </mapper>
 <!-- selectCommunity
 select * from community where co_num = #{bo_co_num}

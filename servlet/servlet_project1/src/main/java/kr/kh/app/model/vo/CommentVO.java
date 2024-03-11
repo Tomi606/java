@@ -16,4 +16,5 @@ public class CommentVO {
 		cm_content = content;
 		cm_me_id = me_id;
 	}
+
 }
