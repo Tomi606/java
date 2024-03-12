@@ -36,7 +36,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/test/{num}", method = RequestMethod.GET)
-	//@PathVariable
+	//@PathVariable : 경로 변수를 표시하기 위해 메서드에 매개변수에 사용된다. 경로 변수는 중괄호 {id} 값. URL 경로에서 변수 값을 추출하여 매개변수에 할당한다.
 	public String test(Model model, @PathVariable("num")int num) {
 		System.out.println("경로 데이터 : " + num);
 		return "redirect:/";
