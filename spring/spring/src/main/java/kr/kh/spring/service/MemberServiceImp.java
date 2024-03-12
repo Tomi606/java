@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.spring.dao.MemberDAO;
+import kr.kh.spring.model.vo.MemberVO;
 
 @Service //@Service 어노테이션이 있어야 컨트롤러에서 객체를 만들때 Imp을 자동으로 추가해줌
 public class MemberServiceImp implements MemberService {
@@ -14,6 +15,11 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public int testCountMember() {
 		return memberDao.selectMemberCount();
+	}
+
+	@Override
+	public MemberVO getMember(String id) {
+		return memberDao.selectMember(id);
 	}
 	
 }
