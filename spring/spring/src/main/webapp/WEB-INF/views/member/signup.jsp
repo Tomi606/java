@@ -12,7 +12,7 @@
 <!-- jquery validation -->
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-<title>signup</title>
+<title>회원가입</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">

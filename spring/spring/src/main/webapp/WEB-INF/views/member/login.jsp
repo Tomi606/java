@@ -9,8 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<title>스프링</title>
-<title>login</title>
+<title>로그인</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -26,14 +25,14 @@
 </nav>
 <div class="container">
 	<h1>로그인</h1>
-	<form action='<c:url value="/login"/>'>
+	<form action='<c:url value="/login"/>' method="post">
 		<div class="form-group">
 			<label for="id">아이디</label>
-			<input type="text" class="form-control" id="id" placeholder="Enter id" name="me_id">
+			<input type="text" class="form-control" id="id" name="id" placeholder="Enter id" >
 		</div>
 		<div class="form-group">
 			<label for="pw">비번</label>
-			<input type="password" class="form-control" id="pw" placeholder="Enter pw" name="me_pw">
+			<input type="password" class="form-control" id="pw" name="pw" placeholder="Enter pw">
 		</div>
 		<button class="btn btn-outline-success col-12">로그인</button>
 	</form>

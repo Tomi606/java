@@ -3,11 +3,10 @@ package kr.kh.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.kh.spring.model.dto.TestDTO;
+import kr.kh.spring.model.dto.LoginDTO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.service.MemberService;
 
@@ -56,8 +55,17 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPost(Model model, MemberVO member) {
-		
-		return "member/login";
+	public String loginPost(Model model, LoginDTO loginDto) {
+		MemberVO user = memberService.login(loginDto);
+		System.out.println(user);
+		if(user != null) {
+			model.addAttribute("msg", "로그인 되었습니다.");
+			model.addAttribute("url", "/");
+		}
+		else {
+			model.addAttribute("msg", "로그인 실패했습니다.");
+			model.addAttribute("url", "/login");
+		}
+		return "message";
 	}
 }
