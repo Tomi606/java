@@ -57,8 +57,9 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPost(Model model, LoginDTO loginDto) {
 		MemberVO user = memberService.login(loginDto);
-		System.out.println(user);
+		//확인용 : System.out.println(user);
 		if(user != null) {
+			model.addAttribute("user", user);
 			model.addAttribute("msg", "로그인 되었습니다.");
 			model.addAttribute("url", "/");
 		}
