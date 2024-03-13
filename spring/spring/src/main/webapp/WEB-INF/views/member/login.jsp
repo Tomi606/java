@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <title>스프링</title>
+<title>login</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -24,7 +25,18 @@
 	</ul>
 </nav>
 <div class="container">
-	<h1>메인페이지</h1>
+	<h1>로그인</h1>
+	<form action='<c:url value="/login"/>'>
+		<div class="form-group">
+			<label for="id">아이디</label>
+			<input type="text" class="form-control" id="id" placeholder="Enter id" name="me_id">
+		</div>
+		<div class="form-group">
+			<label for="pw">비번</label>
+			<input type="password" class="form-control" id="pw" placeholder="Enter pw" name="me_pw">
+		</div>
+		<button class="btn btn-outline-success col-12">로그인</button>
+	</form>
 </div>
 </body>
 </html>

@@ -11,15 +11,25 @@ public class MemberServiceImp implements MemberService {
 
 	@Autowired //자동으로 마이바티스 생성자 추가
 	private MemberDAO memberDao;
-
-	@Override
-	public int testCountMember() {
-		return memberDao.selectMemberCount();
+	
+	private boolean checkString(String str) {
+		return str != null && str.length() != 0;
 	}
 
 	@Override
-	public MemberVO getMember(String id) {
-		return memberDao.selectMember(id);
+	public boolean insertMember(MemberVO member) {
+		if(member == null
+		|| !checkString(member.getMe_id())
+		|| !checkString(member.getMe_pw())
+		|| !checkString(member.getMe_email())) {
+			return false;
+		}
+		//아이디 중복 체크 user = DB에서 가져온 정보, member = 입력받은 정보
+		MemberVO user = memberDao.selectMember(member.getMe_id());
+		if(user != null) {
+			return false;
+		}
+		return memberDao.insertMember(member);
 	}
 	
 }

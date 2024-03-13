@@ -18,41 +18,46 @@ public class HomeController {
 	@Autowired //해당 클래스를 싱글톤으로 만들어줌
 	private MemberService memberService;
 	
-	//@RequestMapping : url 전송/ value : url, method : 전송 방식(get, post)
+	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		//테스트용으로 등록된 회원 수를 조회
-		int count = memberService.testCountMember();
-		System.out.println("등록된 회원 수 : " + count);
-		
-		MemberVO member = memberService.getMember("admin");
-		System.out.println(member);
-		
-		//model.addAttribute("화면에서 사용할 이름","보낼 데이터");
-		model.addAttribute("name","홍길동");
-		
-		//해당하는 jsp로 리턴
+		//jsp 리턴
 		return "home";
 	}
 	
-	//이 예제 잘 기억!!!
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	//매개변수를 추가해주면 자동으로 매핑해줌(jsp의 name과 매개변수가 같으면)
-	public String homePost(Model model, TestDTO testDto/*, String name, int age*/) {
-		/*
-		System.out.println("이름 : " + name);
-		System.out.println("나이 : " + age);
-		TestDTO testDto = new TestDTO(name, age);
-		 */
-		System.out.println(testDto);
-		return "home";
+	//회원가입
+	//"태그가 a"이면 무조건 "get" method
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signup(Model model) {
+		
+		return "member/signup";
 	}
 	
-	@RequestMapping(value = "/test/{num}", method = RequestMethod.GET)
-	//@PathVariable : 경로 변수를 표시하기 위해 메서드에 매개변수에 사용된다. 경로 변수는 중괄호 {id} 값. URL 경로에서 변수 값을 추출하여 매개변수에 할당한다.
-	public String test(Model model, @PathVariable("num")int num) {
-		System.out.println("경로 데이터 : " + num);
-		return "redirect:/";
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	//spring은 MemberVO member를 멤버변수로 바로 받을 수 있다.
+	//주의사항 : 정수로 받을 때 에러 안나게 조심(문자열을 -> 정수로 바꿀 수 없기때문)
+	public String signupPost(Model model, MemberVO member) {
+		if(memberService.insertMember(member)) {
+			model.addAttribute("msg", "회원가입을 완료했습니다.");
+			model.addAttribute("url", "/");
+		}
+		else {
+			model.addAttribute("msg", "회원가입을 실패했습니다.");
+			model.addAttribute("url", "/signup");
+		}
+		return "message";
 	}
 	
+	//로그인
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) {
+		
+		return "member/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String loginPost(Model model, MemberVO member) {
+		
+		return "member/login";
+	}
 }
