@@ -4,28 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- jquery validation -->
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
 <title>회원가입</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	<a class="navbar-brand" href='<c:url value="/"/>'>Logo</a>
-	<ul class="navbar-nav">
-		<li class="nav-item">
-			<a class="nav-link" href='<c:url value="/signup"/>'>회원가입</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href='<c:url value="/login"/>'>로그인</a>
-		</li>
-	</ul>
-</nav>
 <div class="container">
 	<h1>회원가입</h1>
 	<form action='<c:url value="/signup"/>' method="post">
