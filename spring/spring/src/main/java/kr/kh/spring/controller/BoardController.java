@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.model.vo.BoardVO;
 import kr.kh.spring.model.vo.CommunityVO;
+import kr.kh.spring.model.vo.FileVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.pagination.Criteria;
 import kr.kh.spring.pagination.PageMaker;
@@ -24,6 +25,7 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	//a태그 = getMapping
 	@GetMapping("/board/list") //@RequestMapping(value="/board/list", method=RequstMethod.GET)
 	public String boardList(Model model, Criteria cri) {
 		cri.setPerPageNum(5);
@@ -61,4 +63,18 @@ public class BoardController {
 		return "message";
 	}
 	
+	@GetMapping("/board/detail") //게시글 번호, 검색 정보
+	public String boardDetail(Model model, int boNum, Criteria cri) {
+		//조회수 증가
+		boardService.updateView(boNum);
+		//게시글을 가져옴
+		BoardVO board = boardService.getBoard(boNum);
+		//첨부파일을 가져옴
+		ArrayList<FileVO> fileList = boardService.getFileList(boNum);
+		//화면에 게시글, 첨부파일, 검색 정보(cri)를 전송
+		model.addAttribute("board", board);
+		model.addAttribute("fileList", fileList);
+		model.addAttribute("cri", cri);
+		return "/board/detail";
+	}
 }

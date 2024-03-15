@@ -99,5 +99,20 @@ public class BoardServiceImp implements BoardService {
 		
 		return true;
 	}
+
+	@Override
+	public BoardVO getBoard(int boNum) {
+		return boardDao.selectBoard(boNum);
+	}
+
+	@Override
+	public void updateView(int boNum) {
+		boardDao.updateView(boNum);
+	}
+
+	@Override
+	public ArrayList<FileVO> getFileList(int boNum) {
+		return boardDao.selectFileList(boNum);
+	}
 	
 }

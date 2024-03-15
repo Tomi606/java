@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-	<form action='<c:url value="/board/insert"/>' method="post">
+	<form action='<c:url value="/board/insert"/>' method="post" enctype="multipart/form-data">
 		<h1>게시글 등록</h1>
 		<div class="form-group">
 			<label for="bo_title">게시판</label>
