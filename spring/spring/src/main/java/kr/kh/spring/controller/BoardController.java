@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.model.vo.BoardVO;
 import kr.kh.spring.model.vo.CommunityVO;
@@ -44,10 +45,12 @@ public class BoardController {
 		return "/board/insert";
 	}
 	
+	//첨부파일 여러개라서 []넣음(1개면 안넣어도됨)
 	@PostMapping("/board/insert")
-	public String boardInsertPost(Model model, BoardVO board, HttpServletRequest requst) {
+	public String boardInsertPost(Model model, BoardVO board,
+			HttpServletRequest requst, MultipartFile[] file) {
 		MemberVO user = (MemberVO)requst.getSession().getAttribute("user");
-		if(boardService.insertBoard(board, user)) {
+		if(boardService.insertBoard(board, user, file)) {
 			model.addAttribute("msg", "게시글을 등록했습니다.");
 			model.addAttribute("url", "/board/list");
 		}
@@ -55,8 +58,6 @@ public class BoardController {
 			model.addAttribute("msg", "게시글을 등록하지 못했습니다.");
 			model.addAttribute("url", "/board/insert");
 		}
-		
-		
 		return "message";
 	}
 	

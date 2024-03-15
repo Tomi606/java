@@ -53,4 +53,9 @@
 		insert into board (bo_title, bo_content, bo_co_num, bo_me_id)
 		values(#{bo.bo_title}, #{bo.bo_content}, #{bo.bo_co_num}, #{bo.bo_me_id})
 	</insert>
+	
+	<insert id="insertFile">
+		insert into file(fi_bo_num, fi_name, fi_ori_name)
+		values(#{fi.fi_bo_num}, #{fi.fi_name}, #{fi.fi_ori_name})
+	</insert>
 </mapper>
