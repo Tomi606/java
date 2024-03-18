@@ -27,4 +27,9 @@ public interface BoardDAO {
 
 	ArrayList<FileVO> selectFileList(@Param("bo_num") int boNum);
 
+	void deleteFile(@Param("fi_num") int fi_num);
+
+	//int bo_num은 서비스와 별개로 이름을 지정해도 된다.
+	boolean deleteBoard(@Param("bo_num")int bo_num);
+
 }

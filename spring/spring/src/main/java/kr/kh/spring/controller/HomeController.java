@@ -1,5 +1,6 @@
 package kr.kh.spring.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.kh.spring.model.dto.LoginDTO;
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.service.BoardService;
 import kr.kh.spring.service.MemberService;
 
 //controller = 여러 개의 Servlet
@@ -16,6 +18,7 @@ public class HomeController {
 	//스프링에서는 new를 안하고 어노테이션 이용
 	@Autowired //해당 클래스를 싱글톤으로 만들어줌
 	private MemberService memberService;
+	private BoardService boardService;
 	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -69,4 +72,5 @@ public class HomeController {
 		}
 		return "message";
 	}
+	
 }

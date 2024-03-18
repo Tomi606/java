@@ -54,4 +54,15 @@ public class UploadFileUtils {
         String iconName = path + File.separator + fileName;
         return iconName.replace(File.separatorChar, '/');
     }
+
+    //파일 삭제
+	public static void deleteFile(String uploadPath, String fi_name) {
+		fi_name = fi_name.replace('/', File.separatorChar); //슬래쉬를 역슬래쉬로 바꿔줌
+		File file = new File(uploadPath + fi_name);
+		//파일이 존재한다면
+		if(file.exists()) {
+			//파일을 삭제
+			file. delete();
+		}
+	}
 }
