@@ -45,8 +45,16 @@
 	<!-- LoginInterceptor를 등록 
 	id="객체명"
 	class="해당 인터셉터 경로" -->
-	<beans:bean id="LoginInterceptor" 
-	class="kr.kh.spring.interceptor.LoginInterceptor"/> 
+	<beans:bean id="loginInterceptor" 
+	class="kr.kh.spring.interceptor.LoginInterceptor"/>
+	
+	<!-- MemberInterceptor를 등록 -->
+	<beans:bean id="memberInterceptor" 
+	class="kr.kh.spring.interceptor.MemberInterceptor"/>
+	
+	<!-- GuestInterceptor를 등록 -->
+	<beans:bean id="guestInterceptor" 
+	class="kr.kh.spring.interceptor.GuestInterceptor"/>
 	
 	<!-- LoginInterceptor가 실행된 URL 지정 
 	mapping path = 어디로 갈건지
@@ -55,8 +63,24 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/login"/>
-			<beans:ref bean="LoginInterceptor"/>
+			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
+		
+		<!-- MemberInterceptor가 실행된 URL 지정 -->
+		<interceptor>
+			<mapping path="/board/insert"/>
+			<mapping path="/board/update"/>
+			<mapping path="/board/delete"/>
+			<beans:ref bean="memberInterceptor"/>
+		</interceptor>
+		
+		<!-- GuestInterceptor가 실행된 URL 지정 -->
+		<interceptor>
+			<mapping path="/signup"/>
+			<mapping path="/login"/>
+			<beans:ref bean="guestInterceptor"/>
+		</interceptor>
+		
 	</interceptors>
 		
 	<!-- 첨부파일 용량 제한 -->
