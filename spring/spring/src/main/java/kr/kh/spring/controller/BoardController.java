@@ -98,4 +98,42 @@ public class BoardController {
 		
 		return "message";
 	}
+	
+	@GetMapping("/board/update")
+	public String boardUpdate(Model model, int boNum, HttpSession session) {
+		//커뮤니티 리스트를 가져옴
+		ArrayList<CommunityVO> list = boardService.getCommunityList();
+		//게시글을 가져옴
+		BoardVO board = boardService.getBoard(boNum);
+		//첨부파일을 가져옴
+		ArrayList<FileVO> fileList = boardService.getFileList(boNum);
+		
+		//화면에 전송
+		model.addAttribute("fileList", fileList);
+		model.addAttribute("board", board);
+		model.addAttribute("list", list);
+		return "/board/update";
+	}
+	
+	@PostMapping("/board/update")
+	public String boardUpdatePost(Model model, BoardVO board, 
+			MultipartFile [] file, int [] delNums, HttpSession session) { //file = jsp의 <input type="file"
+		//회원 정보를 가져옴. 왜? 작성자만 수정가능 해야하기 때문
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		//게시글, 회원, 첨부파일, 삭제한 첨부파일 번호를 넘겨주면서 게시글을 수정하라고 시킴
+		boolean res = boardService.updateBoard(board, user, file, delNums);
+		
+		//게시글 수정에 성공하면
+		if(res) {
+			model.addAttribute("url", "/board/detail?boNum="+board.getBo_num());
+			model.addAttribute("msg", "수정이 완료되었습니다.");
+		}
+		//실패하면
+		else {
+			model.addAttribute("url", "/board/detail?boNum="+board.getBo_num());
+			model.addAttribute("msg", "수정이 실패되었습니다.");
+		}
+		
+		return "message";
+	}
 }

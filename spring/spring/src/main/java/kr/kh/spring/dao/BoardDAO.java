@@ -32,4 +32,8 @@ public interface BoardDAO {
 	//int bo_num은 서비스와 별개로 이름을 지정해도 된다.
 	boolean deleteBoard(@Param("bo_num")int bo_num);
 
+	boolean updateBoard(@Param("board") BoardVO board);
+
+	FileVO selectFile(@Param("fi_num") int tmp);
+
 }
