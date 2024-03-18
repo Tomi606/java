@@ -10,6 +10,6 @@
 	</select>
 	
 	<select id="selectTotalCount" resultType="int">
-		select count(*) from comment where cm_bo_num = # {cri.search}
+		select count(*) from comment where cm_bo_num = #{cri.search}
 	</select>
 </mapper>

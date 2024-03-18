@@ -106,7 +106,7 @@ function getCommentList(cri) {
 
 function displayCommentList(commentList) {
 	let str = '';
-	if(commentList == null || commentList.length() == 0) {
+	if(commentList == null || commentList.length == 0) {
 		str = '<h3>등록된 댓글이 없습니다.</h3>';
 		$(".box-comment-list").html(str);
 		return;
