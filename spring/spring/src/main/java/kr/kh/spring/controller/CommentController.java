@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.kh.spring.model.vo.CommentVO;
+import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.pagination.Criteria;
 import kr.kh.spring.pagination.PageMaker;
 import kr.kh.spring.service.CommentService;
@@ -37,6 +40,20 @@ public class CommentController {
 		
 		map.put("commentList", commentList);
 		map.put("pm", pm);
+		return map;
+	}
+	
+	@PostMapping("/comment/insert")
+	public Map<String, Object> commentInsert(@RequestBody CommentVO comment, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		//확인용
+		//System.out.println(comment);
+		//System.out.println(user);
+		
+		boolean res = commentService.insertComment(comment, user);
+		//success의 console.log(data.result);에서 사용
+		map.put("result", res);
 		return map;
 	}
 	

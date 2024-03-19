@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.spring.dao.CommentDAO;
 import kr.kh.spring.model.vo.CommentVO;
+import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.pagination.Criteria;
 
 @Service
@@ -14,6 +15,10 @@ public class CommentServiceImp implements CommentService {
 
 	@Autowired
 	private CommentDAO commentDao;
+	
+	private boolean checkString(String str) {
+		return str != null && str.length() != 0;
+	}
 
 	@Override
 	public ArrayList<CommentVO> getCommentList(Criteria cri) {
@@ -29,6 +34,20 @@ public class CommentServiceImp implements CommentService {
 			return 0;
 		}
 		return commentDao.selectTotalCount(cri);
+	}
+
+	@Override
+	public boolean insertComment(CommentVO comment, MemberVO user) {
+		if(comment == null || !checkString(comment.getCm_content())) {
+			return false;
+		}
+		if(user == null || user.getMe_id() == null) {
+			return false;
+		}
+		//댓글 작성자로 로그인한 회원 아이디를 넣어줌
+		comment.setCm_me_id(user.getMe_id());
+		
+		return commentDao.insertComment(comment);
 	}
 	
 }
