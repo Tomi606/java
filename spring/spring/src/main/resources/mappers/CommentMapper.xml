@@ -26,4 +26,7 @@
 		delete from comment where cm_num = #{cm_num}
 	</delete>
 	
+	<update id="updateComment">
+		update comment set cm_content = #{cm.cm_content} where cm_num = #{cm.cm_num}
+	</update>
 </mapper>
