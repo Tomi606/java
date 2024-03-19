@@ -276,7 +276,6 @@ $(document).on('click', '.btn-comment-update', function() {
 	let contentBox =  $(this).parents(".box-comment").find(".text-comment");
 	//댓글을 수정할 수 있는 textarea로 변경
 	let content = contentBox.text();
-	console.log(content);
 	let str = `<textarea class="form-control">\${content}</textarea>`;
 	contentBox.after(str);
 	contentBox.hide();
@@ -297,7 +296,6 @@ $(document).on('click', '.btn-complete', function() {
 		cm_content : $(".box-comment").find("textarea").val(),
 		cm_num : $(this).data("num")
 	}
-	console.log(comment);
 	//서버에 ajax로 데이터를 전송 후 처리
 	$.ajax({
 		async : true,
