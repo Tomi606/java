@@ -1,9 +1,8 @@
 package kr.kh.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.mysql.cj.log.Log;
 
 import kr.kh.spring.dao.MemberDAO;
 import kr.kh.spring.model.dto.LoginDTO;
@@ -14,6 +13,9 @@ public class MemberServiceImp implements MemberService {
 
 	@Autowired //자동으로 마이바티스 생성자 추가
 	private MemberDAO memberDao;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	
 	private boolean checkString(String str) {
 		return str != null && str.length() != 0;
@@ -32,6 +34,9 @@ public class MemberServiceImp implements MemberService {
 		if(user != null) {
 			return false;
 		}
+		//비번 암호화
+		String encPw = passwordEncoder.encode(member.getMe_pw());
+		member.setMe_pw(encPw);
 		return memberDao.insertMember(member);
 	}
 
@@ -44,8 +49,8 @@ public class MemberServiceImp implements MemberService {
 		}
 		//아이디와 일치하는 회원 정보 가져옴
 		MemberVO user = memberDao.selectMember(loginDto.getId());
-		//회원 정보가 없거나 비번이 다르면
-		if(user == null || !user.getMe_pw().equals(loginDto.getPw())) {
+		//비번 복호화 하지 않고 비교
+		if(user == null || !passwordEncoder.matches(loginDto.getPw(), user.getMe_pw())) {
 			return null;
 		}
 		return user;
