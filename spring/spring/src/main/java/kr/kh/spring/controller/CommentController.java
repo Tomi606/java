@@ -50,9 +50,20 @@ public class CommentController {
 		//확인용
 		//System.out.println(comment);
 		//System.out.println(user);
-		
 		boolean res = commentService.insertComment(comment, user);
 		//success의 console.log(data.result);에서 사용
+		map.put("result", res);
+		return map;
+	}
+	
+	@PostMapping("/comment/delete")
+	public Map<String, Object> commentDelete(@RequestBody CommentVO comment, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		//확인용
+		//System.out.println(comment);
+		//System.out.println(user);
+		boolean res = commentService.deleteComment(comment, user);
 		map.put("result", res);
 		return map;
 	}

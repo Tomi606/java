@@ -49,5 +49,22 @@ public class CommentServiceImp implements CommentService {
 		
 		return commentDao.insertComment(comment);
 	}
+
+	@Override
+	public boolean deleteComment(CommentVO comment, MemberVO user) {
+		if(comment == null) {
+			return false;
+		}
+		if(user == null || user.getMe_id() == null) {
+			return false;
+		}
+		//작성자인지 확인
+		CommentVO dbComment = commentDao.selectComment(comment.getCm_num());
+		if(dbComment == null || !dbComment.getCm_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		//댓글 삭제
+		return commentDao.deleteComment(comment.getCm_num());
+	}
 	
 }

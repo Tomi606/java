@@ -116,12 +116,24 @@ function displayCommentList(commentList) {
 		$(".box-comment-list").html(str);
 		return;
 	}
+	
 	for(item of commentList) {
+		let boxBtns = 
+		`
+		<span class="box-btn float-right">
+		 	<button class="btn btn-outline-warning btn-comment-update" data-num="\${item.cm_num}">수정</button>
+		 	<button class="btn btn-outline-danger btn-comment-del" data-num="\${item.cm_num}">삭제</button>
+		</span>
+		`;
+		let btns = '${user.me_id}' == item.cm_me_id ? boxBtns : '';
 		str += 
 		`
 		<div class="box-comment row">
 			<div class="col-3">\${item.cm_me_id}</div>
-			<div class="col-9">\${item.cm_content}</div>
+			<div class="col-9 clearfix input-group">
+				<span class="text-comment">\${item.cm_content}</span>
+				\${btns}
+			</div>
 		</div>
 		`
 	}
@@ -223,6 +235,63 @@ function checkLogin() {
 	}
 	return false;
 }
+
+
+</script>
+<!-- 댓글 삭제 -->
+<script type="text/javascript">
+$(document).on('click', '.btn-comment-del', function() {
+	//서버로 보낼 데이터 생성
+	let comment = {
+		cm_num : $(this).data('num')
+	}
+	//서버로 데이터를 전송
+	$.ajax({
+		async : true, 
+		url : '<c:url value="/comment/delete"/>', 
+		type : 'post', 
+		data : JSON.stringify(comment), 
+		contentType : "application/json; charset=utf-8",
+		dataType : "json", 
+		success : function (data){
+			if(data.result) {
+				alert('댓글을 삭제했습니다.');
+				getCommentList(cri);
+			}
+			else {
+				alert('댓글 삭제 실패');
+			}
+		}, 
+		error : function(jqXHR, textStatus, errorThrown){
+
+		}
+	});
+});
+
+</script>
+<!-- 댓글 수정 -->
+<script type="text/javascript">
+$(document).on('click', '.btn-comment-update', function() {
+	let contentBox =  $(this).parents(".box-comment").find(".text-comment");
+	//댓글을 수정할 수 있는 textarea로 변경
+	let content = contentBox.text();
+	console.log(content);
+	let str = `<textarea class="form-control">\${content}</textarea>`;
+	contentBox.after(str);
+	contentBox.hide();
+	
+	//수정.삭제 버튼을 감추고
+	$(this).parents(".box-comment").find(".box-btn").hide();
+	
+	//수정 완료 버튼을 추가
+	let cm_num = $(this).data("num");
+	str = `<button class="btn btn-outline-success btn-complete" data-num="\${cm_num}">수정완료</button>`;
+	$(this).parents(".box-comment").find(".box-btn").after(str);
+});
+
+$(document).on('click', '.btn-complete', function() {
+	alert(1);
+})
 </script>
 </body>
 </html>
