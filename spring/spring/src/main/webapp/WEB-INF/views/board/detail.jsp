@@ -290,8 +290,13 @@ $(document).on('click', '.btn-comment-update', function() {
 });
 
 $(document).on('click', '.btn-complete', function() {
-	alert(1);
-})
+	
+});
+
+//수정 버튼을 누른 상태에서 다른 수정 버튼을 누르면 기존에 누른 댓글을 원상태로 돌려주는 함수
+function initComment() {
+	
+}
 </script>
 </body>
 </html>
