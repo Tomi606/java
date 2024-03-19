@@ -22,9 +22,9 @@
 		<label>조회수 : ${board.bo_view}</label>
 	</div>
 	<div class="input-group mb-3 mt-3">
-		<button class="btn btn-outline-success btn-up col-5">추천(${board.bo_up})</button>
+		<button class="btn btn-outline-success btn-up col-5" data-state="1">추천(${board.bo_up})</button>
 		<hr>
-		<button class="btn btn-outline-success btn-down col-5">비추천(${board.bo_down})</button>
+		<button class="btn btn-outline-success btn-down col-5" data-state="-1">비추천(${board.bo_down})</button>
 	</div>
 	<div>
 	 	<label>내용</label>
@@ -326,6 +326,38 @@ function initComment() {
 	$('.box-btn').show();
 	$('.text-comment').show();
 }
+</script>
+<!-- 추천/비추천 -->
+<script type="text/javascript">
+$('.btn-up, .btn-down').click(function() {
+	//서버에 보낼 데이터 생성
+	let state = $(this).data('state');
+	let boNum = '${board.bo_num}';
+	let recommend = {
+			re_state : state,
+			re_bo_num : boNum
+	}
+	//서버에 전송 json => json
+	$.ajax({
+		async : true,
+		url : '<c:url value="/recommend/check"/>', 
+		type : 'post', 
+		data : JSON.stringify(recommend), 
+		contentType : "application/json; charset=utf-8",
+		dataType : "json", 
+		success : function (data){
+			if(data.result) {
+				alert('눌렀습니다.');
+			}
+			else {
+				alert('추천 기능 실패');
+			}
+		}, 
+		error : function(jqXHR, textStatus, errorThrown){
+
+		}
+	});
+});
 </script>
 </body>
 </html>
