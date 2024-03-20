@@ -382,7 +382,7 @@ function getRecommend() {
 	//서버로 데이터를 전송 object => json
 	$.ajax({
 		async : true,
-		url : '/<c:url value="/recommend"/>', 
+		url : '<c:url value="/recommend"/>', 
 		type : 'post', 
 		data : obj, 
 		dataType : "json", 
@@ -401,7 +401,7 @@ function displayUpdateRecommend(board) {
 	$('.text-down').text(board.bo_down);
 }
 
-function displayRecommend() {
+function displayRecommend(state) {
 	$('.btn-up, .btn-down').addClass("btn-outline-success");
 	$('.btn-up, .btn-down').removeClass("btn-success");
 	if(state == 1) {
