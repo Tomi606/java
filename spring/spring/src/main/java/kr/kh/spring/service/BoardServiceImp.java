@@ -200,12 +200,12 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public boolean recommend(RecommendVO recommend, MemberVO user) {
+	public int recommend(RecommendVO recommend, MemberVO user) {
 		if(recommend == null) {
-			return false;
+			return -2; //실패했을때(-1, 0, 1이 아닐때)
 		}
 		if(user == null) {
-			return false;
+			return -2;
 		}
 		//작성자를 로그인한 회원으로 설정
 		recommend.setRe_me_id(user.getMe_id());
@@ -223,7 +223,17 @@ public class BoardServiceImp implements BoardService {
 			}
 			boardDao.updateRecommend(recommend);
 		}
-		return true;
+		return recommend.getRe_state();
+	}
+
+	@Override
+	public int getUserRecommend(int num, MemberVO user) {
+		if(user == null) {
+			return -2;
+		}
+		
+		RecommendVO recommend = boardDao.selectRecommend(new RecommendVO(num, user.getMe_id()));
+		return recommend == null ? -2 : recommend.getRe_state();
 	}
 	
 }
