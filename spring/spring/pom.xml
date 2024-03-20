@@ -213,16 +213,31 @@
 		    <artifactId>spring-security-web</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
-		<!--스프링시큐리티 core 라이브러리--><dependency>
+		<!--스프링시큐리티 core 라이브러리-->
+		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
-		<!--스프링시큐리티 config 라이브러리--><dependency>
+		<!--스프링시큐리티 config 라이브러리-->
+		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-config</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- gmail을 이용하기 위한 라이브러리 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.3</version>
+		</dependency>
+				
 		
 		
 		
