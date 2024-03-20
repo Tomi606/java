@@ -71,6 +71,7 @@
 			<mapping path="/board/insert"/>
 			<mapping path="/board/update"/>
 			<mapping path="/board/delete"/>
+			<mapping path="/mypage"/>
 			<beans:ref bean="memberInterceptor"/>
 		</interceptor>
 		
@@ -78,6 +79,7 @@
 		<interceptor>
 			<mapping path="/signup"/>
 			<mapping path="/login"/>
+			<mapping path="/find/pw"/>
 			<beans:ref bean="guestInterceptor"/>
 		</interceptor>
 		
