@@ -4,6 +4,7 @@ package kr.kh.spring.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,13 @@ public class HomeController {
 	
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login(Model model, HttpServletRequest request) {
+		//login 페이지로 넘어오기 이전 경로를 가져옴
+		String url = request.getHeader("Referer");
+		//이전 url에 login이 들어가 있는 경우를 제외(post)
+		if(url != null && !url.contains("login")) {
+			request.getSession().setAttribute("prevUrl", url);
+		}
 		
 		return "/member/login";
 	}

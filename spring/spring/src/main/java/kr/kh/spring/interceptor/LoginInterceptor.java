@@ -40,7 +40,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//홈 컨트롤러의 로그인 된 user의 정보를 가져옴
 		//ModelAndView 객체에서 model 객체에 넣어준 user를 가져오는 코드
 		MemberVO user = (MemberVO)modelAndView.getModel().get("user");
-		System.out.println(user);
 		//로그인에 성공 했으면
 		if(user != null) {
 			//세션에 user 정보 저장
@@ -65,6 +64,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				Date date = new Date(System.currentTimeMillis() + time * 1000);
 				user.setMe_cookie_limit(date);
 				memberService.updateMemberCookie(user);
+			}
+			//되돌아 갈 url이 있으면 해당 url로 돌아감.
+			String url = (String)request.getSession().getAttribute("prevUrl");
+			//돌아갈 url이 있다면
+			if(url != null) {
+				response.sendRedirect(url);
+				request.getSession().removeAttribute("prevUrl");
 			}
 		}
 		
