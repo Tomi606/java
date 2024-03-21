@@ -68,9 +68,10 @@ public class HomeController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPost(Model model, LoginDTO loginDto) {
-		MemberVO user = memberService.login(loginDto);
+		MemberVO user = memberService.login(loginDto); //자동로그인 DTO를 user에게도 알려줘야 함.
 		//확인용 : System.out.println(user);
 		if(user != null) {
+			user.setAutoLogin(loginDto.isAutoLogin());
 			model.addAttribute("user", user);
 			model.addAttribute("msg", "로그인 되었습니다.");
 			model.addAttribute("url", "/");
@@ -149,4 +150,6 @@ public class HomeController {
 		session.setAttribute("user", user);
 		return "message";
 	}
+	
+	
 }

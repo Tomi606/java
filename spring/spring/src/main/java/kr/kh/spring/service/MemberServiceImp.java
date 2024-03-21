@@ -194,4 +194,17 @@ public class MemberServiceImp implements MemberService {
 		user.setMe_email(member.getMe_email());
 		return res;
 	}
+
+	@Override
+	public void updateMemberCookie(MemberVO user) {
+		if(user == null) {
+			return;
+		}
+		memberDao.updateMemberCookie(user);
+	}
+
+	@Override
+	public MemberVO getMemberByCookie(String sessionId) {
+		return memberDao.selectMemberByCookie(sessionId);
+	}
 }

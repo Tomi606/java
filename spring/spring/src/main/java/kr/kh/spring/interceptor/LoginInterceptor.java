@@ -1,12 +1,17 @@
 package kr.kh.spring.interceptor;
 
+import java.util.Date;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.service.MemberService;
 //서블릿에 같이 user정보 저장했던 걸 인터셉터 클래스로 나눠서 저장하는 거
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	//디스패처 서블릿에서 컨트롤러로 들어가기 전 작업할 내용 : 컨트롤러 실행 전 동작
@@ -20,6 +25,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 //		return true;
 //	}
 
+	@Autowired
+	private MemberService memberService;
+	
 	//컨트롤러에서 디스패처 서블릿으로 가기 전 작업할 내용 : 컨트롤러 실행 후 동작
 	//로그인
 	@Override
@@ -37,6 +45,27 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if(user != null) {
 			//세션에 user 정보 저장
 			request.getSession().setAttribute("user", user);
+			
+			//자동 로그인을 체크했으면
+			if(user.isAutoLogin()) {				
+				//쿠키를 생성해서
+				String value = request.getSession().getId(); //세션의 아이디를 가져와서 밑 쿠키에 저장
+				Cookie cookie = new Cookie("loginCookie", value); //("쿠키명", 쿠키값)
+				cookie.setPath("/"); //"쿠키가 유효한 URL 경로", 모든 url에서 유효하도록 /
+				//7일
+				int time = 7 * 24 * 60 * 60; //(7일 24시간 60분 60초)7일을 초로 환산
+				cookie.setMaxAge(time); //쿠키유지기간(seconds기준)
+				
+				//화면에 전송(response 객체에 쿠키를 담아서 전송
+				response.addCookie(cookie);
+				
+				//DB에 관련 정보를 추가
+				//세션 아이디와 만료시간
+				user.setMe_cookie(value);
+				Date date = new Date(System.currentTimeMillis() + time * 1000);
+				user.setMe_cookie_limit(date);
+				memberService.updateMemberCookie(user);
+			}
 		}
 		
 	}
