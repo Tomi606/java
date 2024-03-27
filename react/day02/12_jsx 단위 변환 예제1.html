@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JSX 복습</title>
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+			const root = ReactDOM.createRoot(document.getElementById("root"));
+			/* 
+			위의 인풋태그에 분을 입력하고, 변환버튼을 누르면 시간으로 환산하는 코드
+			Math.floor(값) : 소수점 버림
+			*/
+			function App(){
+				let [amount,setAmount] = React.useState(0);
+				let [data, setData] = React.useState(0);
+				
+				return (
+					<div>
+						<input type="text" onChange={(e)=>setData(e.target.value)}/>
+						<button onClick={()=>setAmount(data)}>변환</button>
+						<br/>
+						<input type="text" readOnly value={Math.floor(amount/60)}/>시간
+						<input type="text" readOnly value={Math.floor(amount%60)}/>분
+					</div>
+				);
+			};
+
+			root.render(<App/>)
+	</script>
+</body>
+</html>
+
