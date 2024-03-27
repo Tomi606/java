@@ -20,10 +20,10 @@
 						<DelBtn/>
 						<br/>
 						<Btn1 text={"props 추가"}/>
-						<Btn1 text={"삭제"}/>
+						<Btn1 text={"props 삭제"}/>
 						<br/>
-						<Btn2 text={"추가"}/>
-						<Btn2 text={"삭제"}/>
+						<Btn2 text={"{text} 추가"}/>
+						<Btn2 text={"{text} 삭제"}/>
 					</div>
 				);
 			};
@@ -42,13 +42,13 @@
 
 			function AddBtn() {
 				return (
-					<button>추가</button>
+					<button>AddBtn 추가</button>
 				);
 			}
 
 			function DelBtn() {
 				return (
-					<button>삭제</button>
+					<button>DelBtn 삭제</button>
 				);
 			}
 			root.render(<App/>)
