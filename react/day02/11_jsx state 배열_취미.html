@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JSX 복습</title>
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+			const root = ReactDOM.createRoot(document.getElementById("root"));
+			/*
+			취미를 입력받고, 버튼을 클릭하면 입력된 취미가 ul태그에 추가되도록 코드를 작성
+			*/
+			function App(){
+				//let [hobby, setHobby] = React.useState([]); 필요없음
+				let [btn, setBtn] = React.useState("");
+				let [arr, setArr] = React.useState([]);
+
+				function inputHobby(h) {
+					setBtn(h.target.value);
+				}
+
+				function clickBtn() {
+					setArr(prevArr=>[...prevArr, btn])
+					setBtn(""); //입력태그의 값을 비워주는 역할, 클릭 버튼 누른 후 원래 적었던 단어가 비워짐
+				}
+				return (
+					<div>
+						<h1>좋아하는 취미를 입력하세요.</h1>
+						<input onChange={inputHobby} value={btn}/>
+						<button onClick={clickBtn}>클릭</button>
+						<ul>
+							{arr.map(item=><li>{item}</li>)}
+						</ul>
+					</div>
+				);
+			};
+
+			root.render(<App/>)
+	</script>
+</body>
+</html>
+
