@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JSX 복습</title>
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+			const root = ReactDOM.createRoot(document.getElementById("root"));
+			/* 
+			두 인풋창이 토글 버튼을 누르면 번갈아 가벼 열리고 닫히고 하는 코드
+			*/
+			function App(){
+				let [flag, setFlag] = React.useState(true); //true가 닫힘(false가 열림)
+				function onClick() {
+					setFlag(!flag);
+				}
+
+				return (
+					<div>
+						<input type="text" disabled={flag}/>
+						<button onClick={onClick}>토글</button>
+						<br/>
+						<input type="text" disabled={!flag}/>
+					</div>
+				);
+			};
+
+			root.render(<App/>)
+	</script>
+</body>
+</html>
+
