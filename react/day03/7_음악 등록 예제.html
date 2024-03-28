@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>6. To do List 예제</title>
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		const root = ReactDOM.createRoot(document.getElementById("root"));
+		/* 
+		음악 장르, 제목, 가수를 입력받아 음악을 등록하고,
+		등록된 음악을 table 태그로 화면에 출력하는 코드를 작성
+		*/
+		function App(){
+
+			let [title, setTitle] = React.useState("");
+			let [singer, setSinger] = React.useState("");
+			let [genre, setGenre] = React.useState("");
+			let [list, setList] = React.useState([]);
+
+			function insertMusic() {
+				let music = {
+					title,
+					singer,
+					genre
+				}
+				setList([music,...list]);
+				console.log(music);
+			}
+
+			return (
+				<div>
+					<div>
+						<label htmlFor="">제목</label>	
+						<input 
+							type="text"
+							onChange={(e)=>setTitle(e.target.value)}/>{title}
+					</div>
+					<div>
+						<label htmlFor="">가수</label>	
+						<input 
+							type="text"
+							onChange={(e)=>setSinger(e.target.value)}/>{singer}
+					</div>
+					<div>
+						<label htmlFor="">장르</label>	
+						<input 
+							type="text"
+							onChange={(e)=>setGenre(e.target.value)}/>{genre}
+					</div>
+					<button onClick={insertMusic}>등록</button>
+					<div>
+						<table>
+							<thead>
+								<tr>
+									<th>제목</th>
+									<th>가수</th>
+									<th>장르</th>
+								</tr>
+							</thead>
+							<tbody>
+								{list.map((item, index)=> {
+									return(
+										
+									);
+								})}
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+			);
+		};
+
+		root.render(<App/>)
+	</script>
+</body>
+</html>
