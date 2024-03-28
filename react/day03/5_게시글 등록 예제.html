@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>JSX 복습</title>
+	<title>5. 게시글 등록 예제</title>
 	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -41,6 +41,14 @@
 				//콜백함수 : setList(prevBoard=>[board, ...prevBoard]); 둘 다 가능
 				setList([board, ...list]);
 			}
+
+			function deleteBoard(index) {
+				let tmpList = [...list];
+				//splice(index, 1) : 인덱스 번지부터 1개만 지우겠습니다.
+				tmpList.splice(index, 1);
+				setList(tmpList);
+			}
+
 			return (
 				<div>
 					<div>
@@ -71,20 +79,29 @@
 					<div>
 						<table board="1">
 							<thead>
-								<th>제목</th>
-								<th>작성자</th>	
-								<th>작성일</th>	
+								<tr>
+									<th>제목</th>
+									<th>작성자</th>	
+									<th>작성일</th>	
+									<th>비고</th>
+								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>	
-								</tr>	
+								{list.map((item, index)=>{
+									return (
+										<tr key={index}>
+											<td>{item.title}</td>
+											<td>{item.writer}</td>
+											<td>{item.regDate}</td>	
+											<td>
+												<button onClick={()=>deleteBoard(index)}>삭제</button>
+											</td>	
+										</tr>	
+									);
+								})}
 							</tbody>
 						</table>	
 					</div>
-					{list.length != 0 ? list[0].title: ""}
 				</div>
 			);
 		};
