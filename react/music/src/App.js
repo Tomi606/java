@@ -75,7 +75,6 @@ function List({list, add, remove}) { //add : 음악을 등록하는 함수, remo
               );
             })
           }
-          
         </tbody>
       </table>
     </div>
