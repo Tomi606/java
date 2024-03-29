@@ -167,4 +167,14 @@ public class BoardController {
 		map.put("board", board);
 		return map;
 	}
+	
+	//비동기통신 vs와 연결
+	@ResponseBody
+	@GetMapping("/api/board/list")
+	public Map<String, Object> apiBoardList() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<BoardVO> list = boardService.selectBoardList(new Criteria());
+		map.put("list", list);
+		return map;
+	}
 }
