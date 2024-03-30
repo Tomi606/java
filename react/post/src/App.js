@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'; //이 코드를 import하면 React.useState로 사용하던 코드를 useState로 사용가능 하다.
 import {BrowserRouter, Route, Link, Routes, useLocation, useNavigate} from 'react-router-dom'
 
 function App() {
@@ -73,7 +73,7 @@ function List({list, add, remove}){
              <tr>
                <td>{item.title}</td>
                <td>{item.content}</td>
-               <td>{item.writer}<button onClick={()=>remove(index)}>&times;</button></td>
+               <td>{item.writer} <button onClick={()=>remove(index)}>&times;</button></td>
              </tr>  
            );
          })

@@ -14,8 +14,6 @@
 	<script type="text/babel">
 		const root = ReactDOM.createRoot(document.getElementById("root"));
 
-		
-		
 		function App(){
 			let [count, setCount]	 = React.useState(0);
 			let [text, setText]	 = React.useState("");
@@ -23,13 +21,16 @@
 			React.useEffect(()=>{
 				console.log("렌더링!");
 			});
+
 			React.useEffect(()=>{
 				console.log("마운트(처음 렌더링)!");
-				return ()=>{}
+				return ()=>{} //어마운트 : 요소를 해제 할 때
 			},[]);
+
 			React.useEffect(()=>{
 				console.log("count 상태 변경!");
 			},[count]);
+			
 			return (
 				<div>
 					<button onClick={()=>setCount(count-1)}>-</button>
