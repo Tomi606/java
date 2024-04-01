@@ -26,13 +26,15 @@
 		- 서버에서 화면에 데이터를 전송
 		- 화면에서는 서버에서 보낸 데이터를 alert창으로 출력
 	 -->
-	 <div>
-	 <input type="text" name="name" placeholder="이름">
-	 <br>
-	 <input type="text" name="age" placeholder="나이">
-	 <button type="button" class="btn3">전송</button>
-	 </div>
+	 <form action="">
+		 <input type="text" name="name" placeholder="이름">
+		 <br>
+		 <input type="text" name="age" placeholder="나이">
+		 <button type="submit" class="btn3">전송</button>
+	 </form>
+	 <button type="button" class="btn4">object - object</button>
 	 
+	<!-- btn1 -->
 	<script type="text/javascript">
 	//로그인할 때 참고(this와 return 잘 사용하기!)
 		//서버에서 보낸 이름을 가져오는 함수
@@ -84,6 +86,7 @@
 		});
 	</script>
 	
+	<!-- btn2 -->
 	<script type="text/javascript">
 		$(".btn2").click(function() {
 			let obj = {
@@ -106,14 +109,11 @@
 		});
 	</script>
 
+	<!-- btn3 -->
 	<script type="text/javascript">
-		$(".btn3").click(function() {
-			let name = $("[name=name]").val();
-			let age = $("[name=age]").val();
-			let obj = {
-				name, //name : name
-				age //age : age
-			}
+		$("form").submit(function() {
+			//serialize() : form 태그 안의 name들을 하나의 문자열로 만들어 준다. name명=값& 형태로
+			let obj = $(this).serialize();
 			//object -> json
 			$.ajax({
 				async : true, 
@@ -128,7 +128,29 @@
 
 				}
 			});
+			return false;
 		});
 	</script>
+	
+	<!-- btn4 -->
+	<script type="text/javascript">
+		$(".btn4").click(function() {
+			let obj = {name : "홍길동"};
+			$.ajax({
+				async : true, 
+				url : '<c:url value="/ajax/object/object"/>', 
+				type : 'get', 
+				data : obj, 
+				success : function (data){
+					console.log(data)
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
+
+				}
+			});
+		});
+	</script>
+	
+	
 </body>
 </html>

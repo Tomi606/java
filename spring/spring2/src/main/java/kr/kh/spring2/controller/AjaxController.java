@@ -1,5 +1,6 @@
 package kr.kh.spring2.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,5 +45,15 @@ public class AjaxController {
 		System.out.println(age);
 		map.put("result", "성공");
 		return map;
+	}
+	
+	@GetMapping("/object/object") //타입을 자유롭게 변형가능 문자열 보내고 싶다 -> String, 문자열 -> ArrayList<E>
+	public String objectObject(@RequestParam("name")String name) {
+		System.out.println(name);
+		return "";
+//		public ArrayList<String>일 경우
+//		ArrayList<String> list = new ArrayList<String>();
+//		list.add("안녕하세요");
+//		return list;
 	}
 }
