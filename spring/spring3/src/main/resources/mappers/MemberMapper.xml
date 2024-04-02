@@ -7,4 +7,12 @@
 		select count(*) from member
 	</select>
 	
+	<select id="selectMemberId"	resultType="kr.kh.spring3.model.vo.MemberVO">
+		select * from member where me_id=#{me_id}
+	</select>
+	
+	<insert id="insertMember">
+		insert into member(me_id, me_pw, me_email, me_ms_state)
+		values(#{me.me_id}, #{me.me_pw}, #{me.me_email}, "이용중")
+	</insert>
 </mapper>
