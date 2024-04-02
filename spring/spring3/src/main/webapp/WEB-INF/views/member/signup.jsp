@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-	<h1>회원가입</h1>	
+	<h1 class="mt-3">회원가입</h1>	
 	<form action='<c:url value="/signup"/>' method="post">
 		<div class="form-group">
 			<label for="id">아이디</label>

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-	<h1>로그인</h1>
+	<h1 class="mt-3">로그인</h1>
 	<form action='<c:url value="/login"/>' method="post">
 		<div class="form-group">
 			<label for="id">아이디</label>

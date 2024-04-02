@@ -4,14 +4,11 @@
 <!doctype html>
 <html>
 <head>
-
-	<title>Home</title>
+	<title>메인</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<div class="container">
+	<h1 class="mt-3">RagnaroK</h1>
+</div>
 </body>
 </html>

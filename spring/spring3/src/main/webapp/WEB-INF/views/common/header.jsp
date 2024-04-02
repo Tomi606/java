@@ -16,7 +16,7 @@
 			<a class="nav-link" href='<c:url value="/login"/>'>로그인</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#">Link 3</a>
+			<a class="nav-link" href="#">엣헴!</a>
 		</li>
 	</ul>
 </nav>
