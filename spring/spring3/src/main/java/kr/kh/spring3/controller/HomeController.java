@@ -32,22 +32,47 @@ public class HomeController {
 	}
 	
 	@GetMapping("/signup")
-	public String signup() {
-		
+	public String signup(Model model) {
+		model.addAttribute("title", "회원가입"); //웹 페이지의 title
 		return "/member/signup";
 	}
 	
 	@PostMapping("/signup")
-	public String signupPost(MemberVO member) {
+	public String signupPost(Model model, MemberVO member) {
 //		log.info(member); 확인용
 		boolean res = memberService.signup(member);
 		
 		if(res) {			
-			return "redirect:/";
+			model.addAttribute("msg", "회원가입 성공");
+			model.addAttribute("url", "/");
 		}
 		else {
-			return "redirect:/signup";
+			model.addAttribute("msg", "회원가입 실패");
+			model.addAttribute("url", "/signup");
 		}
+		return "message";
+	}
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("title", "로그인");
+		return "/member/login";
+	}
+	
+	@PostMapping("/login")
+	public String loginPost(Model model, MemberVO member) {
+		log.info(member);
+		
+		MemberVO res = memberService.login(member);
+		if(res != null) {			
+			model.addAttribute("msg", "로그인 성공");
+			model.addAttribute("url", "/");
+		}
+		else {
+			model.addAttribute("msg", "로그인 실패");
+			model.addAttribute("url", "/login");
+		}
+		return "message";
 	}
 	
 }

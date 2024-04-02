@@ -7,4 +7,6 @@ public interface MemberService {
 	int getMemberCount();
 
 	boolean signup(MemberVO member);
+
+	MemberVO login(MemberVO member);
 }

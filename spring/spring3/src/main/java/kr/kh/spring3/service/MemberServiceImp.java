@@ -15,6 +15,11 @@ public class MemberServiceImp implements MemberService {
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	private boolean checkString(String str) {
+
+		return str != null && str.length() != 0;
+	}
 
 	@Override
 	public int getMemberCount() {
@@ -51,4 +56,23 @@ public class MemberServiceImp implements MemberService {
 			return false;
 		}
 	}
+
+	@Override
+	public MemberVO login(MemberVO member) {
+		if(member == null
+		|| !checkString(member.getMe_id())
+		|| !checkString(member.getMe_pw())) {
+			return null;
+		}
+		//일치하는 아이디가 있는 유저 들고오기
+		MemberVO user = memberDao.selectMemberId(member.getMe_id());
+		//비번 비교(일치하는 비번)
+		if(user == null
+		|| !passwordEncoder.matches(member.getMe_pw(), user.getMe_pw())) {
+			return null;
+		}
+		return user;
+	}
+
+	
 }

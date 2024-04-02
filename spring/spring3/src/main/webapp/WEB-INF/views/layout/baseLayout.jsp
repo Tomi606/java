@@ -8,7 +8,7 @@
 <title>
 <c:choose>
 	<c:when test="${title != null }">${title}</c:when>
-	<c:otherwise>스프링</c:otherwise>
+	<c:otherwise>라그나로크</c:otherwise>
 </c:choose>
 </title>
 
