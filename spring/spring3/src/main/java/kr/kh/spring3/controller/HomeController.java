@@ -1,5 +1,7 @@
 package kr.kh.spring3.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,4 +77,11 @@ public class HomeController {
 		return "message";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(Model model, HttpSession session) {
+		session.removeAttribute("user");
+		model.addAttribute("msg", "로그아웃 했습니다.");
+		model.addAttribute("url", "/");
+		return "message";
+	}
 }
