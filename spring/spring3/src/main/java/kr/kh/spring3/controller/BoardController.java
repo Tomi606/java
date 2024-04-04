@@ -22,13 +22,15 @@ public class BoardController {
 	
 	@GetMapping("/post/list")
 	public String postList(Model model, Criteria cri) {
-		cri.setPerPageNum(2); //한 페이지 당 5개의 게시글
+		cri.setPerPageNum(3); //한 페이지 당 5개의 게시글
 		//현재 페이지 정보를 주면서 게시글 목록을 가져오라고 요청
 		ArrayList<BoardVO> list = boardService.getBoardList(cri);
 		//현재 페이지 정보를 주면서 전체 게시글을 가져오라 명령
-		int totalCount = boardService.getBoardTotalCount();
+		int totalCount = boardService.getBoardTotalCount(cri);
 		//전체 게시글 목록 수, 현재 페이지 정보, 한 페이지네이션의 페이지 개수를 정해서 PageMaker 객체를 생성
-		PageMaker pm = new PageMaker(5, cri, totalCount);
+		PageMaker pm = new PageMaker(3, cri, totalCount);
+		
+		//검색
 		
 		model.addAttribute("title", "게시글");
 		model.addAttribute("list", list);
