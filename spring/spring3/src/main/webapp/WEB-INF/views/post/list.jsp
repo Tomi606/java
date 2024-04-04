@@ -10,7 +10,7 @@
 <body>
 <div class="container">
 	<h1 class="mt-3">게시글 목록</h1>
-	<form action='<c:url value="/post/list"/>' method="get">
+	<form action='<c:url value="/post/list"/>' method="get" id="searchForm">
 		<div class="input-group mb-3">
 			<select name="type" class="form-control">
 				<option value="all" <c:if test="${pm.cri.search == 'all'}">selected</c:if>>전체</option>
@@ -21,7 +21,6 @@
 			<button class="btn btn-outline-success">검색</button>
 		 </div>
 		 <select class="form-control col-4 mb-3 offset-8" name="order">
-		 	
 		 	<option value="bo_num" <c:if test="${pm.cri.order == 'bo_num'}">selected</c:if>>최신순</option>
 		 	<option value="bo_view" <c:if test="${pm.cri.order == 'bo_view'}">selected</c:if>>조회수순</option>
 		 </select>
@@ -85,7 +84,11 @@
 			</li>
 		</c:if>
 	</ul>
-	
 </div>
+<script type="text/javascript">
+$('[name=order]').change(function() { //이벤트 등록
+	$("#searchForm").submit(); //이벤트 실행
+});
+</script>
 </body>
 </html>
