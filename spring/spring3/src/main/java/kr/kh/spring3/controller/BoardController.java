@@ -2,12 +2,16 @@ package kr.kh.spring3.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import kr.kh.spring3.model.vo.BoardVO;
+import kr.kh.spring3.model.vo.MemberVO;
 import kr.kh.spring3.pagination.Criteria;
 import kr.kh.spring3.pagination.PageMaker;
 import kr.kh.spring3.service.BoardService;
@@ -29,13 +33,35 @@ public class BoardController {
 		int totalCount = boardService.getBoardTotalCount(cri);
 		//전체 게시글 목록 수, 현재 페이지 정보, 한 페이지네이션의 페이지 개수를 정해서 PageMaker 객체를 생성
 		PageMaker pm = new PageMaker(3, cri, totalCount);
-		
-		//검색
-		
+
 		model.addAttribute("title", "게시글");
 		model.addAttribute("list", list);
 		model.addAttribute("pm", pm); //화면에서 PageMaker 객체를 전송
 		return "/post/list";
+	}
+	
+	@GetMapping("/post/insert")
+	public String postInsert(Model model) {
+		
+		model.addAttribute("title", "게시글 등록");
+		return "/post/insert";
+	}
+	
+	@PostMapping("/post/insert")
+	public String postInsertPost(Model model, BoardVO board, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		boolean res = boardService.insertBoard(board, user);
+		log.info(user);
+		log.info(board);
+		if(res) {
+			model.addAttribute("msg", "게시글 등록 완료");
+			model.addAttribute("url", "/post/list");
+		}else {
+			model.addAttribute("msg", "게시글 등록 실패");
+			model.addAttribute("url", "/post/insert");
+		}
+		
+		return "message";
 	}
 	
 }

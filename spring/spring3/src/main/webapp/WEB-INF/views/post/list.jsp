@@ -40,7 +40,7 @@
 				<tr>
 				  <td>${pm.totalCount - vs.index - pm.cri.pageStart}</td>
 				  <td>
-					<a href="#">${post.bo_title}</a>
+					<a href='<c:url value="/post/detail" />'>${post.bo_title}</a>
 				  </td>
 				  <td>${post.bo_me_id}</td>
 				  <td>${post.bo_view}</td>
@@ -48,6 +48,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="<c:url value='/post/insert'/>" class="btn btn-outline-success col-2 mb-3 offset-10">
+	게시글 등록
+	</a>
 	<ul class="pagination justify-content-center">
 		<c:if test="${pm.prev}">		
 			<li class="page-item">

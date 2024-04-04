@@ -68,6 +68,7 @@ public class HomeController {
 		MemberVO res = memberService.login(member);
 		if(res != null) {			
 			model.addAttribute("msg", "로그인 성공");
+			model.addAttribute("user", res); //넣어야 로그인 유지됨!!!
 			model.addAttribute("url", "/");
 		}
 		else {
