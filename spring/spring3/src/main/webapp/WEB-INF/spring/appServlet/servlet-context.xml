@@ -14,6 +14,8 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<!-- mapping=url이 ~로("/download/**"로) 시작하면 location ~폴더("file:///D:/uploads/"폴더)에서 찾겠습니다. -->
+	<resources mapping="/download/**" location="file:///D:/uploads/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -58,10 +60,10 @@
 	<!-- 서버에 저장될 파일 경로 설정 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<!-- 학원 
+		-->
 		<beans:constructor-arg value="D:\\uploads"/>
-		-->
 		<!-- 집 
-		-->
 		<beans:constructor-arg value="C:\Users\YANG\Documents\JavaFile\uploads"/>
+		-->
 	</beans:bean>
 </beans:beans>

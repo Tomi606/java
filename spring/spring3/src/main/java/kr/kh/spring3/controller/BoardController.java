@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring3.model.vo.BoardVO;
 import kr.kh.spring3.model.vo.CommunityVO;
+import kr.kh.spring3.model.vo.FileVO;
 import kr.kh.spring3.model.vo.MemberVO;
 import kr.kh.spring3.pagination.Criteria;
 import kr.kh.spring3.pagination.PageMaker;
@@ -67,6 +68,21 @@ public class BoardController {
 		}
 		
 		return "message";
+	}
+	
+	@GetMapping("/post/detail")
+	public String postDetail(Model model, int num) {
+		log.info(num);
+		//조회수 증가
+		boardService.updateView(num);
+		//상세 페이지 조회
+		BoardVO board = boardService.getPostDetail(num);
+		//첨부파일
+		ArrayList<FileVO> list = boardService.getFileList(num);
+		//화면에 게시글, 첨부파일 전송
+		model.addAttribute("board", board);
+		model.addAttribute("list", list);
+		return "/post/detail";
 	}
 	
 }
