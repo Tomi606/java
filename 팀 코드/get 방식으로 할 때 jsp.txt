@@ -1,0 +1,66 @@
+/comment/delete
+<button class="btn-outline-success btn-member-del" data-id="\${me.me_id}" name="meDelete">탈퇴</button>
+
+<c:if test="${me.me_id == admin123}">	
+		<c:forEach items="${list}" var="me">			
+			<tr>
+				<td>${me.me_id}</td>
+				<td>${me.me_name}</td>
+				<td>${me.me_gender}</td>
+				<td>${me.me_phone}</td>
+				<td>${me.me_email}</td>
+				<td>${me.me_address}</td>
+				<td>${me.me_job}</td>
+				<td>${me.me_stop}</td>
+				<td></td>
+				<td>
+					<c:choose>
+						<c:when test="${me.me_stop == null}">						
+							<button class="meStop" name="meStop">정지</button>
+						</c:when>
+						<c:otherwise>
+							<button class="meStopClear" name="meStopClear">정지 해제</button>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td>
+					<c:if test="${me.me_id != null}">
+						<a href='<c:url value="/member/delete?me_id=${me.me_id}"/>' 
+						class="btn btn-member-del btn-outline-danger" data-id="\${me.me_id}">탈퇴</a>
+					</c:if>
+				</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+
+
+<ul class="pagination justify-content-center">
+	<c:if test="${pm.prev}">
+		<c:url value="/admin/member" var="url">
+			<c:param name="page" value="${pm.startPage - 1}"/>
+			<c:param name="type" value="${pm.cri.type}"/>
+			<c:param name="search" value="${pm.cri.search}"/>
+		</c:url>
+		<li class="page-item">
+			<a class="page-link" href="${url}">이전</a>
+		</li>
+	</c:if>
+	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+		<c:url value="/admin/member" var="url">
+			<c:param name="page" value="${i}"/>
+		</c:url>
+		<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
+			<a class="page-link" href="${url}">${i}</a>
+		</li>
+	</c:forEach>
+	<c:if test="${pm.next}">
+		<c:url value="/admin/member" var="url">
+			<c:param name="page" value="${pm.endPage + 1}"/>
+			<c:param name="type" value="${pm.cri.type}"/>
+			<c:param name="search" value="${pm.cri.search}"/>
+		</c:url>
+		<li class="page-item">
+			<a class="page-link" href="${url}">다음</a>
+		</li>
+	</c:if>
+</ul>
