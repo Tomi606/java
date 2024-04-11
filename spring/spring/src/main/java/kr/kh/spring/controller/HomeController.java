@@ -106,8 +106,9 @@ public class HomeController {
 		return "message";
 	}
 	
+	//아이디 중복 체크
 	@ResponseBody
-	@GetMapping("/id/check/dup")//또는 @PostMapping("경로")
+	@GetMapping("/id/check/dup")
 	public Map<String, Object> idCheckDup(@RequestParam("id") String id){
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean res = memberService.idCheck(id);
