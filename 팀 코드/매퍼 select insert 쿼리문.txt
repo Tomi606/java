@@ -3,6 +3,5 @@ SELECT la_emd_num,#{st.site_id}, "USER" FROM land
 WHERE condition;
 
 site_la_num = la_num(
-
 		insert into site_management(site_la_num, site_id, site_authority)
 		value(1, #{st.site_id}, "USER")
