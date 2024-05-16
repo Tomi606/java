@@ -1,0 +1,16 @@
+.price-th {
+    position: relative;
+    text-align: center;
+}
+
+.price {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+<th class="price-th" rowspan="\${data.itemList.length}">
+	<div class="price">\${data.hp.payMentMoney}</div>
+</th>
