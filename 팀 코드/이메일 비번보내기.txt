@@ -1,0 +1,31 @@
+private String randomPassword1(int size) {
+		String strs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#";
+		String newPw = "";
+		int min = 0, max = strs.length() - 1;
+		while(newPw.length() < size) {
+			int r = (int)(Math.random() * (max - min + 1) + min);
+			newPw += strs.charAt(r);
+		}
+		return newPw;
+	}
+
+public boolean mailSend(String to, String title, String content) {
+
+	    String setfrom = "didtjswls98@gmail.com";
+	   try{
+	        MimeMessage message = mailSender.createMimeMessage();
+	        MimeMessageHelper messageHelper
+	            = new MimeMessageHelper(message, true, "UTF-8");
+
+	        messageHelper.setFrom(setfrom);// 보내는사람 생략하거나 하면 정상작동을 안함
+	        messageHelper.setTo(to);// 받는사람 이메일
+	        messageHelper.setSubject(title);// 메일제목은 생략이 가능하다
+	        messageHelper.setText(content, true);// 메일 내용, (,true) : 내용에 html 코드가 들어가면 문자열이 아니라 html 코드로 들어간다
+
+	        mailSender.send(message);
+	        return true;
+	    } catch(Exception e){
+	        e.printStackTrace();
+	        return false;
+	    }
+	}

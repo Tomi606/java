@@ -1,0 +1,109 @@
+<div class="home-box1">
+	<div style="width: 80%; margin: 0 auto; padding-top: 80px;">
+		<div class="page-title">
+			병원
+		</div>
+	</div>
+</div>
+
+/* 헤더 */
+.home-box1 {
+	width: 100%;
+	height: 500px;
+	background: url('<c:url value="/resources/img/white_pattern.jpg"/>');
+	background-repeat: no-repeat;
+	background-size: cover;
+    background-origin: content-box;
+}
+
+.page-title{
+	color:rgba(0, 100, 60, 0.8);
+	text-align: left;
+	font-size: 50px;
+	font-weight: bold;
+	margin: 0 0 80px 0;
+}
+
+/* 전체 툴 */
+.container {
+    box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin: -250px auto 70px auto;
+    background-color: white;
+    width: 80%;
+    height: 100%;
+    border: 1px solid #ced4da;
+    padding: 60px 80px;
+    display: block;
+}
+
+.label {
+	color: #555;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.hr_line {
+	margin: 30px auto;
+	padding: 50px auto;
+}
+
+.choose-box a {
+    border-radius: 5px;
+    line-height: 45px;
+    margin: 0 auto;
+    border: 1px solid green;
+    width: 100%;
+    height: 50px;
+    color: green;
+    text-decoration: none;
+    font-size: 20px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+.update-btn {
+    border-radius: 5px;
+    line-height: 45px;
+    margin: 0 auto;
+    border: 1px solid green;
+    width: 20%;
+    height: 50px;
+    color: green;
+    text-decoration: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.update-btn:hover {
+	color: white;
+	background: green;
+	border: 0px solid white;
+	border-radius: 5px;
+}
+
+.form-control {
+    display: block;
+    width: 95%;
+    height: auto;
+    padding: 8px;
+    margin: auto 10px;
+    font-size: 16px;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+
+<div class="program-update-del-box">
+			<label class="label">등록할 세부 항목을 입력하세요</label>
+		    <a class="btn item-update-btn" href='<c:url value="/item/update"/>'>수정</a>
+		    <a class="btn item-delete-btn">삭제</a>
+	    </div> 
