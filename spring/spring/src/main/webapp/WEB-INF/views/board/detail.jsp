@@ -327,6 +327,7 @@ function initComment() {
 	$('.text-comment').show();
 }
 </script>
+
 <!-- 추천/비추천 -->
 <script type="text/javascript">
 $('.btn-up, .btn-down').click(function() {

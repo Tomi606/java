@@ -46,6 +46,7 @@ $('.btn-find').click(function() {
 		dataType : "json", 
 		success : function (data){
 			if(data.result) {
+				console.log(data.result);
 				alert('새 비번이 이메일로 전송됐습니다.');
 			}
 			else {
