@@ -1,0 +1,54 @@
+<table class="hd_time" id="hd_time">
+		<thead>
+		    <tr>
+		        <th>진료 시간</th>
+		    </tr>
+		</thead>
+		<tbody>
+			<tr>
+		        <td>점심 시간</td>
+		        <td><input type="text" class="lunch" name="hd_time" placeholder="12:00~13:00"
+		        onkeyup="this.value=this.value.replace(/[^0-9~:]/g,'');" required></td>
+	 		</tr>
+		    <tr>
+		        <td>월요일</td>
+		        <td><input type="text" class="mon" name="hd_time" placeholder="9:00~18:00"
+		        onkeyup="this.value=this.value.replace(/[^0-9~:ㅎㅁ휴무]/g,'');" required></td>
+	 		</tr>
+			<tr>
+			    <td>화요일</td>
+			    <td><input type="text" class="tue" name="hd_time" placeholder="9:00~18:00"
+			    onkeyup="this.value=this.value.replace(/[^0-9~:ㅎㅁ휴무]/g,'');" required></td>
+			</tr>
+			<tr>
+			    <td>수요일</td>
+			    <td><input type="text" class="wed" name="hd_time" placeholder="9:00~18:00"
+			    onkeyup="this.value=this.value.replace(/[^0-9~:ㅎㅁ휴무]/g,'');" required></td>
+			</tr>
+			<tr>
+			    <td>목요일</td>
+			    <td><input type="text" class="thu" name="hd_time" placeholder="9:00~18:00"
+			    onkeyup="this.value=this.value.replace(/[^0-9~:ㅎㅁ휴무]/g,'');" required></td>
+			</tr>
+			<tr>
+			    <td>금요일</td>
+			    <td><input type="text" class="fri" name="hd_time" placeholder="9:00~18:00"
+			    onkeyup="this.value=this.value.replace(/[^0-9~:ㅎㅁ휴무]/g,'');" required></td>
+			</tr>
+			<tr>
+			    <td>토요일</td>
+			    <td><input type="text" class="sat" name="hd_time" placeholder="9:00~18:00"
+			    onkeyup="this.value=this.value.replace(/[^ㅎㅁ휴무0-9~:]/g,'');" required></td>
+			</tr>
+			<tr>
+			    <td>일요일</td> 
+			    <td><input type="text" class="sun" name="hd_time" placeholder="9:00~18:00"
+			    onkeyup="this.value=this.value.replace(/[^ㅎㅁ휴무0-9~:]/g,'');" required></td>
+			</tr>
+			<tr>
+			    <td>휴무일</td> 
+			    <td><input type="text" class="holiday" name="hd_time" placeholder="휴무 또는 영업시간"
+			    onkeyup="this.value=this.value.replace(/[^ㅎㅁ휴무0-9~:]/g,'');" required></td>
+			  </tr>
+		</tbody>
+	</table>

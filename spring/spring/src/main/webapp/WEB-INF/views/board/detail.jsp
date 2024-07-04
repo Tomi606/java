@@ -49,7 +49,7 @@
 	</div>
 	<br>
 	<div class="container-comment mt-3 mb-3">
-	<h2>댓글(<span class="comment-total"></span>)</h2>
+		<h2>댓글(<span class="comment-total"></span>)</h2>
 		<div class="box-comment-list">
 			<div class="box-comment row">
 				<div class="col-3">아이디</div>
